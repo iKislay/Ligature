@@ -71,9 +71,9 @@ export async function GET(req: NextRequest) {
       return new ImageResponse(
         (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif', padding: '40px' }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Connect your GitHub account</div>
-              <div style={{ fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligature.dev to enable widgets for @{user}</div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div style={{ display: 'flex', fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Connect your GitHub account</div>
+              <div style={{ display: 'flex', fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligature.dev to enable widgets for @{user}</div>
             </div>
           </div>
         ),
