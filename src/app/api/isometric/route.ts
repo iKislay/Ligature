@@ -101,8 +101,15 @@ async function fetchUserInfo(username: string): Promise<UserInfo> {
     fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`),
   ]);
 
-  const repos = reposRes.ok ? (await reposRes.json()) as Repo[] : [];
-  const contribData = contribRes.ok ? await contribRes.json() : null;
+  if (!reposRes.ok) {
+    throw new Error(`GitHub repos API failed: ${reposRes.status} ${reposRes.statusText}`);
+  }
+  if (!contribRes.ok) {
+    throw new Error(`Contributions API failed: ${contribRes.status} ${contribRes.statusText}`);
+  }
+
+  const repos = (await reposRes.json()) as Repo[];
+  const contribData = await contribRes.json();
 
   const contributionCalendar =
     (contribData?.contributions as ContribDay[] | undefined)?.map((day) => ({
@@ -172,6 +179,17 @@ function getLanguageColor(lang: string): string {
   }
 }
 
+function errorSvg(message: string, themeName: string): string {
+  const isDark = themeName === 'geist_dark' || themeName === 'cyberpunk' || themeName === 'night';
+  const bg = isDark ? '#0a0a0a' : '#ffffff';
+  const fg = isDark ? '#ededed' : '#171717';
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+    <rect width="800" height="400" fill="${bg}"/>
+    <text x="400" y="180" text-anchor="middle" fill="${fg}" font-size="24" font-family="sans-serif">Unable to load 3D contribution graph</text>
+    <text x="400" y="220" text-anchor="middle" fill="${fg}" font-size="14" font-family="sans-serif">${message}</text>
+  </svg>`;
+}
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -191,6 +209,13 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error('Error generating 3D contrib:', error);
-    return new Response('Failed to generate image', { status: 500 });
+    const message = error instanceof Error ? error.message : 'GitHub API rate limit or network error';
+    return new Response(errorSvg(message, 'geist'), {
+      status: 503,
+      headers: {
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'no-cache',
+      },
+    });
   }
 }
