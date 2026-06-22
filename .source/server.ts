@@ -1,13 +1,15 @@
 // @ts-nocheck
-import * as __fd_glob_14 from "../content/docs/themes.mdx?collection=docs"
-import * as __fd_glob_13 from "../content/docs/quick-start.mdx?collection=docs"
-import * as __fd_glob_12 from "../content/docs/puzzle-bobble.mdx?collection=docs"
-import * as __fd_glob_11 from "../content/docs/pacman.mdx?collection=docs"
-import * as __fd_glob_10 from "../content/docs/minesweeper.mdx?collection=docs"
-import * as __fd_glob_9 from "../content/docs/isometric.mdx?collection=docs"
-import * as __fd_glob_8 from "../content/docs/index.mdx?collection=docs"
-import * as __fd_glob_7 from "../content/docs/github-trends.mdx?collection=docs"
-import * as __fd_glob_6 from "../content/docs/github-stats.mdx?collection=docs"
+import * as __fd_glob_16 from "../content/docs/themes.mdx?collection=docs"
+import * as __fd_glob_15 from "../content/docs/quick-start.mdx?collection=docs"
+import * as __fd_glob_14 from "../content/docs/puzzle-bobble.mdx?collection=docs"
+import * as __fd_glob_13 from "../content/docs/pacman.mdx?collection=docs"
+import * as __fd_glob_12 from "../content/docs/minesweeper.mdx?collection=docs"
+import * as __fd_glob_11 from "../content/docs/isometric.mdx?collection=docs"
+import * as __fd_glob_10 from "../content/docs/index.mdx?collection=docs"
+import * as __fd_glob_9 from "../content/docs/github-trends.mdx?collection=docs"
+import * as __fd_glob_8 from "../content/docs/github-summary-cards.mdx?collection=docs"
+import * as __fd_glob_7 from "../content/docs/github-stats.mdx?collection=docs"
+import * as __fd_glob_6 from "../content/docs/github-profile.mdx?collection=docs"
 import * as __fd_glob_5 from "../content/docs/gh-skyline.mdx?collection=docs"
 import * as __fd_glob_4 from "../content/docs/galaga.mdx?collection=docs"
 import * as __fd_glob_3 from "../content/docs/edge.mdx?collection=docs"
@@ -22,4 +24,4 @@ const create = server<typeof Config, import("fumadocs-mdx/runtime/types").Intern
   }
 }>({"doc":{"passthroughs":["extractedReferences"]}});
 
-export const docs = await create.docs("docs", "content/docs", {}, {"api.mdx": __fd_glob_0, "bomberman.mdx": __fd_glob_1, "breakout.mdx": __fd_glob_2, "edge.mdx": __fd_glob_3, "galaga.mdx": __fd_glob_4, "gh-skyline.mdx": __fd_glob_5, "github-stats.mdx": __fd_glob_6, "github-trends.mdx": __fd_glob_7, "index.mdx": __fd_glob_8, "isometric.mdx": __fd_glob_9, "minesweeper.mdx": __fd_glob_10, "pacman.mdx": __fd_glob_11, "puzzle-bobble.mdx": __fd_glob_12, "quick-start.mdx": __fd_glob_13, "themes.mdx": __fd_glob_14, });
+export const docs = await create.docs("docs", "content/docs", {}, {"api.mdx": __fd_glob_0, "bomberman.mdx": __fd_glob_1, "breakout.mdx": __fd_glob_2, "edge.mdx": __fd_glob_3, "galaga.mdx": __fd_glob_4, "gh-skyline.mdx": __fd_glob_5, "github-profile.mdx": __fd_glob_6, "github-stats.mdx": __fd_glob_7, "github-summary-cards.mdx": __fd_glob_8, "github-trends.mdx": __fd_glob_9, "index.mdx": __fd_glob_10, "isometric.mdx": __fd_glob_11, "minesweeper.mdx": __fd_glob_12, "pacman.mdx": __fd_glob_13, "puzzle-bobble.mdx": __fd_glob_14, "quick-start.mdx": __fd_glob_15, "themes.mdx": __fd_glob_16, });

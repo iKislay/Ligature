@@ -12,9 +12,8 @@ export interface SummaryCardTheme {
 }
 
 export class SummaryCard {
-  private dom: JSDOM;
   private body: d3.Selection<HTMLBodyElement, unknown, null, undefined>;
-  protected svg: d3.Selection<SVGGElement, unknown, null, undefined>;
+  public svg: d3.Selection<SVGGElement, unknown, null, undefined>;
   protected width: number;
   protected height: number;
   protected theme: SummaryCardTheme;
@@ -67,7 +66,7 @@ export class SummaryCard {
       .attr('transform', 'translate(0, 40)') as unknown as d3.Selection<SVGGElement, unknown, null, undefined>;
   }
 
-  protected appendIcon(
+  appendIcon(
     container: d3.Selection<SVGGElement, unknown, null, undefined>,
     path: string,
     x: number,
