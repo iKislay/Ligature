@@ -44,7 +44,7 @@ export function PreviewSection() {
     : `/api/github?user=${username || 'iKislay'}&theme=${selectedTheme}`;
   const fullImageUrl = selectedTab === 'gh-skyline' ? imageUrl : `https://ligature.dev${imageUrl}`;
   const markdownSnippet = selectedTab === 'gh-skyline'
-    ? `Check out my [GitHub Skyline 3D Contribution Graph](skyline.stl)!`
+    ? `Check out my [GitHub Skyline 3D Contribution Graph](${username}-github-skyline.stl)!`
     : `[![${username}'s ${isGame ? 'Game' : 'GitHub'} Stats](${fullImageUrl})](https://github.com/${username})`;
 
   const handleCopy = () => {

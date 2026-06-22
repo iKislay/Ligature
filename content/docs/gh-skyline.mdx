@@ -1,86 +1,24 @@
 ---
 title: GitHub Skyline
-description: Learn how to set up and customize the GitHub Skyline 3D contribution graph for your GitHub profile.
+description: View a 3D printable STL representation of your GitHub contribution graph.
 ---
 
 # GitHub Skyline
 
-The **GitHub Skyline** widget generates a 3D-printable STL file of your GitHub contribution graph. You can embed this STL file in your README, and GitHub will natively render it as an interactive 3D model!
+The **GitHub Skyline** widget generates a 3D-printable STL file of your GitHub contribution graph. It uses the official `gh-skyline` CLI extension to analyze your yearly contributions and render them as a 3D model.
 
-Since this tool requires your GitHub data, it runs as a **GitHub Action** on your own repository using the official `gh-skyline` CLI extension.
+## Adding to your README
 
-## 1. Setup Your Profile Repository
-
-If you haven't already, create a new repository on GitHub with the exact same name as your GitHub username (e.g., `iKislay/iKislay`). This is a special repository that appears at the top of your GitHub profile.
-
-## 2. Create the GitHub Action Workflow
-
-In your profile repository, create a new file at `.github/workflows/gh-skyline.yml` and paste the following content:
-
-```yaml
-name: GitHub Skyline
-
-on:
-  schedule: # Run automatically every week
-    - cron: "0 0 * * 0"
-  workflow_dispatch: # Allow running manually from the Actions tab
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: generate-github-skyline
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install and Run GitHub Skyline
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Install the gh-skyline extension
-          gh extension install github/gh-skyline
-          
-          # Generate the STL file for the user
-          gh skyline --user ${{ github.repository_owner }} --output skyline.stl
-      - name: Commit & Push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add skyline.stl
-          git commit -m "chore: update GitHub Skyline" || exit 0
-          git push
-```
-
-## 3. Configure Permissions
-
-For the action to commit the generated STL back to your repository, ensure the default `GITHUB_TOKEN` has read/write permissions:
-1. Go to your repository **Settings**.
-2. Navigate to **Actions > General**.
-3. Under **Workflow permissions**, select **Read and write permissions**.
-4. Click **Save**.
-
-## 4. Run the Workflow
-
-1. Go to the **Actions** tab in your repository.
-2. Select **GitHub Skyline** from the left sidebar.
-3. Click **Run workflow**.
-
-Wait a minute for the action to finish. It will generate a file named `skyline.stl` in your repository!
-
-## 5. Add it to your README
-
-Finally, edit your `README.md` and add a link to the generated STL file. GitHub will natively render it as an interactive 3D model!
+Since GitHub natively supports rendering STL files, you can embed your generated STL directly into your README. Once you have generated the STL using the CLI, upload it to your repository and simply link to it.
 
 ```md
-Check out my [GitHub Skyline 3D Contribution Graph](skyline.stl)!
+Check out my [GitHub Skyline 3D Contribution Graph](iKislay-github-skyline.stl)!
 ```
 
-*(Note: In GitHub READMEs, STLs are rendered as an interactive 3D viewer when clicked, and some extensions support embedding them directly!)*
+*(Note: In GitHub READMEs, clicking on an STL file link opens an interactive 3D viewer, allowing visitors to spin and zoom in on your contribution graph!)*
 
-### Example Preview
+## Example Preview
 
-Here is an example of how the GitHub Skyline looks when rendered or 3D printed:
+Here is an example preview of what the **GitHub Skyline** looks like when generated for `iKislay` and viewed in an interactive 3D environment or 3D printed:
 
-![Example GitHub Skyline](https://github.com/user-attachments/assets/ed0fe34e-6825-4eb2-91d7-a0834966dc3a)
-
-<Callout>
-  **Note:** This workflow runs on your own repository via GitHub Actions. Ligature does not track or store your data for this widget. It's completely private and runs on your own schedule.
-</Callout>
+![Example GitHub Skyline Preview](https://github.com/user-attachments/assets/ed0fe34e-6825-4eb2-91d7-a0834966dc3a)

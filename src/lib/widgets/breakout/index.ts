@@ -4,7 +4,7 @@ import { BreakoutGame } from './core/game';
 import { BreakoutStore } from './core/store';
 import { BreakoutConfig, BreakoutStoreType } from './types';
 
-export { BreakoutConfig } from './types';
+export type { BreakoutConfig } from './types';
 
 export class BreakoutRenderer {
 	store!: BreakoutStoreType;

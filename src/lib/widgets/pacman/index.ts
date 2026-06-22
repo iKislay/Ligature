@@ -5,7 +5,8 @@ import { Store } from './core/store';
 import { Config, PlayerStyle, StoreType } from './types';
 import { Grid } from './utils/grid';
 
-export { Config as PacmanConfig, PlayerStyle } from './types';
+export type { Config as PacmanConfig } from './types';
+export { PlayerStyle } from './types';
 
 export class PacmanRenderer {
 	store!: StoreType;
