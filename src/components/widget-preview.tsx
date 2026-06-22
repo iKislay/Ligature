@@ -27,7 +27,7 @@ interface AuthGateProps {
   title?: string;
 }
 
-function AuthGate({ onConnect, fallbackImage, title }: AuthGateProps) {
+export function AuthGate({ onConnect, fallbackImage, title }: AuthGateProps) {
   return (
     <div className="flex w-full flex-col items-center gap-6 py-8">
       {fallbackImage && (
@@ -92,7 +92,7 @@ interface WidgetPreviewProps {
 
 export function WidgetPreview({
   type,
-  requiresAuth = false,
+  requiresAuth = true,
   fallbackImage,
 }: WidgetPreviewProps) {
   const {
@@ -111,10 +111,7 @@ export function WidgetPreview({
   const [checkingAuth, setCheckingAuth] = useState(requiresAuth);
 
   useEffect(() => {
-    if (!requiresAuth) {
-      setCheckingAuth(false);
-      return;
-    }
+    if (!requiresAuth) return;
 
     fetch('/api/auth/status')
       .then((res) => res.json())

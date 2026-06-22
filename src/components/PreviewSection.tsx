@@ -1,19 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Copy, Check } from 'lucide-react';
+import { signIn } from 'next-auth/react';
 import { themes } from '@/lib/themes';
 import { useWidgetPreview, WidgetPreviewType } from '@/hooks/use-widget-preview';
+import { AuthGate } from '@/components/widget-preview';
+
+type PreviewTab = 'github' | '3d-contrib' | 'games' | 'istime' | 'discord' | 'forg';
 
 const previewOptions = [
-  { value: 'github', label: 'GitHub Stats' },
-  { value: '3d-contrib', label: '3D Contributions' },
-  { value: 'games', label: 'Arcade Games' },
-  { value: 'istime', label: 'IsTime' },
-  { value: 'discord', label: 'Discord' },
-  { value: 'forg', label: 'Forg' },
-] as const;
+  { value: 'github' as PreviewTab, label: 'GitHub Stats' },
+  { value: '3d-contrib' as PreviewTab, label: '3D Contributions' },
+  { value: 'games' as PreviewTab, label: 'Arcade Games' },
+  { value: 'istime' as PreviewTab, label: 'IsTime' },
+  { value: 'discord' as PreviewTab, label: 'Discord' },
+  { value: 'forg' as PreviewTab, label: 'Forg' },
+];
 
 const gameOptions = [
   { value: 'pacman', label: 'Pac-Man' },
@@ -43,15 +47,18 @@ function tabToWidgetType(
 }
 
 export function PreviewSection() {
-  const [selectedTab, setSelectedTab] = useState<
-    | 'github'
-    | 'actions'
-    | 'games'
-    | 'istime'
-    | 'discord'
-    | 'forg'
-    | '3d-contrib'
-  >('github');
+  const [selectedTab, setSelectedTab] = useState<PreviewTab>('github');
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/auth/status')
+      .then((res) => res.json())
+      .then((data) => setIsAuthenticated(data.authenticated))
+      .catch(() => setIsAuthenticated(false))
+      .finally(() => setCheckingAuth(false));
+  }, []);
 
   const {
     username,
@@ -83,7 +90,7 @@ export function PreviewSection() {
             {previewOptions.map((option) => (
               <button
                 key={option.value}
-                onClick={() => setSelectedTab(option.value as any)}
+                onClick={() => setSelectedTab(option.value)}
                 className={`h-9 px-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-300 ${
                   selectedTab === option.value
                     ? 'bg-neutral-100 text-neutral-900 shadow-sm dark:bg-neutral-800 dark:text-neutral-50'
@@ -149,7 +156,17 @@ export function PreviewSection() {
       </div>
 
       <div className="flex min-h-[400px] w-full items-center justify-center rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-black md:p-12">
-        {widgetType ? (
+        {checkingAuth ? (
+          <div className="flex items-center gap-2 text-sm text-neutral-500">
+            <div className="size-4 animate-spin rounded-full border-2 border-neutral-300 border-t-neutral-600" />
+            Checking authentication...
+          </div>
+        ) : !isAuthenticated ? (
+          <AuthGate
+            onConnect={() => signIn('github', { callbackUrl: window.location.href })}
+            title="widget preview"
+          />
+        ) : widgetType ? (
           <img
             src={imageUrl}
             alt={`${selectedTab === 'games' ? 'Games' : selectedTab === '3d-contrib' ? '3D Contributions' : 'GitHub'} Widget Preview`}
