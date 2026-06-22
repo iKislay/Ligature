@@ -7,7 +7,7 @@ import { themes } from '@/lib/themes';
 
 const previewOptions = [
   { value: 'github', label: 'GitHub Stats' },
-  { value: 'actions', label: 'GitHub Actions' },
+  { value: '3d-contrib', label: '3D Contributions' },
   { value: 'games', label: 'Arcade Games' },
   { value: 'istime', label: 'IsTime' },
   { value: 'discord', label: 'Discord' },
@@ -26,7 +26,7 @@ const gameOptions = [
 const themeKeys = Object.keys(themes);
 
 export function PreviewSection() {
-  const [selectedTab, setSelectedTab] = useState<'github' | 'actions' | 'games' | 'istime' | 'discord' | 'forg'>('github');
+  const [selectedTab, setSelectedTab] = useState<'github' | 'actions' | 'games' | 'istime' | 'discord' | 'forg' | '3d-contrib'>('github');
   const [username, setUsername] = useState('torvalds');
   const [selectedTheme, setSelectedTheme] = useState('geist');
   const [selectedGame, setSelectedGame] = useState('pacman');
@@ -35,6 +35,8 @@ export function PreviewSection() {
   const isGame = selectedTab === 'games';
   const imageUrl = isGame 
     ? `/api/games?user=${username || 'torvalds'}&game=${selectedGame}`
+    : selectedTab === '3d-contrib'
+    ? `/api/github-3d-contrib?user=${username || 'torvalds'}`
     : `/api/github?user=${username || 'torvalds'}&theme=${selectedTheme}`;
   const fullImageUrl = `https://ligature.dev${imageUrl}`;
   const markdownSnippet = `[![${username}'s ${isGame ? 'Game' : 'GitHub'} Stats](${fullImageUrl})](https://github.com/${username})`;
@@ -117,10 +119,10 @@ export function PreviewSection() {
       </div>
 
       <div className="w-full rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black p-4 md:p-12 flex items-center justify-center min-h-[400px]">
-        {selectedTab === 'github' || selectedTab === 'games' ? (
+        {selectedTab === 'github' || selectedTab === 'games' || selectedTab === '3d-contrib' ? (
           <img 
             src={imageUrl} 
-            alt={`${selectedTab === 'games' ? 'Games' : 'GitHub'} Widget Preview`}
+            alt={`${selectedTab === 'games' ? 'Games' : selectedTab === '3d-contrib' ? '3D Contributions' : 'GitHub'} Widget Preview`}
             className="w-full max-w-[800px] shadow-lg rounded-xl border border-neutral-200 dark:border-neutral-800"
           />
         ) : (
