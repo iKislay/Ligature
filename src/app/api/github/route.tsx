@@ -2,17 +2,19 @@ import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getTheme } from '@/lib/themes';
 import { githubFetch } from '@/lib/github-client';
+import { getUserToken } from '@/lib/user-token';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // Aggressive caching (60 minutes) to prevent rate-limiting as per constraints
 export const revalidate = 3600;
 
-async function fetchAllRepos(username: string): Promise<Array<{ stargazers_count: number; fork: boolean }>> {
+async function fetchAllRepos(token: string, username: string): Promise<Array<{ stargazers_count: number; fork: boolean }>> {
   const repos: Array<{ stargazers_count: number; fork: boolean }> = [];
   let page = 1;
   while (page <= 10) {
     const res = await githubFetch(
+      token,
       `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=pushed`
     );
     if (!res.ok) break;
@@ -24,15 +26,16 @@ async function fetchAllRepos(username: string): Promise<Array<{ stargazers_count
   return repos;
 }
 
-async function fetchTotalStars(username: string): Promise<number> {
-  const repos = await fetchAllRepos(username);
+async function fetchTotalStars(token: string, username: string): Promise<number> {
+  const repos = await fetchAllRepos(token, username);
   return repos
     .filter(repo => !repo.fork)
     .reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
 }
 
-async function fetchSearchCount(username: string, type: 'pr' | 'issue'): Promise<number> {
+async function fetchSearchCount(token: string, username: string, type: 'pr' | 'issue'): Promise<number> {
   const res = await githubFetch(
+    token,
     `https://api.github.com/search/issues?q=author:${username}+type:${type}&per_page=1`
   );
   if (!res.ok) return 0;
@@ -62,11 +65,26 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
+    const token = await getUserToken(user);
+    if (!token) {
+      return new ImageResponse(
+        (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif', padding: '40px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Connect your GitHub account</div>
+              <div style={{ fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligature.dev to enable widgets for @{user}</div>
+            </div>
+          </div>
+        ),
+        { width: 800, height: 400 }
+      );
+    }
+
     const [commits, prs, issues, stars] = await Promise.all([
       fetchContributionsLastYear(user),
-      fetchSearchCount(user, 'pr'),
-      fetchSearchCount(user, 'issue'),
-      fetchTotalStars(user),
+      fetchSearchCount(token, user, 'pr'),
+      fetchSearchCount(token, user, 'issue'),
+      fetchTotalStars(token, user),
     ]);
 
     const stats = {
