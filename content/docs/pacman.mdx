@@ -1,0 +1,45 @@
+---
+title: Pac-Man
+description: Play Pac-Man on your GitHub contribution graph.
+---
+
+# Pac-Man
+
+Navigate Pac-Man through the maze, eat pellets, and avoid ghosts — all rendered as an SVG overlay on your contribution grid.
+
+## Endpoint
+
+```
+GET /api/games?user=<username>&game=pacman&theme=<theme>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `octocat` | GitHub username |
+| `game` | `pacman` | Game identifier |
+| `theme` | `github` | Color theme |
+
+## Player Styles
+
+The Pac-Man widget supports multiple AI play styles:
+
+- `opportunistic` — default, chases nearest pellet
+- `aggressive` — prioritises power pellets and ghosts
+- `scatter` — avoids ghosts, prefers safe routes
+
+## Example
+
+```md
+[![Pac-Man](https://ligature.dev/api/games?user=octocat&game=pacman)](https://ligature.dev)
+```
+
+## Ghosts
+
+Four classic ghosts with distinct personalities:
+
+- **Blinky** — chases directly
+- **Pinky** — ambushes ahead of Pac-Man
+- **Inky** — uses Blinky's position for strategy
+- **Clyde** — alternates between chase and scatter

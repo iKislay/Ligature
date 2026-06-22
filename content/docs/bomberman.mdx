@@ -1,0 +1,35 @@
+---
+title: Bomberman
+description: Plant bombs and blast through obstacles on your contribution grid.
+---
+
+# Bomberman
+
+Strategically place bombs to destroy obstacles and defeat enemies in this classic grid-based game, rendered on your contribution graph.
+
+## Endpoint
+
+```
+GET /api/games?user=<username>&game=bomberman&theme=<theme>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `octocat` | GitHub username |
+| `game` | `bomberman` | Game identifier |
+| `theme` | `github` | Color theme |
+
+## Example
+
+```md
+[![Bomberman](https://ligature.dev/api/games?user=octocat&game=bomberman)](https://ligature.dev)
+```
+
+## Mechanics
+
+- Plant bombs with timed explosions
+- Explosions propagate in four directions
+- Destroy soft blocks to reveal power-ups
+- Defeat enemies to advance levels

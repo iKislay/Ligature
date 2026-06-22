@@ -1,0 +1,41 @@
+---
+title: Isometric Contribution Graph
+description: A 3D isometric view of your GitHub contribution history.
+---
+
+# Isometric Contribution Graph
+
+Turn your contribution grid into a 3D isometric visualization.
+
+## Endpoint
+
+```
+GET /api/isometric?user=<username>&theme=<theme>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `octocat` | GitHub username |
+| `theme` | `github` | Widget theme |
+
+## Themes
+
+The isometric graph supports all standard Ligature themes plus these exclusive variants:
+
+- `north` — Northern Hemisphere seasonal colors
+- `south` — Southern Hemisphere seasonal colors
+- `night` — Dark blue nighttime palette
+- `halloween` — Orange and purple spooky colors
+- `gitblock` — Monochrome block theme
+
+## Example
+
+```md
+[![Isometric Graph](https://ligature.dev/api/isometric?user=octocat&theme=north)](https://ligature.dev)
+```
+
+<Callout>
+  The isometric widget uses D3 for rendering and produces raw SVG output, making it infinitely scalable.
+</Callout>

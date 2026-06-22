@@ -1,0 +1,37 @@
+---
+title: GitHub Stats
+description: Embed your GitHub contribution statistics as a beautiful SVG card.
+---
+
+# GitHub Stats
+
+Display your commits, pull requests, issues, and star count in a single lightweight card.
+
+## Endpoint
+
+```
+GET /api/github?user=<username>&theme=<theme>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `octocat` | GitHub username |
+| `theme` | `geist` | Color theme (see [Themes](/docs/themes)) |
+
+## Example
+
+```md
+[![Ligature Stats](https://ligature.dev/api/github?user=octocat)](https://ligature.dev)
+```
+
+## Custom Theme
+
+```md
+[![Ligature Stats](https://ligature.dev/api/github?user=octocat&theme=cyberpunk)](https://ligature.dev)
+```
+
+## Rendering
+
+This endpoint uses **Next.js ImageResponse** (Satori) to render HTML + CSS into a PNG. It runs on the Edge Runtime, so responses are fast and cached aggressively.

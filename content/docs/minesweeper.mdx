@@ -1,0 +1,39 @@
+---
+title: Minesweeper
+description: Classic Minesweeper logic puzzle on your GitHub contribution grid.
+---
+
+# Minesweeper
+
+Reveal tiles and flag mines in this classic logic puzzle, playable as an SVG widget on your contribution graph.
+
+## Endpoint
+
+```
+GET /api/games?user=<username>&game=minesweeper&theme=<theme>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `octocat` | GitHub username |
+| `game` | `minesweeper` | Game identifier |
+| `theme` | `github` | Color theme |
+
+## Example
+
+```md
+[![Minesweeper](https://ligature.dev/api/games?user=octocat&game=minesweeper)](https://ligature.dev)
+```
+
+## Rules
+
+- Left-click to reveal a tile
+- Numbers indicate adjacent mine count
+- Flag suspected mines to avoid accidents
+- Reveal all safe tiles to win
+
+<Callout>
+  The widget auto-plays using a solvable strategy — sit back and watch the logic unfold on your profile.
+</Callout>

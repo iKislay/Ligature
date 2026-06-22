@@ -1,0 +1,35 @@
+---
+title: Edge Runtime
+description: How Ligature leverages the Edge Runtime for fast, stateless rendering.
+---
+
+# Edge Runtime
+
+Ligature runs entirely on **Next.js Edge Runtime** — every widget is rendered at the closest CDN edge location.
+
+## Benefits
+
+- **Low latency** — responses are served from edge nodes near the viewer
+- **No cold starts** — Edge Functions start instantly
+- **No state** — each request is independent, no database lookups
+- **Automatic scaling** — the edge infrastructure handles any traffic volume
+
+## Caching
+
+API responses are cached aggressively:
+
+- `Cache-Control: public, max-age=3600`
+- `stale-while-revalidate: 86400`
+
+This means your widget never causes excessive API calls, and users always see a fast response.
+
+## How It Works
+
+1. A visitor views your GitHub profile
+2. The Markdown image tag requests an SVG from `ligature.dev`
+3. The Edge Function generates the widget using the provided parameters
+4. The response is cached at the edge for subsequent views
+
+## Deployment
+
+Ligature is deployed on [Vercel](https://vercel.com) using Edge Functions, but the codebase is platform-agnostic and can be deployed to any edge provider supporting Next.js.

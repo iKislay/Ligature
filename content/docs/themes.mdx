@@ -1,0 +1,42 @@
+---
+title: Themes
+description: Available color themes for Ligature widgets and how to customize them.
+---
+
+# Themes
+
+Every Ligature widget supports a `theme` parameter to match your README's visual style.
+
+## Usage
+
+Add `&theme=<name>` to any widget URL:
+
+```md
+[![GitHub Stats](https://ligature.dev/api/github?user=octocat&theme=geist_dark)](https://ligature.dev)
+```
+
+## Available Themes
+
+| Theme | Preview | Style |
+|-------|---------|-------|
+| `geist` | Light | Clean, modern — the default |
+| `geist_dark` | Dark | Dark variant for dim environments |
+| `cyberpunk` | Dark | Neon glow, green-on-black terminal |
+| `minimal` | Light | Sparse, neutral, high contrast |
+| `retro` | Light | Solarized-inspired warm tones |
+
+## Theme Properties
+
+Each theme defines:
+
+- **Background** — card fill color
+- **Text** — primary text color
+- **Primary** — accent/highlight color
+- **Secondary** — muted/label color
+- **Border** — card outline color
+- **Typography** — font family
+- **Effects** — optional scanlines, grain, or glow
+
+## Custom Themes
+
+To create a custom theme, open a PR on [GitHub](https://github.com/iKislay/Ligature) adding your theme to `src/lib/themes.ts`.

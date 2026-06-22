@@ -1,24 +1,38 @@
 ---
 title: Introduction
-description: Welcome to Ligature Docs
+description: Learn about Ligature, the stateless edge-rendered SVG widget system for GitHub and GitLab profiles.
 ---
 
-# Welcome to Ligature Docs
+# Welcome to Ligature
 
-Ligature provides stateless, edge-rendered SVGs for your GitHub READMEs and personal websites. You can simply copy a Markdown URL to embed dynamic widgets anywhere.
+Ligature lets you generate beautiful, customizable SVG widgets for your GitHub and GitLab profile READMEs. Every widget is rendered at the edge — no servers, no state, no maintenance.
 
-## Why Ligature?
+## How It Works
 
-Unlike other widget providers that might be slow or require complex setup, Ligature is designed to be:
-- **Stateless & Edge-Rendered:** Extremely fast rendering globally.
-- **Highly Customizable:** Infinite themeability to perfectly match your brand or profile.
-- **Interactive & Creative:** From standard stats to gaming arcade contribution graphs (like Pacman and Snake).
+1. Browse the available widgets
+2. Pick a username and theme
+3. Copy the Markdown snippet
+4. Paste it into your README
 
-## Coming Soon
+That's it. The SVG is rendered on every request by **Next.js Edge Runtime**, so your stats are always up to date.
 
-We are currently focused on **GitHub Data Widgets**. In Phase 2, we will be expanding to provide widgets for:
-- [isTime](https://istime.dev) (WakaTime Alternative)
-- Forg.to Profiles
-- Twitter & YouTube stats
+## Features
 
-[Browse Widgets](/widgets/github/stats-card) to get started!
+- **Stateless** — no database, no state management
+- **Edge-rendered** — fast responses from CDN edges worldwide
+- **Arcade Games** — playable retro games overlaid on your contribution graph
+- **Multiple Themes** — dark, light, seasonal, and custom palettes
+- **GitHub + GitLab** — support for both platforms
+- **Open Source** — MIT licensed, contributions welcome
+
+## Quick Example
+
+Copy this into your `README.md`:
+
+```md
+[![Ligature Stats](https://ligature.dev/api/github?user=octocat)](https://ligature.dev)
+```
+
+<Callout>
+  All widgets follow the same pattern: a `<img>` or Markdown link pointing to a Ligature API endpoint.
+</Callout>

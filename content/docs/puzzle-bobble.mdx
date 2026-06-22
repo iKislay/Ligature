@@ -1,0 +1,35 @@
+---
+title: Puzzle Bobble
+description: Aim and shoot bubbles to match colours on your contribution graph.
+---
+
+# Puzzle Bobble
+
+Aim, shoot, and match three or more bubbles of the same colour to clear them in this classic puzzle game rendered over your GitHub contributions.
+
+## Endpoint
+
+```
+GET /api/games?user=<username>&game=puzzle-bobble&theme=<theme>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `octocat` | GitHub username |
+| `game` | `puzzle-bobble` | Game identifier |
+| `theme` | `github` | Color theme |
+
+## Example
+
+```md
+[![Puzzle Bobble](https://ligature.dev/api/games?user=octocat&game=puzzle-bobble)](https://ligature.dev)
+```
+
+## Gameplay
+
+- Aim your shot using the trajectory guide
+- Match 3+ same-colour bubbles to pop them
+- Clear connected bubbles to drop remaining ones
+- Keep the playfield clear to survive

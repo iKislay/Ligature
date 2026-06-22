@@ -7,6 +7,7 @@ import { themes } from '@/lib/themes';
 
 const previewOptions = [
   { value: 'github', label: 'GitHub Stats' },
+  { value: 'actions', label: 'GitHub Actions' },
   { value: 'games', label: 'Arcade Games' },
   { value: 'istime', label: 'IsTime' },
   { value: 'discord', label: 'Discord' },

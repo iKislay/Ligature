@@ -1,0 +1,35 @@
+---
+title: Breakout
+description: Break bricks on your contribution graph with a classic arcade game.
+---
+
+# Breakout
+
+Smash through rows of bricks using a paddle and ball, rendered as an SVG on your GitHub contribution grid.
+
+## Endpoint
+
+```
+GET /api/games?user=<username>&game=breakout&theme=<theme>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `octocat` | GitHub username |
+| `game` | `breakout` | Game identifier |
+| `theme` | `github` | Color theme |
+
+## Example
+
+```md
+[![Breakout](https://ligature.dev/api/games?user=octocat&game=breakout)](https://ligature.dev)
+```
+
+## Gameplay
+
+- Control the paddle with AI
+- Break all bricks to win
+- Each brick color represents a different point value
+- The ball speed increases as bricks are cleared

@@ -1,0 +1,55 @@
+---
+title: REST API
+description: Complete API reference for Ligature widget endpoints.
+---
+
+# REST API
+
+All Ligature widgets are served from edge-cached API routes. Every endpoint produces a static SVG or PNG that you embed in your README.
+
+## Base URL
+
+```
+https://ligature.dev
+```
+
+## Endpoints
+
+### GitHub Stats
+
+```
+GET /api/github?user=<username>&theme=<theme>
+```
+
+Generates a PNG stats card showing commits, PRs, issues, and stars.
+
+### Arcade Games
+
+```
+GET /api/games?user=<username>&game=<game>&theme=<theme>
+```
+
+Generates an animated SVG game widget. Available games:
+
+- `pacman` — navigate mazes and eat pellets
+- `breakout` — break bricks with a paddle
+- `galaga` — space shooter against aliens
+- `bomberman` — bomb-based grid puzzle
+- `puzzle-bobble` — bubble matching shooter
+- `minesweeper` — logic-based mine clearing
+
+### Isometric Graph
+
+```
+GET /api/isometric?user=<username>&theme=<theme>
+```
+
+Renders a 3D isometric view of your contribution history.
+
+## Common Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `user` | string | `octocat` | GitHub/GitLab username |
+| `theme` | string | `geist` | Color theme name |
+| `game` | string | `pacman` | Game identifier (games only) |
