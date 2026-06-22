@@ -1,22 +1,23 @@
 export const siteConfig = {
-  name: "Magic UI",
-  url: "https://magicui.design",
-  ogImage: "https://magicui.design/og",
+  name: "Ligature",
+  url: "https://ligature.dev",
+  ogImage: "https://ligature.dev/og",
   description:
-    "Beautifully designed landing page components built with React & Tailwind CSS.",
+    "Stateless, edge-rendered SVG widgets for your GitHub and GitLab READMEs. Customize themes, copy a snippet, and embed.",
   links: {
-    twitter: "https://twitter.com/dillionverma",
-    discord: "https://discord.gg/87p2vpsat5",
-    github: "https://github.com/magicuidesign/magicui",
-    instagram: "https://instagram.com/magicuidesign/",
+    twitter: "https://twitter.com/iKislay",
+    github: "https://github.com/iKislay/Ligature",
   },
   keywords: [
-    "React",
-    "Tailwind CSS",
-    "Motion",
-    "Landing Page",
-    "Components",
+    "GitHub",
+    "GitLab",
+    "README",
+    "SVG",
+    "Widgets",
+    "Contributions",
+    "Arcade",
     "Next.js",
+    "Edge",
   ],
 }
 

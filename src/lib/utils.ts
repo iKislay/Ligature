@@ -92,8 +92,8 @@ export function absoluteUrl(path: string) {
 }
 
 export function constructMetadata({
-  title = "Magic UI - Modern React + Tailwind CSS components & Templates",
-  description = "Magic UI is a curated collection of the best landing page components built using React + Tailwind CSS + Motion",
+  title = "Ligature - Stateless SVG Widgets for GitHub",
+  description = "Stateless, edge-rendered SVG widgets for your GitHub and GitLab READMEs. Customize themes, copy a snippet, and embed.",
   image = absoluteUrl("/og"),
   ...props
 }: {
@@ -106,12 +106,15 @@ export function constructMetadata({
     title,
     description,
     keywords: [
-      "React",
-      "Tailwind CSS",
-      "Motion",
-      "Landing Page",
-      "Components",
+      "GitHub",
+      "GitLab",
+      "README",
+      "SVG",
+      "Widgets",
+      "Contributions",
+      "Arcade",
       "Next.js",
+      "Edge",
     ],
     openGraph: {
       title,
@@ -130,17 +133,17 @@ export function constructMetadata({
       title,
       description,
       images: [image],
-      creator: "@dillionverma",
+      creator: "@iKislay",
     },
     icons: "/favicon.ico",
-    metadataBase: new URL("https://magicui.design"),
+    metadataBase: new URL("https://ligature.dev"),
     authors: [
       {
-        name: "dillionverma",
-        url: "https://twitter.com/dillionverma",
+        name: "iKislay",
+        url: "https://github.com/iKislay",
       },
     ],
-    creator: "dillionverma",
+    creator: "iKislay",
     ...props,
   }
 }
