@@ -6,6 +6,14 @@ import { githubFetch } from '@/lib/github-client';
 export const runtime = 'edge';
 export const revalidate = 3600;
 
+interface Repo {
+  name: string;
+  description: string | null;
+  language: string | null;
+  stargazers_count: number;
+  html_url: string;
+}
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -20,10 +28,10 @@ export async function GET(req: NextRequest) {
     ]);
 
     const uData = userRes.ok ? await userRes.json() : null;
-    const allRepos = reposRes.ok ? (await reposRes.json()) as Array<any> : [];
+    const allRepos = reposRes.ok ? (await reposRes.json()) as Repo[] : [];
     // GitHub's "sort=stargazers_count" is not valid; sort client-side.
     const rData = allRepos
-      .sort((a: any, b: any) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+      .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
       .slice(0, 4);
     const cData = contribRes.ok ? await contribRes.json() : null;
 
@@ -109,16 +117,16 @@ export async function GET(req: NextRequest) {
           </div>
 
           {/* Graph */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginBottom: '40px' }}>
-            <div style={{ display: 'flex', gap: '4px', alignSelf: 'flex-start' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', gap: '3px', alignSelf: 'flex-start' }}>
               {weeks.map((week, i) => (
-                <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
                   {week.map((day, j) => (
                     <div 
                       key={j} 
                       style={{ 
-                        width: '12px', 
-                        height: '12px', 
+                        width: '10px', 
+                        height: '10px', 
                         backgroundColor: getLevelColor(day),
                         borderRadius: '2px' 
                       }} 
@@ -140,7 +148,7 @@ export async function GET(req: NextRequest) {
 
           {/* Cards Grid */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-            {rData.map((repo: any, i: number) => (
+            {rData.map((repo, i) => (
               <div key={i} style={{ 
                 display: 'flex', 
                 flexDirection: 'column', 
