@@ -149,10 +149,7 @@ export function GithubProfileCard({ username, theme = 'geist' }: { username: str
             colorScheme={isDark ? 'dark' : 'light'}
             blockSize={10}
             blockMargin={3}
-            theme={{
-              light: !isDark ? t.calendarColors : undefined,
-              dark: isDark ? t.calendarColors : undefined
-            }}
+            theme={isDark ? { dark: t.calendarColors } : { light: t.calendarColors }}
             style={{ width: '100%', padding: 0 }}
           />
         </div>

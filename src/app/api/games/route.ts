@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const user = searchParams.get('user') || 'octocat';
     const game = searchParams.get('game') || 'pacman';
-    const themeName = searchParams.get('theme') || 'github';
+    const themeName = searchParams.get('theme') || 'geist';
 
     if (!ARCADE_GAMES.includes(game as any)) {
       return new Response(`Invalid game: ${game}. Valid options: ${ARCADE_GAMES.join(', ')}`, { status: 400 });
