@@ -13,6 +13,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Callout } from "@/components/callout"
+import { WidgetPreview } from "@/components/widget-preview"
 import { CodeBlockCommand } from "@/components/code-block-command"
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper"
 import { CopyButton } from "@/components/copy-button"
@@ -322,6 +323,7 @@ export const mdxComponents = {
   ),
   Button,
   Callout,
+  WidgetPreview,
   Accordion,
   AccordionContent,
   AccordionItem,
