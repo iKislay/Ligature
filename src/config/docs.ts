@@ -55,12 +55,16 @@ export function getNeighboursFromConfig(currentUrl: string): {
 export const docsConfig: DocsConfig = {
   mainNav: [
     {
-      title: "Widgets",
-      href: "/widgets",
+      title: "Docs",
+      href: "/docs",
     },
     {
-      title: "Showcase",
-      href: "/showcase",
+      title: "Widgets",
+      href: "/docs/github-stats",
+    },
+    {
+      title: "GitHub",
+      href: "https://github.com/iKislay/Ligature",
     },
   ],
   sidebarNav: [
@@ -69,117 +73,83 @@ export const docsConfig: DocsConfig = {
       items: [
         {
           title: "Introduction",
-          href: "/widgets",
+          href: "/docs",
           items: [],
         },
         {
-          title: "Installation & Usage",
-          href: "/widgets/installation",
-          items: [],
-        },
-      ],
-    },
-    {
-      title: "GitHub Stats",
-      items: [
-        {
-          title: "Profile Stats Card",
-          href: "/widgets/github/stats-card",
-          items: [],
-          label: "Popular",
-        },
-        {
-          title: "Top Languages",
-          href: "/widgets/github/top-languages",
+          title: "Quick Start",
+          href: "/docs/quick-start",
           items: [],
         },
         {
-          title: "Star History Chart",
-          href: "/widgets/github/star-history",
-          items: [],
-          label: "New",
-        },
-        {
-          title: "Pinned Repo Card",
-          href: "/widgets/github/repo-card",
-          items: [],
-        },
-        {
-          title: "GitHub Trophies",
-          href: "/widgets/github/trophies",
-          items: [],
-        },
-        {
-          title: "Visitor Badge",
-          href: "/widgets/github/visitor-badge",
+          title: "Themes",
+          href: "/docs/themes",
           items: [],
         },
       ],
     },
     {
-      title: "Contributions (Creative)",
+      title: "Widgets",
       items: [
         {
-          title: "3D Isometric Graph",
-          href: "/widgets/github/isometric-contrib",
+          title: "GitHub Stats",
+          href: "/docs/github-stats",
           items: [],
-          label: "Live",
         },
         {
-          title: "Contribution Snake",
-          href: "/widgets/github/contrib-snake",
-          items: [],
-          label: "Fun",
-        },
-        {
-          title: "Pacman Arcade",
-          href: "/widgets/github/contrib-pacman",
-          items: [],
-          label: "Fun",
-        },
-        {
-          title: "Activity Streak",
-          href: "/widgets/github/activity-streak",
+          title: "Isometric Graph",
+          href: "/docs/isometric",
           items: [],
         },
       ],
     },
     {
-      title: "Coding Time",
+      title: "Arcade Games",
       items: [
         {
-          title: "WakaTime Stats",
-          href: "/widgets/wakatime/stats",
+          title: "Pac-Man",
+          href: "/docs/pacman",
           items: [],
         },
         {
-          title: "isTime Stats (Coming Soon)",
-          href: "/widgets/istime/stats",
+          title: "Breakout",
+          href: "/docs/breakout",
           items: [],
-          label: "Soon",
+        },
+        {
+          title: "Galaga",
+          href: "/docs/galaga",
+          items: [],
+        },
+        {
+          title: "Bomberman",
+          href: "/docs/bomberman",
+          items: [],
+        },
+        {
+          title: "Puzzle Bobble",
+          href: "/docs/puzzle-bobble",
+          items: [],
+        },
+        {
+          title: "Minesweeper",
+          href: "/docs/minesweeper",
+          items: [],
         },
       ],
     },
     {
-      title: "Social Platforms (Phase 2)",
+      title: "API Reference",
       items: [
         {
-          title: "Forg.to Profile",
-          href: "/widgets/social/forg",
+          title: "REST API",
+          href: "/docs/api",
           items: [],
-          label: "Planned",
         },
         {
-          title: "Twitter Latest Tweet",
-          href: "/widgets/social/twitter",
+          title: "Edge Runtime",
+          href: "/docs/edge",
           items: [],
-          label: "Planned",
-        },
-        {
-          title: "YouTube Subscribers",
-          href: "/widgets/social/youtube",
-          items: [],
-          label: "Planned",
         },
       ],
     },
