@@ -1,0 +1,267 @@
+
+> ligature@0.1.0 build /home/kislay/Desktop/coding/Ligature
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/kislay/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /home/kislay/Desktop/coding/Ligature/pnpm-lock.yaml
+
+[MDX] generated files in 7.0044430000000375ms
+▲ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Turbopack build encountered 9 warnings:
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:17:18
+A Node.js API is used (process.argv at line: 17) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m15 |[0m         }
+  [90m16 |[0m         [36mconst[0m userName =
+[31m[1m>[0m [90m17 |[0m             [35m3[0m <= process.argv.length ? process.argv[[35m2[0m] : process.env.[33mU...[0m
+  [90m   |[0m                  [31m[1m^^^^^^^^^^^^[0m
+  [90m18 |[0m         [36mif[0m (!userName) {
+  [90m19 |[0m             console.error([32m'USERNAME is empty'[0m);
+  [90m20 |[0m             process.exitCode = [35m1[0m;
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:17:40
+A Node.js API is used (process.argv at line: 17) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m15 |[0m ...
+  [90m16 |[0m ...[36mt[0m userName =
+[31m[1m>[0m [90m17 |[0m ...[35m3[0m <= process.argv.length ? process.argv[[35m2[0m] : process.env.[33mUSERNAME[0m;
+  [90m   |[0m                               [31m[1m^^^^^^^^^^^^[0m
+  [90m18 |[0m ...!userName) {
+  [90m19 |[0m ...console.error([32m'USERNAME is empty'[0m);
+  [90m20 |[0m ...process.exitCode = [35m1[0m;
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:114:9
+A Node.js API is used (process.exitCode at line: 114) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m112 |[0m     } [36mcatch[0m (error) {
+  [90m113 |[0m         console.error(error);
+[31m[1m>[0m [90m114 |[0m         process.exitCode = [35m1[0m;
+  [90m    |[0m         [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m115 |[0m     }
+  [90m116 |[0m };
+  [90m117 |[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:13:13
+A Node.js API is used (process.exitCode at line: 13) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m11 |[0m         [36mif[0m (!token) {
+  [90m12 |[0m             console.error([32m'GITHUB_TOKEN is empty'[0m);
+[31m[1m>[0m [90m13 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m             [36mreturn[0m;
+  [90m15 |[0m         }
+  [90m16 |[0m         [36mconst[0m userName =
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:20:13
+A Node.js API is used (process.exitCode at line: 20) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m18 |[0m         [36mif[0m (!userName) {
+  [90m19 |[0m             console.error([32m'USERNAME is empty'[0m);
+[31m[1m>[0m [90m20 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m21 |[0m             [36mreturn[0m;
+  [90m22 |[0m         }
+  [90m23 |[0m         [36mconst[0m maxRepos = process.env.[33mMAX_REPOS[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:28:13
+A Node.js API is used (process.exitCode at line: 28) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m26 |[0m         [36mif[0m ([33mNumber[0m.isNaN(maxRepos)) {
+  [90m27 |[0m             console.error([32m'MAX_REPOS is NaN'[0m);
+[31m[1m>[0m [90m28 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m             [36mreturn[0m;
+  [90m30 |[0m         }
+  [90m31 |[0m         [36mconst[0m year = process.env.[33mYEAR[0m ? [33mNumber[0m(process.env.[33mYEAR[0m) : [36mnull[0m;
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:34:13
+A Node.js API is used (process.exitCode at line: 34) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m32 |[0m         [36mif[0m ([33mNumber[0m.isNaN(year)) {
+  [90m33 |[0m             console.error([32m'YEAR is NaN'[0m);
+[31m[1m>[0m [90m34 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m35 |[0m             [36mreturn[0m;
+  [90m36 |[0m         }
+  [90m37 |[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/file-writer.ts:1:1
+A Node.js module is loaded ('fs' at line 1) which is not supported in the Edge Runtime.
+    Learn More: https://nextjs.org/docs/messages/node-module-in-edge-runtime
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { mkdirSync, writeFileSync } [36mfrom[0m [32m'fs'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m
+  [90m3 |[0m [36mexport[0m [36mconst[0m [33mOUTPUT_FOLDER[0m = [32m'./profile-3d-contrib'[0m;
+  [90m4 |[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/file-writer.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/settings-reader.ts:1:1
+A Node.js module is loaded ('fs' at line 1) which is not supported in the Edge Runtime.
+    Learn More: https://nextjs.org/docs/messages/node-module-in-edge-runtime
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { readFileSync } [36mfrom[0m [32m'fs'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m * [36mas[0m [36mtype[0m [36mfrom[0m [32m'../types'[0m;
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36mconst[0m readSettingJson = (filePath: string): [36mtype[0m.[33mSettingFile[0m => {
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/settings-reader.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+
+> Build error occurred
+Error: Turbopack build failed with 3 errors:
+./Desktop/coding/Ligature/src/lib/source.ts:1:1
+Module not found: Can't resolve '@/.source'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { docs } [36mfrom[0m [32m'@/.source'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { loader } [36mfrom[0m [32m'fumadocs-core/source'[0m;
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36mconst[0m source = loader({
+
+Import map: aliased to relative './src/.source' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/lib/source.ts
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/ui/dropdown-menu.tsx:4:1
+Module not found: Can't resolve '@radix-ui/react-dropdown-menu'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m * [36mas[0m [33mReact[0m [36mfrom[0m [32m"react"[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m * [36mas[0m [33mDropdownMenuPrimitive[0m [36mfrom[0m [32m"@radix-ui/react-dropdown-menu"[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mCheckIcon[0m, [33mChevronRightIcon[0m, [33mCircleIcon[0m } [36mfrom[0m [32m"lucide-react"[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/coding/Ligature/src/components/ui/dropdown-menu.tsx [Client Component Browser]
+    ./Desktop/coding/Ligature/src/components/docs-toc.tsx [Client Component Browser]
+    ./Desktop/coding/Ligature/src/components/docs-toc.tsx [Server Component]
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/coding/Ligature/src/components/ui/dropdown-menu.tsx [Client Component SSR]
+    ./Desktop/coding/Ligature/src/components/docs-toc.tsx [Client Component SSR]
+    ./Desktop/coding/Ligature/src/components/docs-toc.tsx [Server Component]
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx:8:1
+Module not found: Can't resolve 'fumadocs-core/server'
+  [90m 6 |[0m [36mimport[0m [36mtype[0m { [33mBreadcrumbItem[0m } [36mfrom[0m [32m"fumadocs-core/breadcrumb"[0m
+  [90m 7 |[0m [36mimport[0m { getBreadcrumbItems } [36mfrom[0m [32m"fumadocs-core/breadcrumb"[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { findNeighbour } [36mfrom[0m [32m"fumadocs-core/server"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m [36mtype[0m { [33mBreadcrumbList[0m, [33mTechArticle[0m, [33mWithContext[0m } [36mfrom[0m [32m"schema-...[0m
+  [90m10 |[0m
+  [90m11 |[0m [36mimport[0m { getNeighboursFromConfig } [36mfrom[0m [32m"@/config/docs"[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./Desktop/coding/Ligature/src/lib/source.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/ui/dropdown-menu.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+ ELIFECYCLE  Command failed with exit code 1.

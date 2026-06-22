@@ -1,0 +1,570 @@
+
+> ligature@0.1.0 build /home/kislay/Desktop/coding/Ligature
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/kislay/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /home/kislay/Desktop/coding/Ligature/pnpm-lock.yaml
+
+[MDX] generated files in 9.558047999999985ms
+▲ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Turbopack build encountered 9 warnings:
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:17:18
+A Node.js API is used (process.argv at line: 17) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m15 |[0m         }
+  [90m16 |[0m         [36mconst[0m userName =
+[31m[1m>[0m [90m17 |[0m             [35m3[0m <= process.argv.length ? process.argv[[35m2[0m] : process.env.[33mU...[0m
+  [90m   |[0m                  [31m[1m^^^^^^^^^^^^[0m
+  [90m18 |[0m         [36mif[0m (!userName) {
+  [90m19 |[0m             console.error([32m'USERNAME is empty'[0m);
+  [90m20 |[0m             process.exitCode = [35m1[0m;
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:17:40
+A Node.js API is used (process.argv at line: 17) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m15 |[0m ...
+  [90m16 |[0m ...[36mt[0m userName =
+[31m[1m>[0m [90m17 |[0m ...[35m3[0m <= process.argv.length ? process.argv[[35m2[0m] : process.env.[33mUSERNAME[0m;
+  [90m   |[0m                               [31m[1m^^^^^^^^^^^^[0m
+  [90m18 |[0m ...!userName) {
+  [90m19 |[0m ...console.error([32m'USERNAME is empty'[0m);
+  [90m20 |[0m ...process.exitCode = [35m1[0m;
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:114:9
+A Node.js API is used (process.exitCode at line: 114) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m112 |[0m     } [36mcatch[0m (error) {
+  [90m113 |[0m         console.error(error);
+[31m[1m>[0m [90m114 |[0m         process.exitCode = [35m1[0m;
+  [90m    |[0m         [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m115 |[0m     }
+  [90m116 |[0m };
+  [90m117 |[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:13:13
+A Node.js API is used (process.exitCode at line: 13) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m11 |[0m         [36mif[0m (!token) {
+  [90m12 |[0m             console.error([32m'GITHUB_TOKEN is empty'[0m);
+[31m[1m>[0m [90m13 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m             [36mreturn[0m;
+  [90m15 |[0m         }
+  [90m16 |[0m         [36mconst[0m userName =
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:20:13
+A Node.js API is used (process.exitCode at line: 20) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m18 |[0m         [36mif[0m (!userName) {
+  [90m19 |[0m             console.error([32m'USERNAME is empty'[0m);
+[31m[1m>[0m [90m20 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m21 |[0m             [36mreturn[0m;
+  [90m22 |[0m         }
+  [90m23 |[0m         [36mconst[0m maxRepos = process.env.[33mMAX_REPOS[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:28:13
+A Node.js API is used (process.exitCode at line: 28) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m26 |[0m         [36mif[0m ([33mNumber[0m.isNaN(maxRepos)) {
+  [90m27 |[0m             console.error([32m'MAX_REPOS is NaN'[0m);
+[31m[1m>[0m [90m28 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m             [36mreturn[0m;
+  [90m30 |[0m         }
+  [90m31 |[0m         [36mconst[0m year = process.env.[33mYEAR[0m ? [33mNumber[0m(process.env.[33mYEAR[0m) : [36mnull[0m;
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:34:13
+A Node.js API is used (process.exitCode at line: 34) which is not supported in the Edge Runtime.
+    Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+  [90m32 |[0m         [36mif[0m ([33mNumber[0m.isNaN(year)) {
+  [90m33 |[0m             console.error([32m'YEAR is NaN'[0m);
+[31m[1m>[0m [90m34 |[0m             process.exitCode = [35m1[0m;
+  [90m   |[0m             [31m[1m^^^^^^^^^^^^^^^^[0m
+  [90m35 |[0m             [36mreturn[0m;
+  [90m36 |[0m         }
+  [90m37 |[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/file-writer.ts:1:1
+A Node.js module is loaded ('fs' at line 1) which is not supported in the Edge Runtime.
+    Learn More: https://nextjs.org/docs/messages/node-module-in-edge-runtime
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { mkdirSync, writeFileSync } [36mfrom[0m [32m'fs'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m
+  [90m3 |[0m [36mexport[0m [36mconst[0m [33mOUTPUT_FOLDER[0m = [32m'./profile-3d-contrib'[0m;
+  [90m4 |[0m
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/file-writer.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/settings-reader.ts:1:1
+A Node.js module is loaded ('fs' at line 1) which is not supported in the Edge Runtime.
+    Learn More: https://nextjs.org/docs/messages/node-module-in-edge-runtime
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { readFileSync } [36mfrom[0m [32m'fs'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m * [36mas[0m [36mtype[0m [36mfrom[0m [32m'../types'[0m;
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36mconst[0m readSettingJson = (filePath: string): [36mtype[0m.[33mSettingFile[0m => {
+
+Ecmascript file had an error
+
+Import trace:
+  Edge App Route:
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/utils/settings-reader.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts
+    ./Desktop/coding/Ligature/src/lib/widgets/index.ts
+    ./Desktop/coding/Ligature/src/app/api/games/route.ts
+
+
+
+> Build error occurred
+Error: Turbopack build failed with 15 errors:
+./Desktop/coding/Ligature/src/lib/source.ts:1:1
+Module not found: Can't resolve '@/.source'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { docs } [36mfrom[0m [32m'@/.source'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { loader } [36mfrom[0m [32m'fumadocs-core/source'[0m;
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36mconst[0m source = loader({
+
+Import map: aliased to relative './src/.source' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/lib/source.ts
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:8:1
+Module not found: Can't resolve '@/components/ping-dot'
+  [90m 6 |[0m [36mimport[0m { trackEvent } [36mfrom[0m [32m"@/lib/events"[0m
+  [90m 7 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { [33mPingDot[0m } [36mfrom[0m [32m"@/components/ping-dot"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny-t...[0m
+  [90m10 |[0m [36mimport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
+  [90m11 |[0m [36mimport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
+
+Import map: aliased to relative './src/components/ping-dot' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:7:1
+Module not found: Can't resolve '@/components/ui/dropdown-menu'
+  [90m 5 |[0m [36mimport[0m { useCopyToClipboard } [36mfrom[0m [32m"@/hooks/use-copy-to-clipboard"[0m
+  [90m 6 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 8 |[0m   [33mDropdownMenu[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 9 |[0m   [33mDropdownMenuContent[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m10 |[0m   [33mDropdownMenuItem[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m   [33mDropdownMenuTrigger[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m12 |[0m } [36mfrom[0m [32m"@/components/ui/dropdown-menu"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m [36mimport[0m {
+  [90m14 |[0m   [33mPopover[0m,
+  [90m15 |[0m   [33mPopoverContent[0m,
+
+Import map: aliased to relative './src/components/ui/dropdown-menu' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/docs-copy-page.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/docs-toc.tsx:8:1
+Module not found: Can't resolve '@/components/ui/dropdown-menu'
+  [90m 6 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m
+  [90m 7 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 9 |[0m   [33mDropdownMenu[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m10 |[0m   [33mDropdownMenuContent[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m   [33mDropdownMenuItem[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m12 |[0m   [33mDropdownMenuTrigger[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m13 |[0m } [36mfrom[0m [32m"@/components/ui/dropdown-menu"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36mfunction[0m useActiveItem(itemIds: string[]) {
+  [90m16 |[0m   [36mconst[0m [activeId, setActiveId] = [33mReact[0m.useState<string | [36mnull[0m>([36mnull[0m)
+
+Import map: aliased to relative './src/components/ui/dropdown-menu' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/docs-toc.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:13:1
+Module not found: Can't resolve '@/components/ui/popover'
+  [90m11 |[0m   [33mDropdownMenuTrigger[0m,
+  [90m12 |[0m } [36mfrom[0m [32m"@/components/ui/dropdown-menu"[0m
+[31m[1m>[0m [90m13 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m14 |[0m   [33mPopover[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^[0m
+[31m[1m>[0m [90m15 |[0m   [33mPopoverContent[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m16 |[0m   [33mPopoverTrigger[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m17 |[0m } [36mfrom[0m [32m"@/components/ui/popover"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m18 |[0m [36mimport[0m { [33mSeparator[0m } [36mfrom[0m [32m"@/components/ui/separator"[0m
+  [90m19 |[0m
+  [90m20 |[0m [36mfunction[0m getPromptUrl(baseURL: string, url: string) {
+
+Import map: aliased to relative './src/components/ui/popover' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/docs-copy-page.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:5:1
+Module not found: Can't resolve '@/hooks/use-copy-to-clipboard'
+  [90m3 |[0m [36mimport[0m { [33mIconCheck[0m, [33mIconChevronDown[0m, [33mIconCopy[0m } [36mfrom[0m [32m"@tabler/icons-react"[0m
+  [90m4 |[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useCopyToClipboard } [36mfrom[0m [32m"@/hooks/use-copy-to-clipboard"[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
+  [90m7 |[0m [36mimport[0m {
+  [90m8 |[0m   [33mDropdownMenu[0m,
+
+Import map: aliased to relative './src/hooks/use-copy-to-clipboard' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/docs-copy-page.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/ui/sidebar.tsx:9:1
+Module not found: Can't resolve '@/hooks/use-mobile'
+  [90m 7 |[0m
+  [90m 8 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useIsMobile } [36mfrom[0m [32m"@/hooks/use-mobile"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
+  [90m11 |[0m [36mimport[0m { [33mInput[0m } [36mfrom[0m [32m"@/components/ui/input"[0m
+  [90m12 |[0m [36mimport[0m { [33mSeparator[0m } [36mfrom[0m [32m"@/components/ui/separator"[0m
+
+Import map: aliased to relative './src/hooks/use-mobile' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/ui/sidebar.tsx
+    ./Desktop/coding/Ligature/src/app/docs/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/contribute.tsx:5:1
+Module not found: Can't resolve '@/lib/github'
+  [90m3 |[0m [36mimport[0m { [33mBugIcon[0m, [33mLightbulbIcon[0m, [33mPencilIcon[0m } [36mfrom[0m [32m"lucide-react"[0m
+  [90m4 |[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { getGithubFileUrl, getGitHubIssueUrl } [36mfrom[0m [32m"@/lib/github"[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mfunction[0m [33mContribute[0m({ page }: { page: [33mPage[0m<[33mPageData[0m> }) {
+  [90m8 |[0m   [36mconst[0m contributeLinks = [
+
+Import map: aliased to relative './src/lib/github' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/contribute.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/lib/events.ts:3:1
+Module not found: Can't resolve '@/lib/posthog'
+  [90m1 |[0m [36mimport[0m { z } [36mfrom[0m [32m"zod"[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { capturePostHogEvent } [36mfrom[0m [32m"@/lib/posthog"[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m
+  [90m5 |[0m [36mconst[0m eventSchema = z.object({
+  [90m6 |[0m   name: z.[36menum[0m([
+
+Import map: aliased to relative './src/lib/posthog' inside of [project]/Desktop/coding/Ligature
+
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/coding/Ligature/src/lib/events.ts [Client Component Browser]
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Client Component Browser]
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Server Component]
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/coding/Ligature/src/lib/events.ts [Client Component SSR]
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Client Component SSR]
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Server Component]
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/lib/docs.ts:1:1
+Module not found: Can't resolve '@/lib/registry'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { getRegistryItem } [36mfrom[0m [32m"@/lib/registry"[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m
+  [90m3 |[0m /**
+  [90m4 |[0m  * [33mReplaces[0m [33mComponentSource[0m tags [36min[0m content [36mwith[0m actual source code [36mfro.[0m..
+
+Import map: aliased to relative './src/lib/registry' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/lib/docs.ts
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:9:1
+Module not found: Can't resolve '@/registry/magicui/animated-shiny-text'
+  [90m 7 |[0m ...[36mrt[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
+  [90m 8 |[0m ...[36mrt[0m { [33mPingDot[0m } [36mfrom[0m [32m"@/components/ping-dot"[0m
+[31m[1m>[0m [90m 9 |[0m ...[36mrt[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny-text"[0m
+  [90m   |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m ...[36mrt[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
+  [90m11 |[0m ...[36mrt[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
+  [90m12 |[0m ...[36mrt[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
+
+Import map: aliased to relative './src/registry/magicui/animated-shiny-text' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:10:1
+Module not found: Can't resolve '@/registry/magicui/aurora-text'
+  [90m 8 |[0m [36mimport[0m { [33mPingDot[0m } [36mfrom[0m [32m"@/components/ping-dot"[0m
+  [90m 9 |[0m [36mimport[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny-t...[0m
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m [36mimport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
+  [90m12 |[0m [36mimport[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
+  [90m13 |[0m
+
+Import map: aliased to relative './src/registry/magicui/aurora-text' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:11:1
+Module not found: Can't resolve '@/registry/magicui/line-shadow-text'
+  [90m 9 |[0m ...[36mmport[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny...[0m
+  [90m10 |[0m ...[36mmport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
+[31m[1m>[0m [90m11 |[0m ...[36mmport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
+  [90m   |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m ...[36mmport[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
+  [90m13 |[0m ...
+  [90m14 |[0m ...[36mxport[0m [36mfunction[0m [33mProCTA[0m() {
+
+Import map: aliased to relative './src/registry/magicui/line-shadow-text' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:12:1
+Module not found: Can't resolve '@/registry/magicui/text-animate'
+  [90m10 |[0m [36mimport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
+  [90m11 |[0m [36mimport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
+[31m[1m>[0m [90m12 |[0m [36mimport[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m
+  [90m14 |[0m [36mexport[0m [36mfunction[0m [33mProCTA[0m() {
+  [90m15 |[0m   [36mreturn[0m (
+
+Import map: aliased to relative './src/registry/magicui/text-animate' inside of [project]/Desktop/coding/Ligature
+
+
+Import trace:
+  Server Component:
+    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
+    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx:8:1
+Module not found: Can't resolve 'fumadocs-core/server'
+  [90m 6 |[0m [36mimport[0m [36mtype[0m { [33mBreadcrumbItem[0m } [36mfrom[0m [32m"fumadocs-core/breadcrumb"[0m
+  [90m 7 |[0m [36mimport[0m { getBreadcrumbItems } [36mfrom[0m [32m"fumadocs-core/breadcrumb"[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { findNeighbour } [36mfrom[0m [32m"fumadocs-core/server"[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m [36mtype[0m { [33mBreadcrumbList[0m, [33mTechArticle[0m, [33mWithContext[0m } [36mfrom[0m [32m"schema-...[0m
+  [90m10 |[0m
+  [90m11 |[0m [36mimport[0m { getNeighboursFromConfig } [36mfrom[0m [32m"@/config/docs"[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./Desktop/coding/Ligature/src/lib/source.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/docs-toc.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:13:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/ui/sidebar.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/contribute.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/lib/events.ts:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/lib/docs.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:12:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+ ELIFECYCLE  Command failed with exit code 1.

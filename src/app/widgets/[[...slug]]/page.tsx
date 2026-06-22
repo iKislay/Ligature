@@ -93,7 +93,7 @@ export default async function DocPage({ params }: DocPageProps) {
     next: configNeighbours.next,
   }
   const breadcrumbs = getBreadcrumbItems(page.url, source.pageTree, {
-    includeRoot: { url: "/docs" },
+    includeRoot: { url: "/widgets" },
     includePage: true,
   })
   const lastBreadcrumb = breadcrumbs.at(-1)
@@ -148,8 +148,8 @@ export default async function DocPage({ params }: DocPageProps) {
     },
     isPartOf: {
       "@type": "CreativeWorkSeries",
-      name: "Magic UI Documentation",
-      url: absoluteUrl("/docs"),
+      name: "Ligature Widgets",
+      url: absoluteUrl("/widgets"),
     },
     wordCount: content ? content.split(/\s+/).length : 0,
   }
