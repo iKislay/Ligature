@@ -20,15 +20,17 @@ interface UserData {
 export function GithubProfileCard({ username }: { username: string }) {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [totalContributions, setTotalContributions] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       try {
-        const [userRes, reposRes] = await Promise.all([
+        const [userRes, reposRes, contribRes] = await Promise.all([
           fetch(`https://api.github.com/users/${username}`),
-          fetch(`https://api.github.com/users/${username}/repos?sort=stargazers_count&per_page=4`)
+          fetch(`https://api.github.com/users/${username}/repos?sort=stargazers_count&per_page=4`),
+          fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`)
         ]);
 
         if (userRes.ok && reposRes.ok) {
@@ -36,6 +38,11 @@ export function GithubProfileCard({ username }: { username: string }) {
           const rData = await reposRes.json();
           setUserData(uData);
           setRepos(rData);
+        }
+        
+        if (contribRes.ok) {
+           const cData = await contribRes.json();
+           setTotalContributions(cData?.total?.[new Date().getFullYear()] || cData?.total?.['lastYear'] || Object.values(cData?.total || {})[0] || 0);
         }
       } catch (error) {
         console.error('Error fetching GitHub data:', error);
@@ -48,6 +55,29 @@ export function GithubProfileCard({ username }: { username: string }) {
       fetchData();
     }
   }, [username]);
+
+  const getLanguageIcon = (lang: string) => {
+    if (!lang) return null;
+    const map: Record<string, string> = {
+      'JavaScript': 'JavaScript',
+      'TypeScript': 'TypeScript',
+      'Python': 'Python-Dark',
+      'Java': 'Java-Dark',
+      'HTML': 'HTML',
+      'CSS': 'CSS',
+      'Go': 'GoLang',
+      'Rust': 'Rust',
+      'Ruby': 'Ruby',
+      'PHP': 'PHP-Dark',
+      'C++': 'CPP',
+      'C': 'C',
+      'C#': 'CS',
+      'Swift': 'Swift',
+      'Vue': 'VueJS-Dark',
+      'Shell': 'Bash-Dark'
+    };
+    return map[lang] || null;
+  };
 
   const getLanguageColor = (lang: string) => {
     switch (lang?.toLowerCase()) {
@@ -65,89 +95,103 @@ export function GithubProfileCard({ username }: { username: string }) {
 
   if (loading) {
     return (
-      <div className="flex h-64 w-full items-center justify-center rounded-xl border border-neutral-800 bg-[#0d1117]">
-        <div className="size-8 animate-spin rounded-full border-2 border-neutral-500 border-t-neutral-100" />
+      <div className="flex h-[350px] w-full items-center justify-center rounded-xl bg-[#18181A]">
+        <div className="size-6 animate-spin rounded-full border-2 border-neutral-600 border-t-neutral-200" />
       </div>
     );
   }
 
   if (!userData) {
     return (
-      <div className="flex h-64 w-full items-center justify-center rounded-xl border border-neutral-800 bg-[#0d1117] text-neutral-400">
+      <div className="flex h-[350px] w-full items-center justify-center rounded-xl bg-[#18181A] text-sm text-neutral-400">
         User not found
       </div>
     );
   }
 
   return (
-    <div className="flex w-full flex-col rounded-xl border border-[#30363d] bg-[#0d1117] p-8 font-sans text-[#c9d1d9] shadow-xl">
+    <div className="flex w-full flex-col rounded-xl bg-[#18181A] p-6 font-sans text-[#c9d1d9] shadow-lg">
       {/* Calendar Section */}
-      <div className="mb-10 w-full overflow-hidden">
-        <GitHubCalendar 
-          username={username} 
-          colorScheme="dark"
-          theme={{
-            dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353']
-          }}
-          style={{ width: '100%' }}
-        />
+      <div className="mb-6 w-full">
+        <div className="mb-3 flex items-center text-sm">
+          <span className="mr-1.5 font-bold text-white">{totalContributions !== null ? totalContributions : '...'}</span>
+          <span className="text-[#A1A1AA]">Contributions in the last year</span>
+        </div>
+        <div className="flex w-full overflow-hidden [&>article>footer]:hidden">
+          <GitHubCalendar 
+            username={username} 
+            colorScheme="dark"
+            hideTotalCount={true}
+            hideColorLegend={true}
+            blockSize={10}
+            blockMargin={3}
+            theme={{
+              dark: ['#27272A', '#0e4429', '#006d32', '#26a641', '#39d353']
+            }}
+            style={{ width: '100%', padding: 0 }}
+          />
+        </div>
       </div>
 
       {/* Repositories Header */}
-      <div className="mb-6 flex items-center justify-between text-lg">
-        <div className="flex items-center gap-2">
-          <span className="text-[#8b949e]">Total</span>
+      <div className="mb-3 flex items-center text-sm">
+        <div className="flex items-center gap-1.5">
+          <span className="text-[#A1A1AA]">Total</span>
           <span className="font-bold text-white">{userData.public_repos}</span>
-          <span className="text-[#8b949e]">repositories</span>
+          <span className="text-[#A1A1AA]">repositories</span>
         </div>
       </div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {repos.map((repo) => (
           <a
             key={repo.id}
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-col rounded-2xl border border-[#30363d] bg-[#161b22] p-5 transition-all hover:border-[#8b949e]"
+            className="group flex flex-col rounded-lg border border-[#3F3F46] bg-[#18181A] p-4 transition-all hover:border-[#71717A]"
           >
-            <div className="mb-3 flex items-center text-lg">
-              <span className="text-[#8b949e]">{userData.login}/</span>
-              <span className="font-bold text-[#c9d1d9] group-hover:text-[#58a6ff]">
+            <div className="mb-2 text-sm leading-tight break-words">
+              <span className="text-[#A1A1AA]">{userData.login}/</span>
+              <span className="font-bold text-[#E4E4E7] group-hover:text-white">
                 {repo.name}
               </span>
             </div>
             
-            <p className="line-clamp-2 min-h-[42px] text-sm text-[#8b949e]">
+            <p className="line-clamp-2 min-h-[36px] flex-1 text-xs leading-relaxed text-[#A1A1AA]">
               {repo.description || 'No description provided.'}
             </p>
 
-            <div className="mt-5 flex items-center justify-between">
-              <div className="flex items-center gap-4">
+            <div className="mt-3 flex items-center justify-between">
+              <div className="flex items-center gap-3">
                 {repo.language && (
-                  <div className="flex items-center gap-2">
-                    <div 
-                      className="size-3 rounded-full" 
-                      style={{ backgroundColor: getLanguageColor(repo.language) }} 
-                    />
-                    <span className="text-sm text-[#8b949e]">{repo.language}</span>
+                  <div className="flex items-center gap-1.5">
+                    {getLanguageIcon(repo.language) ? (
+                      <img 
+                        src={`/assets/skills-icon/${getLanguageIcon(repo.language)}.svg`} 
+                        alt={repo.language} 
+                        className="size-4" 
+                      />
+                    ) : (
+                      <div 
+                        className="size-2.5 rounded-full" 
+                        style={{ backgroundColor: getLanguageColor(repo.language) }} 
+                      />
+                    )}
+                    <span className="text-xs text-[#A1A1AA]">{repo.language}</span>
                   </div>
                 )}
                 {repo.stargazers_count > 0 && (
-                  <div className="flex items-center gap-1.5">
-                    <svg className="size-4 text-[#8b949e]" viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+                  <div className="flex items-center gap-1">
+                    <svg className="size-3.5 text-[#A1A1AA]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                     </svg>
-                    <span className="text-sm text-[#8b949e]">{repo.stargazers_count}</span>
+                    <span className="text-xs text-[#A1A1AA]">{repo.stargazers_count}</span>
                   </div>
                 )}
               </div>
-              <div className="flex size-8 items-center justify-center rounded-full bg-[#21262d] transition-colors group-hover:bg-[#30363d]">
-                <svg className="size-4 text-[#8b949e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </div>
+              {/* Removed Share Icon */}
             </div>
           </a>
         ))}
