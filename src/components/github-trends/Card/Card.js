@@ -1,8 +1,10 @@
+'use client';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import SVG from './SVG';
-import { classnames } from '../../utils';
+import { cn as classnames } from '@/lib/utils';
 
 export const Image = ({ imageSrc, compact, userId = 'iKislay' }) => {
   const fullImageSrc = `https://api.githubtrends.io/user/svg/${userId}/${imageSrc}`;
