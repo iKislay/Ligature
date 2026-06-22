@@ -121,8 +121,6 @@ export function GithubProfileCard({ username }: { username: string }) {
           <GitHubCalendar 
             username={username} 
             colorScheme="dark"
-            hideTotalCount={true}
-            hideColorLegend={true}
             blockSize={10}
             blockMargin={3}
             theme={{

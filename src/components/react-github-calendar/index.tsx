@@ -85,8 +85,6 @@ export const GitHubCalendar = forwardRef<HTMLElement, Props>(
         data={transformData(data.contributions, transformFn)}
         labels={Object.assign({}, defaultLabels, labels)}
         ref={ref}
-        hideTotalCount={true}
-        hideColorLegend={true}
         {...props}
         theme={theme}
         loading={Boolean(props.loading) || loading}
