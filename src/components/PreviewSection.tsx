@@ -26,7 +26,7 @@ const gameOptions = [
 const themeKeys = Object.keys(themes);
 
 export function PreviewSection() {
-  const [selectedTab, setSelectedTab] = useState<'github' | 'games' | 'istime' | 'discord' | 'forg'>('github');
+  const [selectedTab, setSelectedTab] = useState<'github' | 'actions' | 'games' | 'istime' | 'discord' | 'forg'>('github');
   const [username, setUsername] = useState('torvalds');
   const [selectedTheme, setSelectedTheme] = useState('geist');
   const [selectedGame, setSelectedGame] = useState('pacman');
