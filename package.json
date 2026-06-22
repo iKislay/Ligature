@@ -22,6 +22,7 @@
     "@radix-ui/react-tooltip": "^1.2.10",
     "@tabler/icons-react": "^3.44.0",
     "@types/mdx": "^2.0.14",
+    "@types/unist": "^3.0.3",
     "@upstash/redis": "^1.38.0",
     "axios": "^1.18.0",
     "class-variance-authority": "^0.7.1",
