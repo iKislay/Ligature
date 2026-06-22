@@ -45,12 +45,19 @@ export const Hero = memo(function Hero() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-0 rounded-md overflow-hidden shadow-sm border border-neutral-200 dark:border-neutral-800">
           <Link
-            href="#customizer"
+            href="/docs"
             className="h-11 px-6 flex items-center bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
+          >
+            Read Docs
+          </Link>
+          <div className="h-11 w-[1px] bg-neutral-800 dark:bg-neutral-200" />
+          <Link
+            href="#customizer"
+            className="h-11 px-4 flex items-center bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
           >
             Build Widget
           </Link>
-          <div className="h-11 w-[1px] bg-neutral-800 dark:bg-neutral-200" />
+          <div className="h-11 w-[1px] bg-neutral-200 dark:bg-neutral-800" />
           <Link
             href="https://github.com/iKislay/Ligature"
             target="_blank"
