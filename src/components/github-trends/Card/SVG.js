@@ -4,9 +4,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-
 const SvgInline = (props) => {
   const [svg, setSvg] = useState(null);
 
@@ -29,9 +26,9 @@ const SvgInline = (props) => {
 
   if (props.forceLoading || !loaded) {
     if (props.compact) {
-      return <Skeleton style={{ paddingBottom: '58%' }} />;
+      return <div className="animate-pulse bg-gray-200 rounded-md" style={{ paddingBottom: '58%' }} />;
     }
-    return <Skeleton style={{ paddingBottom: '95%' }} />;
+    return <div className="animate-pulse bg-gray-200 rounded-md" style={{ paddingBottom: '95%' }} />;
   }
 
   if (props.compact) {

@@ -1,0 +1,50 @@
+---
+title: GitHub Trends
+description: Live interactive preview of GitHub Trends components.
+---
+
+import { Card } from "@/components/github-trends/Card";
+
+# GitHub Trends
+
+The **GitHub Trends** components offer highly customizable statistical cards. Since these are React components, you can embed them directly into your MDX documentation and interact with them in real-time!
+
+## Live Component Preview
+
+This is not a static image. This is the actual React `<Card />` component running inside the documentation page:
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+  <Card 
+    title="Language Contributions" 
+    description="See your overall language breakdown based on recent commits." 
+    imageSrc="langs" 
+  />
+  <Card 
+    title="Repository Contributions" 
+    description="See your most contributed repositories across your history." 
+    imageSrc="repos" 
+    selected={true}
+  />
+</div>
+
+## Usage in React
+
+You can import these components into your own application:
+
+```jsx
+import { Card } from "@/components/github-trends/Card";
+
+export function StatsView() {
+  return (
+    <Card 
+      title="Language Contributions" 
+      description="See your overall language breakdown." 
+      imageSrc="langs" 
+    />
+  );
+}
+```
+
+<Callout>
+  **Note:** The cards above are live React components automatically fetching SVGs from the GitHub Trends backend using the configured `userId` prop.
+</Callout>

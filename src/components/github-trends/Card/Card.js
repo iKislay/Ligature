@@ -1,18 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { BACKEND_URL } from '../../constants';
 
 import SVG from './SVG';
 import { classnames } from '../../utils';
 
-export const Image = ({ imageSrc, compact }) => {
-  const userId = useSelector((state) => state.user.userId);
-  const fullImageSrc = `${BACKEND_URL}/user/svg/${userId}/${imageSrc}`;
+export const Image = ({ imageSrc, compact, userId = 'iKislay' }) => {
+  const fullImageSrc = `https://api.githubtrends.io/user/svg/${userId}/${imageSrc}`;
 
   return (
-    <div className="relative h-full w-full relative">
+    <div className="relative h-full w-full">
       <SVG
         className="object-cover h-full w-full"
         url={fullImageSrc}
