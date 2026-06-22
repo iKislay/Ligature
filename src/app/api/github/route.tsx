@@ -93,14 +93,15 @@ export async function GET(req: NextRequest) {
           }}
         >
           <div style={{ display: 'flex', marginBottom: '32px', alignItems: 'center' }}>
-            {/* User Avatar Placeholder */}
-            <div
+            <img
+              src={`https://github.com/${user}.png`}
+              alt={user}
               style={{
                 width: '64px',
                 height: '64px',
                 borderRadius: '32px',
-                backgroundColor: theme.colors.primary,
                 marginRight: '20px',
+                border: `2px solid ${theme.colors.border}`,
               }}
             />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
