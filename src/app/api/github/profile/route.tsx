@@ -23,15 +23,25 @@ export async function GET(req: NextRequest) {
 
     const [userRes, reposRes, contribRes] = await Promise.all([
       githubFetch(`https://api.github.com/users/${user}`),
-      githubFetch(`https://api.github.com/users/${user}/repos?sort=stargazers_count&per_page=4`),
+      githubFetch(`https://api.github.com/users/${user}/repos?per_page=100`),
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
     ]);
 
     const uData = userRes.ok ? await userRes.json() : null;
-    const rData = reposRes.ok ? await reposRes.json() : [];
+    const allRepos = reposRes.ok ? (await reposRes.json()) as Repo[] : [];
+    // GitHub ignores `sort=stargazers_count`; sort client-side.
+    const rData = allRepos
+      .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+      .slice(0, 4);
     const cData = contribRes.ok ? await contribRes.json() : null;
 
-    if (!uData) {
+    // Degrade gracefully if the user endpoint is rate-limited:
+    // use the username from the query and derive repo count from the repos call.
+    const displayUser = uData?.login || user;
+    const totalRepos = uData?.public_repos ?? allRepos.length;
+
+    // Only hard-fail if we have nothing to show.
+    if (!uData && allRepos.length === 0) {
       return new ImageResponse(
         (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif' }}>
@@ -41,8 +51,6 @@ export async function GET(req: NextRequest) {
         { width: 840, height: 600 }
       );
     }
-
-    const totalRepos = uData?.public_repos || 0;
     const contributions = cData?.total?.[new Date().getFullYear()] || cData?.total?.['lastYear'] || Object.values(cData?.total || {})[0] || 0;
     
     // Process contributions into weeks array (52 weeks, 7 days)
@@ -157,7 +165,7 @@ export async function GET(req: NextRequest) {
                 boxSizing: 'border-box'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px', fontSize: '16px' }}>
-                  <span style={{ color: theme.colors.secondary }}>{user}/</span>
+                  <span style={{ color: theme.colors.secondary }}>{displayUser}/</span>
                   <span style={{ fontWeight: 'bold', color: theme.colors.text }}>{repo.name}</span>
                 </div>
                 
