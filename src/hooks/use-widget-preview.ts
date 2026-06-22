@@ -53,7 +53,7 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
         case 'bomberman':
         case 'puzzle-bobble':
         case 'minesweeper':
-          return `/api/games?user=${user}&game=${type}`;
+          return `/api/games?user=${user}&game=${type}&theme=${theme}`;
         case 'summary-stats':
           return `/api/github-summary?user=${user}&theme=${theme}&card=stats`;
         case 'summary-profile':

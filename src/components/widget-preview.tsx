@@ -141,7 +141,7 @@ export function WidgetPreview({
   const markdownSnippet = getMarkdownSnippet(type);
   const needsAuthGate = requiresAuth && !checkingAuth && !isAuthenticated;
   const isSummaryCard = type.startsWith('summary-');
-  const showThemeSelector = type === 'github-stats' || type === 'isometric' || isSummaryCard;
+  const showThemeSelector = type !== 'skyline' && type !== 'trends' && type !== 'actions';
   const widgetLabel = WIDGET_LABELS[type] ?? type;
 
   return (
@@ -160,7 +160,7 @@ export function WidgetPreview({
           />
         ) : type === 'github-profile' ? (
           <div className="w-full max-w-4xl p-4">
-            <GithubProfileCard username={username || 'gautamkmahato'} />
+            <GithubProfileCard username={username || 'gautamkmahato'} theme={theme} />
           </div>
         ) : (
           <PreviewImage src={relativeUrl} alt={`${widgetLabel} preview for ${username}`} />
@@ -176,7 +176,7 @@ export function WidgetPreview({
           disabled={needsAuthGate}
           className="h-9 w-36 rounded-md border border-neutral-200 bg-transparent px-3 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:opacity-50 dark:border-neutral-800 dark:focus:ring-neutral-300 md:w-44"
         />
-        {showThemeSelector && (
+        {(showThemeSelector || isSummaryCard) && (
           <select
             value={theme}
             onChange={(e) => setTheme(e.target.value)}

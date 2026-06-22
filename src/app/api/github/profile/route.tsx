@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import { getTheme } from '@/lib/themes';
 
 export const runtime = 'edge';
 export const revalidate = 3600;
@@ -8,21 +9,31 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const user = searchParams.get('user') || 'gautamkmahato';
+    const themeName = searchParams.get('theme') || 'geist';
+    const theme = getTheme(themeName);
 
     const contributions = 101;
     const totalRepos = 101;
     
-    // Generate a mock contribution graph
     const weeks = Array.from({ length: 52 }, () => 
       Array.from({ length: 7 }, () => Math.random() > 0.8 ? Math.floor(Math.random() * 4) + 1 : 0)
     );
 
     const getLevelColor = (level: number) => {
-      if (level === 0) return '#161b22';
-      if (level === 1) return '#0e4429';
-      if (level === 2) return '#006d32';
-      if (level === 3) return '#26a641';
-      return '#39d353';
+      const intensityColors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+      const themeIntensity: Record<string, string[]> = {
+        geist: ['#ebedf0', '#dbeafe', '#93c5fd', '#3b82f6', '#006bff'],
+        geist_dark: ['#1a1a1a', '#1e293b', '#1d4ed8', '#2563eb', '#3b82f6'],
+        cyberpunk: ['#1a0033', '#0d3d0d', '#00aa22', '#00dd33', '#00ff41'],
+        minimal: ['#e4e4e7', '#d4d4d8', '#a1a1aa', '#52525b', '#27272a'],
+        retro: ['#eee8d5', '#e6dbb3', '#b58900', '#cb4b16', '#dc322f'],
+      };
+      const colors = themeIntensity[themeName] || intensityColors;
+      if (level === 0) return colors[0];
+      if (level === 1) return colors[1];
+      if (level === 2) return colors[2];
+      if (level === 3) return colors[3];
+      return colors[4];
     };
 
     return new ImageResponse(
@@ -33,17 +44,17 @@ export async function GET(req: NextRequest) {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            backgroundColor: '#1C1C1E',
-            color: '#c9d1d9',
-            fontFamily: 'sans-serif',
+            backgroundColor: theme.colors.background,
+            color: theme.colors.text,
+            fontFamily: theme.typography.fontFamily,
             padding: '40px',
             boxSizing: 'border-box',
           }}
         >
           {/* Header */}
           <div style={{ display: 'flex', marginBottom: '20px', fontSize: '18px' }}>
-            <span style={{ fontWeight: 'bold', color: '#FFFFFF', marginRight: '6px' }}>{contributions}</span> 
-            <span style={{ color: '#A0A0A5' }}>Contributions in the last year</span>
+            <span style={{ fontWeight: 'bold', color: theme.colors.primary, marginRight: '6px' }}>{contributions}</span> 
+            <span style={{ color: theme.colors.secondary }}>Contributions in the last year</span>
           </div>
 
           {/* Graph */}
@@ -70,20 +81,20 @@ export async function GET(req: NextRequest) {
           {/* Repos Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
             <div style={{ display: 'flex', fontSize: '18px' }}>
-              <span style={{ color: '#A0A0A5', marginRight: '6px' }}>Total</span>
-              <span style={{ fontWeight: 'bold', color: '#FFFFFF', marginRight: '6px' }}>{totalRepos}</span>
-              <span style={{ color: '#A0A0A5' }}>repositories</span>
+              <span style={{ color: theme.colors.secondary, marginRight: '6px' }}>Total</span>
+              <span style={{ fontWeight: 'bold', color: theme.colors.text, marginRight: '6px' }}>{totalRepos}</span>
+              <span style={{ color: theme.colors.secondary }}>repositories</span>
             </div>
             <div style={{ 
               display: 'flex', 
               alignItems: 'center', 
               padding: '8px 16px', 
-              backgroundColor: '#2C2C2E', 
+              backgroundColor: theme.colors.background,
               borderRadius: '20px', 
-              border: '1px solid #3A3A3C',
+              border: `1px solid ${theme.colors.border}`,
               fontSize: '16px',
               fontWeight: '500',
-              color: '#FFFFFF'
+              color: theme.colors.text
             }}>
               Pinned Repositories <span style={{ marginLeft: '8px', fontSize: '12px' }}>▼</span>
             </div>
@@ -103,21 +114,21 @@ export async function GET(req: NextRequest) {
                 width: '370px',
                 height: '160px',
                 padding: '20px',
-                backgroundColor: '#1C1C1E',
-                border: '1px solid #3A3A3C',
+                backgroundColor: theme.colors.background,
+                border: `1px solid ${theme.colors.border}`,
                 borderRadius: '16px',
                 boxSizing: 'border-box'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px', fontSize: '20px' }}>
-                  <span style={{ color: '#A0A0A5' }}>{user}/</span>
-                  <span style={{ fontWeight: 'bold', color: '#FFFFFF' }}>{repo.name}</span>
+                  <span style={{ color: theme.colors.secondary }}>{user}/</span>
+                  <span style={{ fontWeight: 'bold', color: theme.colors.text }}>{repo.name}</span>
                 </div>
                 
                 <div style={{ 
                   display: 'flex', 
                   flex: 1,
                   fontSize: '15px', 
-                  color: '#A0A0A5', 
+                  color: theme.colors.secondary, 
                   lineHeight: '1.4',
                   overflow: 'hidden'
                 }}>
@@ -138,12 +149,12 @@ export async function GET(req: NextRequest) {
                             <span style={{ fontSize: '16px' }}>🐍</span>
                          </div>
                       )}
-                      <span style={{ fontSize: '14px', color: '#A0A0A5' }}>{repo.lang}</span>
+                      <span style={{ fontSize: '14px', color: theme.colors.secondary }}>{repo.lang}</span>
                     </div>
                     {repo.stars > 0 && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <span style={{ color: '#A0A0A5' }}>☆</span>
-                        <span style={{ fontSize: '14px', color: '#A0A0A5' }}>{repo.stars}</span>
+                        <span style={{ color: theme.colors.secondary }}>☆</span>
+                        <span style={{ fontSize: '14px', color: theme.colors.secondary }}>{repo.stars}</span>
                       </div>
                     )}
                   </div>
@@ -154,9 +165,9 @@ export async function GET(req: NextRequest) {
                     width: '32px', 
                     height: '32px', 
                     borderRadius: '50%', 
-                    backgroundColor: '#2C2C2E' 
+                    backgroundColor: theme.colors.border
                   }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A0A0A5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.colors.secondary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                   </div>
                 </div>
               </div>
