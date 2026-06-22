@@ -1,5 +1,6 @@
 import { NextAuthOptions } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
+import { saveUserToken } from './user-token';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -8,7 +9,10 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
       authorization: {
         params: {
-          scope: 'read:user user:email',
+          // `read:user` is required to identify the user.
+          // `repo` is required for private contributions/repos.
+          // `read:org` is useful if we ever add org-level stats.
+          scope: 'read:user user:email repo',
         },
       },
     }),
@@ -23,6 +27,17 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
       return session;
+    },
+    async signIn({ account, profile }) {
+      if (account?.access_token && profile?.login) {
+        try {
+          await saveUserToken(profile.login as string, account.access_token as string);
+        } catch (error) {
+          console.error('Failed to save user token on sign-in:', error);
+          // Still allow sign-in; the user can reconnect later.
+        }
+      }
+      return true;
     },
   },
   pages: {
