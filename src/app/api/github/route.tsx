@@ -8,15 +8,15 @@ export const runtime = 'edge';
 // Aggressive caching (60 minutes) to prevent rate-limiting as per constraints
 export const revalidate = 3600;
 
-async function fetchAllRepos(username: string): Promise<Array<{ stargazers_count: number }>> {
-  const repos: Array<{ stargazers_count: number }> = [];
+async function fetchAllRepos(username: string): Promise<Array<{ stargazers_count: number; fork: boolean }>> {
+  const repos: Array<{ stargazers_count: number; fork: boolean }> = [];
   let page = 1;
   while (page <= 10) {
     const res = await githubFetch(
       `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=pushed`
     );
     if (!res.ok) break;
-    const data = (await res.json()) as Array<{ stargazers_count: number }>;
+    const data = (await res.json()) as Array<{ stargazers_count: number; fork: boolean }>;
     repos.push(...data);
     if (data.length < 100) break;
     page++;
@@ -26,7 +26,9 @@ async function fetchAllRepos(username: string): Promise<Array<{ stargazers_count
 
 async function fetchTotalStars(username: string): Promise<number> {
   const repos = await fetchAllRepos(username);
-  return repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+  return repos
+    .filter(repo => !repo.fork)
+    .reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
 }
 
 async function fetchSearchCount(username: string, type: 'pr' | 'issue'): Promise<number> {

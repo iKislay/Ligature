@@ -17,6 +17,7 @@ interface Repo {
   language: string | null;
   stargazers_count: number;
   forks_count: number;
+  fork: boolean;
 }
 
 interface ContribDay {
@@ -135,8 +136,8 @@ async function fetchUserInfo(username: string): Promise<UserInfo> {
     .map(([language, { color, count }]) => ({ language, color, contributions: count }))
     .sort((a, b) => b.contributions - a.contributions);
 
-  const totalForkCount = repos.reduce((sum, r) => sum + (r.forks_count || 0), 0);
-  const totalStargazerCount = repos.reduce(
+  const totalForkCount = repos.filter(r => !r.fork).reduce((sum, r) => sum + (r.forks_count || 0), 0);
+  const totalStargazerCount = repos.filter(r => !r.fork).reduce(
     (sum, r) => sum + (r.stargazers_count || 0),
     0
   );
