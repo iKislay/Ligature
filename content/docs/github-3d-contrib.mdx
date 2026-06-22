@@ -1,11 +1,23 @@
 ---
 title: GitHub 3D Contributions
-description: Learn how to set up and customize the 3D contribution graph for your GitHub profile.
+description: Embed a beautiful isometric 3D view of your GitHub contribution graph.
 ---
 
 # GitHub 3D Contributions
 
-The **3D Contributions** widget generates a beautiful isometric 3D view of your GitHub contribution graph. Due to GitHub's API rate limits and the need for your personal contribution data, this widget runs as a **GitHub Action** on your own repository rather than via a direct Ligature API link.
+The **3D Contributions** widget generates a beautiful isometric 3D view of your GitHub contribution graph.
+
+## Endpoint
+
+```
+GET /api/github-3d-contrib?user=<username>
+```
+
+## Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `user` | `torvalds` | GitHub username |
 
 ## Preview
 
@@ -20,77 +32,3 @@ Here is an example of what the 3D contribution graph looks like for `iKislay`:
   alt="iKislay's 3D Contribution Graph"
   className="w-full max-w-[800px] rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-lg my-8" 
 />
-
-## 1. Setup Your Profile Repository
-
-If you haven't already, create a new repository on GitHub with the exact same name as your GitHub username (e.g., `torvalds/torvalds`). This is a special repository that appears at the top of your GitHub profile.
-
-## 2. Create the GitHub Action Workflow
-
-In your profile repository, create a new file at `.github/workflows/3d-contrib.yml` and paste the following content:
-
-```yaml
-name: GitHub-Profile-3D-Contrib
-
-on:
-  schedule: # Run automatically every day at midnight
-    - cron: "0 0 * * *"
-  workflow_dispatch: # Allow running manually from the Actions tab
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: generate-github-profile-3d-contrib
-    steps:
-      - uses: actions/checkout@v3
-      - uses: yoshi389111/github-profile-3d-contrib@0.7.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
-      - name: Commit & Push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add -A .
-          git commit -m "chore: update 3d contribution graph" || exit 0
-          git push
-```
-
-## 3. Configure Permissions
-
-For the action to commit the generated images back to your repository, ensure the default `GITHUB_TOKEN` has read/write permissions:
-1. Go to your repository **Settings**.
-2. Navigate to **Actions > General**.
-3. Under **Workflow permissions**, select **Read and write permissions**.
-4. Click **Save**.
-
-## 4. Run the Workflow
-
-1. Go to the **Actions** tab in your repository.
-2. Select **GitHub-Profile-3D-Contrib** from the left sidebar.
-3. Click **Run workflow**.
-
-Wait a minute for the action to finish. It will generate a folder named `profile-3d-contrib` containing several SVG versions of your 3D graph!
-
-## 5. Add it to your README
-
-Finally, edit your `README.md` and add one of the generated images. For example, to use the default green theme:
-
-```md
-![3D Contribution Graph](./profile-3d-contrib/profile-green-animate.svg)
-```
-
-### Available Themes
-
-The action generates several different themes you can choose from:
-- `profile-green.svg` (Default)
-- `profile-green-animate.svg` (Animated)
-- `profile-night-view.svg` (Dark Mode)
-- `profile-season.svg` (Seasonal Colors)
-- `profile-gitblock.svg` (GitBlock Style)
-
-Just update the path in your `README.md` to point to the theme you prefer!
-
-<Callout>
-  **Note:** Since this runs on your own repository via GitHub Actions, Ligature does not track or store your data for this widget. It's completely private and runs on your own schedule.
-</Callout>
