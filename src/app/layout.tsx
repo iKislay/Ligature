@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,12 +33,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100 selection:bg-blue-200 dark:selection:bg-blue-900">
         <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
-          <SiteHeader />
-          <main className="mx-auto w-full" id="content">
-            {children}
-          </main>
-          <SiteFooter />
-        </div>
+            <SiteHeader />
+            <main className="mx-auto w-full" id="content">
+              {children}
+            </main>
+            <SiteFooter />
+          </div>
       </body>
     </html>
   );
