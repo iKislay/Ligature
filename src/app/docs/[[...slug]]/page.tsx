@@ -58,7 +58,7 @@ export async function generateMetadata({
   ogUrl.searchParams.set("description", doc.description ?? "")
 
   return {
-    title: `${doc.title} | React Components & Templates`,
+    title: `${doc.title} | Ligature Widgets`,
     description: doc.description,
     openGraph: {
       title: doc.title,
@@ -78,7 +78,7 @@ export async function generateMetadata({
       title: doc.title,
       description: doc.description,
       images: [ogUrl.toString()],
-      creator: "@dillionverma",
+      creator: "@iKislay",
     },
   }
 }
@@ -93,7 +93,7 @@ export default async function DocPage({ params }: DocPageProps) {
     next: configNeighbours.next,
   }
   const breadcrumbs = getBreadcrumbItems(page.url, source.pageTree, {
-    includeRoot: { url: "/widgets" },
+    includeRoot: { url: "/docs" },
     includePage: true,
   })
   const lastBreadcrumb = breadcrumbs.at(-1)
@@ -148,8 +148,8 @@ export default async function DocPage({ params }: DocPageProps) {
     },
     isPartOf: {
       "@type": "CreativeWorkSeries",
-      name: "Ligature Widgets",
-      url: absoluteUrl("/widgets"),
+      name: "Ligature Documentation",
+      url: absoluteUrl("/docs"),
     },
     wordCount: content ? content.split(/\s+/).length : 0,
   }
