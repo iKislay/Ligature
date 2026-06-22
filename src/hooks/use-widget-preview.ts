@@ -15,12 +15,7 @@ export type WidgetPreviewType =
   | 'skyline'
   | 'trends'
   | 'actions'
-  | 'github-profile'
-  | 'summary-stats'
-  | 'summary-profile'
-  | 'summary-repos-lang'
-  | 'summary-commit-lang'
-  | 'summary-productive';
+  | 'github-profile';
 
 export interface UseWidgetPreviewOptions {
   defaultUsername?: string;
@@ -54,16 +49,7 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
         case 'puzzle-bobble':
         case 'minesweeper':
           return `/api/games?user=${user}&game=${type}&theme=${theme}`;
-        case 'summary-stats':
-          return `/api/github-summary?user=${user}&theme=${theme}&card=stats`;
-        case 'summary-profile':
-          return `/api/github-summary?user=${user}&theme=${theme}&card=profile-details`;
-        case 'summary-repos-lang':
-          return `/api/github-summary?user=${user}&theme=${theme}&card=repos-per-language`;
-        case 'summary-commit-lang':
-          return `/api/github-summary?user=${user}&theme=${theme}&card=most-commit-language`;
-        case 'summary-productive':
-          return `/api/github-summary?user=${user}&theme=${theme}&card=productive-time`;
+
         default:
           return `/api/github?user=${user}&theme=${theme}`;
       }
@@ -94,21 +80,7 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
         case 'github-stats':
           label = 'GitHub Stats';
           break;
-        case 'summary-stats':
-          label = 'GitHub Summary Stats';
-          break;
-        case 'summary-profile':
-          label = 'GitHub Profile Summary';
-          break;
-        case 'summary-repos-lang':
-          label = 'Repo Languages';
-          break;
-        case 'summary-commit-lang':
-          label = 'Commit Languages';
-          break;
-        case 'summary-productive':
-          label = 'Productive Time';
-          break;
+
         case 'github-profile':
           label = 'GitHub Profile Overview';
           break;

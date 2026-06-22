@@ -1,11 +1,57 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getTheme } from '@/lib/themes';
+import { githubFetch } from '@/lib/github-client';
 
 export const runtime = 'edge';
 
 // Aggressive caching (60 minutes) to prevent rate-limiting as per constraints
 export const revalidate = 3600;
+
+async function fetchAllRepos(username: string): Promise<Array<{ stargazers_count: number }>> {
+  const repos: Array<{ stargazers_count: number }> = [];
+  let page = 1;
+  while (page <= 10) {
+    const res = await githubFetch(
+      `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=pushed`
+    );
+    if (!res.ok) break;
+    const data = (await res.json()) as Array<{ stargazers_count: number }>;
+    repos.push(...data);
+    if (data.length < 100) break;
+    page++;
+  }
+  return repos;
+}
+
+async function fetchTotalStars(username: string): Promise<number> {
+  const repos = await fetchAllRepos(username);
+  return repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+}
+
+async function fetchSearchCount(username: string, type: 'pr' | 'issue'): Promise<number> {
+  const res = await githubFetch(
+    `https://api.github.com/search/issues?q=author:${username}+type:${type}&per_page=1`
+  );
+  if (!res.ok) return 0;
+  const data = (await res.json()) as { total_count?: number };
+  return data.total_count || 0;
+}
+
+async function fetchContributionsLastYear(username: string): Promise<number> {
+  const res = await fetch(
+    `https://github-contributions-api.jogruber.de/v4/${username}?y=last`
+  );
+  if (!res.ok) return 0;
+  const data = (await res.json()) as { total?: Record<string, number> };
+  const total = data.total || {};
+  return (
+    total['lastYear'] ||
+    total[new Date().getFullYear()] ||
+    Object.values(total)[0] ||
+    0
+  );
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -14,15 +60,18 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
-    // TODO: Connect to Redis (Upstash) for caching actual API responses
-    // TODO: Fetch real GitHub data using the username
+    const [commits, prs, issues, stars] = await Promise.all([
+      fetchContributionsLastYear(user),
+      fetchSearchCount(user, 'pr'),
+      fetchSearchCount(user, 'issue'),
+      fetchTotalStars(user),
+    ]);
 
-    // Mock data for Phase 1 Scaffold
     const stats = {
-      commits: 1337,
-      prs: 42,
-      issues: 12,
-      stars: 128,
+      commits,
+      prs,
+      issues,
+      stars,
     };
 
     return new ImageResponse(
