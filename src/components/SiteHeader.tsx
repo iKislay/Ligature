@@ -41,6 +41,14 @@ export function SiteHeader() {
           <li>
             <Link
               className="text-sm underline-offset-4 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              href="/icons"
+            >
+              Icons
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="text-sm underline-offset-4 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
               href="/docs"
             >
               Docs
