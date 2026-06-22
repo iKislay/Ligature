@@ -14,7 +14,8 @@ export type WidgetPreviewType =
   | 'minesweeper'
   | 'skyline'
   | 'trends'
-  | 'actions';
+  | 'actions'
+  | 'github-profile';
 
 export interface UseWidgetPreviewOptions {
   defaultUsername?: string;
@@ -35,6 +36,8 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
       switch (type) {
         case 'github-stats':
           return `/api/github?user=${user}&theme=${theme}`;
+        case 'github-profile':
+          return `/api/github/profile?user=${user}&theme=${theme}`;
         case 'isometric':
           return `/api/isometric?user=${user}&theme=${theme}`;
         case 'skyline':
@@ -75,6 +78,9 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
       switch (type) {
         case 'github-stats':
           label = 'GitHub Stats';
+          break;
+        case 'github-profile':
+          label = 'GitHub Profile Overview';
           break;
         case 'isometric':
           label = '3D Contribution Graph';

@@ -25,22 +25,6 @@ export function SiteHeader() {
           <li>
             <Link
               className="text-sm underline-offset-4 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
-              href="/actions"
-            >
-              Actions
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="text-sm underline-offset-4 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
-              href="/trends"
-            >
-              Trends
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="text-sm underline-offset-4 text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
               href="/icons"
             >
               Icons
