@@ -9,6 +9,7 @@ import {
   GitBlockSettings
 } from '@/lib/github-3d-contrib/color-template';
 import { githubFetch } from '@/lib/github-client';
+import { getUserToken } from '@/lib/user-token';
 import type { UserInfo, NormalColorSettings } from '@/lib/github-3d-contrib/type';
 
 export const runtime = 'nodejs';
@@ -96,9 +97,9 @@ function getSettings(themeName: string) {
   }
 }
 
-async function fetchUserInfo(username: string): Promise<UserInfo> {
+async function fetchUserInfo(token: string, username: string): Promise<UserInfo> {
   const [reposRes, contribRes] = await Promise.all([
-    githubFetch(`https://api.github.com/users/${username}/repos?per_page=100`),
+    githubFetch(token, `https://api.github.com/users/${username}/repos?per_page=100`),
     fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`),
   ]);
 
@@ -198,8 +199,22 @@ export async function GET(req: NextRequest) {
     const theme = searchParams.get('theme') || 'geist';
     const animate = searchParams.get('animate') === 'true';
 
+    const token = await getUserToken(user);
+    if (!token) {
+      return new Response(
+        errorSvg(`User @${user} has not connected their GitHub account.`, theme),
+        {
+          status: 401,
+          headers: {
+            'Content-Type': 'image/svg+xml',
+            'Cache-Control': 'no-cache',
+          },
+        },
+      );
+    }
+
     const settings = getSettings(theme);
-    const userInfo = await fetchUserInfo(user);
+    const userInfo = await fetchUserInfo(token, user);
     const svgContent = createSvg(userInfo, settings, animate);
 
     return new Response(svgContent, {
