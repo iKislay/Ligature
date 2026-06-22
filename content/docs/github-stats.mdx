@@ -17,21 +17,25 @@ GET /api/github?user=<username>&theme=<theme>
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `user` | `octocat` | GitHub username |
-| `theme` | `geist` | Color theme (see [Themes](/docs/themes)) |
+| `user` | `iKislay` | GitHub username |
+| `theme` | `radical` | Color theme (see [Themes](/docs/themes)) |
+
+## Preview
+
+![iKislay's GitHub Stats](/api/github?user=iKislay&theme=radical)
 
 ## Example
 
 ```md
-[![Ligature Stats](https://ligature.dev/api/github?user=octocat)](https://ligature.dev)
+[![Ligature Stats](https://ligature.dev/api/github?user=iKislay&theme=radical)](https://ligature.dev)
 ```
 
 ## Custom Theme
 
 ```md
-[![Ligature Stats](https://ligature.dev/api/github?user=octocat&theme=cyberpunk)](https://ligature.dev)
+[![Ligature Stats](https://ligature.dev/api/github?user=iKislay&theme=cyberpunk)](https://ligature.dev)
 ```
 
 ## Rendering
 
-This endpoint uses **Next.js ImageResponse** (Satori) to render HTML + CSS into a PNG. It runs on the Edge Runtime, so responses are fast and cached aggressively.
+This endpoint generates **SVGs dynamically**. It supports all themes from the classic `github-readme-stats` library and produces sharp, scalable vector graphics!
