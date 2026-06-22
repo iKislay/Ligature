@@ -106,11 +106,6 @@ export const docsConfig: DocsConfig = {
           href: "/docs/isometric",
           items: [],
         },
-        {
-          title: "GitHub Summary Cards",
-          href: "/docs/github-summary-cards",
-          items: [],
-        },
       ],
     },
     {
