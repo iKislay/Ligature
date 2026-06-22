@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { githubFetch } from '@/lib/github-client';
 import { GitHubCalendar } from './react-github-calendar/index';
 
 interface Repo {
@@ -54,14 +55,17 @@ export function GithubProfileCard({ username, theme = 'geist' }: { username: str
       setLoading(true);
       try {
         const [userRes, reposRes, contribRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${username}`),
-          fetch(`https://api.github.com/users/${username}/repos?sort=stargazers_count&per_page=4`),
+          githubFetch(`https://api.github.com/users/${username}`),
+          githubFetch(`https://api.github.com/users/${username}/repos?per_page=100`),
           fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`)
         ]);
 
         if (userRes.ok && reposRes.ok) {
           const uData = await userRes.json();
-          const rData = await reposRes.json();
+          const allRepos = await reposRes.json();
+          const rData = allRepos
+            .sort((a: any, b: any) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+            .slice(0, 4);
           setUserData(uData);
           setRepos(rData);
         }

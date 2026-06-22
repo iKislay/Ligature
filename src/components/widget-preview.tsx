@@ -17,7 +17,6 @@ const WIDGET_LABELS: Record<WidgetPreviewType, string> = {
   bomberman: 'Bomberman',
   'puzzle-bobble': 'Puzzle Bobble',
   minesweeper: 'Minesweeper',
-  skyline: 'GitHub Skyline',
   trends: 'GitHub Trends',
   actions: 'GitHub Actions',
 };
@@ -133,7 +132,7 @@ export function WidgetPreview({
   const fullImageUrl = getFullPreviewUrl(type);
   const markdownSnippet = getMarkdownSnippet(type);
   const needsAuthGate = requiresAuth && !checkingAuth && !isAuthenticated;
-  const showThemeSelector = type !== 'skyline' && type !== 'trends' && type !== 'actions';
+  const showThemeSelector = type !== 'trends' && type !== 'actions';
   const widgetLabel = WIDGET_LABELS[type] ?? type;
 
   return (

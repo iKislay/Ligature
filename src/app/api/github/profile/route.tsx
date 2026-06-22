@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getTheme } from '@/lib/themes';
+import { githubFetch } from '@/lib/github-client';
 
 export const runtime = 'edge';
 export const revalidate = 3600;
@@ -8,23 +9,22 @@ export const revalidate = 3600;
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const user = searchParams.get('user') || 'gautamkmahato';
+    const user = searchParams.get('user') || 'iKislay';
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
-    const headers: Record<string, string> = {};
-    if (process.env.GITHUB_TOKEN) {
-      headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
-    }
-
     const [userRes, reposRes, contribRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${user}`, { headers }),
-      fetch(`https://api.github.com/users/${user}/repos?sort=stargazers_count&per_page=4`, { headers }),
+      githubFetch(`https://api.github.com/users/${user}`),
+      githubFetch(`https://api.github.com/users/${user}/repos?per_page=100`),
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
     ]);
 
     const uData = userRes.ok ? await userRes.json() : null;
-    const rData = reposRes.ok ? await reposRes.json() : [];
+    const allRepos = reposRes.ok ? (await reposRes.json()) as Array<any> : [];
+    // GitHub's "sort=stargazers_count" is not valid; sort client-side.
+    const rData = allRepos
+      .sort((a: any, b: any) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+      .slice(0, 4);
     const cData = contribRes.ok ? await contribRes.json() : null;
 
     if (!uData) {

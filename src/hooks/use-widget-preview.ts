@@ -12,7 +12,6 @@ export type WidgetPreviewType =
   | 'bomberman'
   | 'puzzle-bobble'
   | 'minesweeper'
-  | 'skyline'
   | 'trends'
   | 'actions'
   | 'github-profile';
@@ -40,8 +39,6 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
           return `/api/github/profile?user=${user}&theme=${theme}`;
         case 'isometric':
           return `/api/isometric?user=${user}&theme=${theme}`;
-        case 'skyline':
-          return `https://github.com/user-attachments/assets/ed0fe34e-6825-4eb2-91d7-a0834966dc3a`;
         case 'pacman':
         case 'breakout':
         case 'galaga':
@@ -70,10 +67,6 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
     (type: WidgetPreviewType): string => {
       const user = username || 'iKislay';
       const fullUrl = getFullPreviewUrl(type);
-
-      if (type === 'skyline') {
-        return `Check out my [GitHub Skyline 3D Contribution Graph](${user}-github-skyline.stl)!`;
-      }
 
       let label: string;
       switch (type) {

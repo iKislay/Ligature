@@ -9,7 +9,6 @@ import { useWidgetPreview, WidgetPreviewType } from '@/hooks/use-widget-preview'
 const previewOptions = [
   { value: 'github', label: 'GitHub Stats' },
   { value: '3d-contrib', label: '3D Contributions' },
-  { value: 'gh-skyline', label: 'GitHub Skyline' },
   { value: 'games', label: 'Arcade Games' },
   { value: 'istime', label: 'IsTime' },
   { value: 'discord', label: 'Discord' },
@@ -36,8 +35,6 @@ function tabToWidgetType(
       return 'github-stats';
     case '3d-contrib':
       return 'isometric';
-    case 'gh-skyline':
-      return 'skyline';
     case 'games':
       return game as WidgetPreviewType;
     default:
@@ -54,7 +51,6 @@ export function PreviewSection() {
     | 'discord'
     | 'forg'
     | '3d-contrib'
-    | 'gh-skyline'
   >('github');
 
   const {
@@ -156,7 +152,7 @@ export function PreviewSection() {
         {widgetType ? (
           <img
             src={imageUrl}
-            alt={`${selectedTab === 'games' ? 'Games' : selectedTab === '3d-contrib' ? '3D Contributions' : selectedTab === 'gh-skyline' ? 'GitHub Skyline' : 'GitHub'} Widget Preview`}
+            alt={`${selectedTab === 'games' ? 'Games' : selectedTab === '3d-contrib' ? '3D Contributions' : 'GitHub'} Widget Preview`}
             className="w-full max-w-[800px] rounded-xl border border-neutral-200 shadow-lg dark:border-neutral-800"
           />
         ) : (

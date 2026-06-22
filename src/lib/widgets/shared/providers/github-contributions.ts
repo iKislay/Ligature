@@ -1,5 +1,6 @@
 import { BaseStore, Contribution, ContributionLevel } from '../types';
 import { calculateContributionLevel, getCurrentTheme, levelToIndex } from '../utils/utils';
+import { githubFetch } from '@/lib/github-client';
 
 interface ContributionDay {
 	date: string;
@@ -37,11 +38,11 @@ const fetchGithubContributionsRest = async (store: BaseStore): Promise<Contribut
 
 	do {
 		try {
-			const headers: HeadersInit = {};
+			const headers: Record<string, string> = {};
 			if (store.config.githubSettings?.accessToken) {
 				headers['Authorization'] = 'Bearer ' + store.config.githubSettings.accessToken;
 			}
-			const response = await fetch(
+			const response = await githubFetch(
 				`https://api.github.com/search/commits?q=author:${store.config.username}&sort=author-date&order=desc&page=${page}&per_page=100`,
 				{ headers }
 			);
@@ -105,12 +106,15 @@ const fetchGithubContributionsGraphQL = async (store: BaseStore): Promise<Contri
 		}
 	`;
 
-	const response = await fetch('https://api.github.com/graphql', {
+	const headers: Record<string, string> = {
+		'Content-Type': 'application/json'
+	};
+	if (store.config.githubSettings?.accessToken) {
+		headers['Authorization'] = `Bearer ${store.config.githubSettings.accessToken}`;
+	}
+	const response = await githubFetch('https://api.github.com/graphql', {
 		method: 'POST',
-		headers: {
-			Authorization: `Bearer ${store.config.githubSettings?.accessToken}`,
-			'Content-Type': 'application/json'
-		},
+		headers,
 		body: JSON.stringify({ query, variables: { login: store.config.username } })
 	});
 
