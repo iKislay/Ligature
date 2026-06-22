@@ -12,15 +12,31 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
+    const headers: Record<string, string> = {};
+    if (process.env.GITHUB_TOKEN) {
+      headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
+    }
+
     const [userRes, reposRes, contribRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${user}`),
-      fetch(`https://api.github.com/users/${user}/repos?sort=stargazers_count&per_page=4`),
+      fetch(`https://api.github.com/users/${user}`, { headers }),
+      fetch(`https://api.github.com/users/${user}/repos?sort=stargazers_count&per_page=4`, { headers }),
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
     ]);
 
     const uData = userRes.ok ? await userRes.json() : null;
     const rData = reposRes.ok ? await reposRes.json() : [];
     const cData = contribRes.ok ? await contribRes.json() : null;
+
+    if (!uData) {
+      return new ImageResponse(
+        (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif' }}>
+            <h2>GitHub API Rate Limit Exceeded or User Not Found</h2>
+          </div>
+        ),
+        { width: 840, height: 600 }
+      );
+    }
 
     const totalRepos = uData?.public_repos || 0;
     const contributions = cData?.total?.[new Date().getFullYear()] || cData?.total?.['lastYear'] || Object.values(cData?.total || {})[0] || 0;
