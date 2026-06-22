@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { siteConfig } from '@/config/site';
 
 export type WidgetPreviewType =
   | 'github-stats'
@@ -56,7 +57,7 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
     (type: WidgetPreviewType): string => {
       const url = getPreviewUrl(type);
       if (url.startsWith('http')) return url;
-      return `https://ligature.dev${url}`;
+      return `${siteConfig.url}${url}`;
     },
     [getPreviewUrl]
   );

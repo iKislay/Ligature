@@ -136,7 +136,7 @@ export function constructMetadata({
       creator: "@iKislay",
     },
     icons: "/favicon.ico",
-    metadataBase: new URL("https://ligature.dev"),
+    metadataBase: new URL("https://ligaturemd.netlify.app"),
     authors: [
       {
         name: "iKislay",

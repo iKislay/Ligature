@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Ligature",
-  url: "https://ligature.dev",
-  ogImage: "https://ligature.dev/og",
+  url: "https://ligaturemd.netlify.app",
+  ogImage: "https://ligaturemd.netlify.app/og",
   description:
     "Stateless, edge-rendered SVG widgets for your GitHub and GitLab READMEs. Customize themes, copy a snippet, and embed.",
   links: {
