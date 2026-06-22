@@ -9,11 +9,73 @@
  Detected additional lockfiles: 
    * /home/kislay/Desktop/coding/Ligature/pnpm-lock.yaml
 
-[MDX] generated files in 9.558047999999985ms
 ▲ Next.js 16.2.9 (Turbopack)
 - Environments: .env.local
 
+[MDX] generated files in 14.451559999999972ms
   Creating an optimized production build ...
+Error: Can't resolve 'tw-animate-css' in '/home/kislay/Desktop/coding/Ligature/src/app'
+    [2m[at finishWithoutResolve (/home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/enhanced-resolve@5.21.6/node_modules/enhanced-resolve/lib/Resolver.js:942:18)][0m
+    [2m[at /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/enhanced-resolve@5.21.6/node_modules/enhanced-resolve/lib/Resolver.js:1034:14][0m
+    [2m[at /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/enhanced-resolve@5.21.6/node_modules/enhanced-resolve/lib/Resolver.js:1111:5][0m
+    [2m[at eval (eval at create (/home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/tapable@2.3.3/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/enhanced-resolve@5.21.6/node_modules/enhanced-resolve/lib/Resolver.js:1111:5][0m
+    [2m[at eval (eval at create (/home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/tapable@2.3.3/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:27:1)][0m
+    [2m[at /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/enhanced-resolve@5.21.6/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:94:43][0m
+    [2m[at /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/enhanced-resolve@5.21.6/node_modules/enhanced-resolve/lib/Resolver.js:1111:5][0m
+    [2m[at eval (eval at create (/home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/tapable@2.3.3/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/enhanced-resolve@5.21.6/node_modules/enhanced-resolve/lib/Resolver.js:1111:5][0m {
+  details: "resolve 'tw-animate-css' in '/home/kislay/Desktop/coding/Ligature/src/app'\n" +
+    '  Parsed request is a module\n' +
+    '  using description file: /home/kislay/Desktop/coding/Ligature/package.json (relative path: ./src/app)\n' +
+    '    resolve as module\n' +
+    "      /home/kislay/Desktop/coding/Ligature/src/app/node_modules doesn't exist or is not a directory\n" +
+    "      /home/kislay/Desktop/coding/Ligature/src/node_modules doesn't exist or is not a directory\n" +
+    '      looking for modules in /home/kislay/Desktop/coding/Ligature/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/kislay/Desktop/coding/Ligature/package.json (relative path: ./node_modules/tw-animate-css)\n' +
+    '            no extension\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/tw-animate-css doesn't exist\n" +
+    '            .css\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/tw-animate-css.css doesn't exist\n" +
+    "        /home/kislay/Desktop/coding/Ligature/node_modules/tw-animate-css doesn't exist\n" +
+    "      /home/kislay/Desktop/coding/node_modules doesn't exist or is not a directory\n" +
+    "      /home/kislay/Desktop/node_modules doesn't exist or is not a directory\n" +
+    '      looking for modules in /home/kislay/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/kislay/package.json (relative path: ./node_modules/tw-animate-css)\n' +
+    '            no extension\n' +
+    "              /home/kislay/node_modules/tw-animate-css doesn't exist\n" +
+    '            .css\n' +
+    "              /home/kislay/node_modules/tw-animate-css.css doesn't exist\n" +
+    "        /home/kislay/node_modules/tw-animate-css doesn't exist\n" +
+    "      /home/node_modules doesn't exist or is not a directory\n" +
+    "      /node_modules doesn't exist or is not a directory\n" +
+    '      looking for modules in /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/package.json (relative path: ./node_modules/tw-animate-css)\n' +
+    '            no extension\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/node_modules/tw-animate-css doesn't exist\n" +
+    '            .css\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/node_modules/tw-animate-css.css doesn't exist\n" +
+    "        /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/node_modules/tw-animate-css doesn't exist\n" +
+    '      looking for modules in /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/kislay/Desktop/coding/Ligature/package.json (relative path: ./node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/tw-animate-css)\n' +
+    '            no extension\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/tw-animate-css doesn't exist\n" +
+    '            .css\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/tw-animate-css.css doesn't exist\n" +
+    "        /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/next@16.2.9_@babel+core@7.29.7_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/tw-animate-css doesn't exist\n" +
+    '      looking for modules in /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/kislay/Desktop/coding/Ligature/package.json (relative path: ./node_modules/.pnpm/node_modules/tw-animate-css)\n' +
+    '            no extension\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/node_modules/tw-animate-css doesn't exist\n" +
+    '            .css\n' +
+    "              /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/node_modules/tw-animate-css.css doesn't exist\n" +
+    "        /home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/node_modules/tw-animate-css doesn't exist"
+}
 Turbopack build encountered 9 warnings:
 ./Desktop/coding/Ligature/src/lib/widgets/isometric-contrib/index.ts:17:18
 A Node.js API is used (process.argv at line: 17) which is not supported in the Edge Runtime.
@@ -195,376 +257,24 @@ Import trace:
 
 
 > Build error occurred
-Error: Turbopack build failed with 15 errors:
-./Desktop/coding/Ligature/src/lib/source.ts:1:1
-Module not found: Can't resolve '@/.source'
-[31m[1m>[0m [90m1 |[0m [36mimport[0m { docs } [36mfrom[0m [32m'@/.source'[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m2 |[0m [36mimport[0m { loader } [36mfrom[0m [32m'fumadocs-core/source'[0m;
-  [90m3 |[0m
-  [90m4 |[0m [36mexport[0m [36mconst[0m source = loader({
-
-Import map: aliased to relative './src/.source' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/lib/source.ts
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:8:1
-Module not found: Can't resolve '@/components/ping-dot'
-  [90m 6 |[0m [36mimport[0m { trackEvent } [36mfrom[0m [32m"@/lib/events"[0m
-  [90m 7 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
-[31m[1m>[0m [90m 8 |[0m [36mimport[0m { [33mPingDot[0m } [36mfrom[0m [32m"@/components/ping-dot"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m 9 |[0m [36mimport[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny-t...[0m
-  [90m10 |[0m [36mimport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
-  [90m11 |[0m [36mimport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
-
-Import map: aliased to relative './src/components/ping-dot' inside of [project]/Desktop/coding/Ligature
-
+Error: Turbopack build failed with 1 errors:
+./Desktop/coding/Ligature/src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /home/kislay/Desktop/coding/Ligature/src/app/globals.css:1:1: Can't resolve 'tw-animate-css' in '/home/kislay/Desktop/coding/Ligature/src/app'
+    at Input.error (Desktop/coding/Ligature/node_modules/postcss/lib/input.js:135:16) [/home/kislay/Desktop/coding/Ligature/.next/build/chunks/14y__195npnw._.js:4682:22]
+    at error (Desktop/coding/Ligature/node_modules/postcss/lib/node.js:146:32) [/home/kislay/Desktop/coding/Ligature/.next/build/chunks/14y__195npnw._.js:954:38]
+    [at Object.Once (/home/kislay/Desktop/coding/Ligature/node_modules/.pnpm/@tailwindcss+postcss@4.3.1/node_modules/@tailwindcss/postcss/dist/index.js:10:6918)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:104:5)]
+    at async LazyResult.runAsync (Desktop/coding/Ligature/node_modules/postcss/lib/lazy-result.js:293:11) [/home/kislay/Desktop/coding/Ligature/.next/build/chunks/14y__195npnw._.js:6254:21]
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [/home/kislay/Desktop/coding/Ligature/.next/build/chunks/[root-of-the-server]__0_n6tgs._.js:146:36]
+    at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23) [/home/kislay/Desktop/coding/Ligature/.next/build/chunks/[root-of-the-server]__0in422v._.js:443:31]
 
 Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:7:1
-Module not found: Can't resolve '@/components/ui/dropdown-menu'
-  [90m 5 |[0m [36mimport[0m { useCopyToClipboard } [36mfrom[0m [32m"@/hooks/use-copy-to-clipboard"[0m
-  [90m 6 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
-[31m[1m>[0m [90m 7 |[0m [36mimport[0m {
-  [90m   |[0m [31m[1m^^^^^^^[0m
-[31m[1m>[0m [90m 8 |[0m   [33mDropdownMenu[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m 9 |[0m   [33mDropdownMenuContent[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m10 |[0m   [33mDropdownMenuItem[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m11 |[0m   [33mDropdownMenuTrigger[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m12 |[0m } [36mfrom[0m [32m"@/components/ui/dropdown-menu"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m13 |[0m [36mimport[0m {
-  [90m14 |[0m   [33mPopover[0m,
-  [90m15 |[0m   [33mPopoverContent[0m,
-
-Import map: aliased to relative './src/components/ui/dropdown-menu' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/docs-copy-page.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/docs-toc.tsx:8:1
-Module not found: Can't resolve '@/components/ui/dropdown-menu'
-  [90m 6 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m
-  [90m 7 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
-[31m[1m>[0m [90m 8 |[0m [36mimport[0m {
-  [90m   |[0m [31m[1m^^^^^^^[0m
-[31m[1m>[0m [90m 9 |[0m   [33mDropdownMenu[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m10 |[0m   [33mDropdownMenuContent[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m11 |[0m   [33mDropdownMenuItem[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m12 |[0m   [33mDropdownMenuTrigger[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m13 |[0m } [36mfrom[0m [32m"@/components/ui/dropdown-menu"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m14 |[0m
-  [90m15 |[0m [36mfunction[0m useActiveItem(itemIds: string[]) {
-  [90m16 |[0m   [36mconst[0m [activeId, setActiveId] = [33mReact[0m.useState<string | [36mnull[0m>([36mnull[0m)
-
-Import map: aliased to relative './src/components/ui/dropdown-menu' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/docs-toc.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:13:1
-Module not found: Can't resolve '@/components/ui/popover'
-  [90m11 |[0m   [33mDropdownMenuTrigger[0m,
-  [90m12 |[0m } [36mfrom[0m [32m"@/components/ui/dropdown-menu"[0m
-[31m[1m>[0m [90m13 |[0m [36mimport[0m {
-  [90m   |[0m [31m[1m^^^^^^^[0m
-[31m[1m>[0m [90m14 |[0m   [33mPopover[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^[0m
-[31m[1m>[0m [90m15 |[0m   [33mPopoverContent[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m16 |[0m   [33mPopoverTrigger[0m,
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
-[31m[1m>[0m [90m17 |[0m } [36mfrom[0m [32m"@/components/ui/popover"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m18 |[0m [36mimport[0m { [33mSeparator[0m } [36mfrom[0m [32m"@/components/ui/separator"[0m
-  [90m19 |[0m
-  [90m20 |[0m [36mfunction[0m getPromptUrl(baseURL: string, url: string) {
-
-Import map: aliased to relative './src/components/ui/popover' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/docs-copy-page.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:5:1
-Module not found: Can't resolve '@/hooks/use-copy-to-clipboard'
-  [90m3 |[0m [36mimport[0m { [33mIconCheck[0m, [33mIconChevronDown[0m, [33mIconCopy[0m } [36mfrom[0m [32m"@tabler/icons-react"[0m
-  [90m4 |[0m
-[31m[1m>[0m [90m5 |[0m [36mimport[0m { useCopyToClipboard } [36mfrom[0m [32m"@/hooks/use-copy-to-clipboard"[0m
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
-  [90m7 |[0m [36mimport[0m {
-  [90m8 |[0m   [33mDropdownMenu[0m,
-
-Import map: aliased to relative './src/hooks/use-copy-to-clipboard' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/docs-copy-page.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/ui/sidebar.tsx:9:1
-Module not found: Can't resolve '@/hooks/use-mobile'
-  [90m 7 |[0m
-  [90m 8 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m
-[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useIsMobile } [36mfrom[0m [32m"@/hooks/use-mobile"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m10 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
-  [90m11 |[0m [36mimport[0m { [33mInput[0m } [36mfrom[0m [32m"@/components/ui/input"[0m
-  [90m12 |[0m [36mimport[0m { [33mSeparator[0m } [36mfrom[0m [32m"@/components/ui/separator"[0m
-
-Import map: aliased to relative './src/hooks/use-mobile' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/ui/sidebar.tsx
-    ./Desktop/coding/Ligature/src/app/docs/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/contribute.tsx:5:1
-Module not found: Can't resolve '@/lib/github'
-  [90m3 |[0m [36mimport[0m { [33mBugIcon[0m, [33mLightbulbIcon[0m, [33mPencilIcon[0m } [36mfrom[0m [32m"lucide-react"[0m
-  [90m4 |[0m
-[31m[1m>[0m [90m5 |[0m [36mimport[0m { getGithubFileUrl, getGitHubIssueUrl } [36mfrom[0m [32m"@/lib/github"[0m
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mexport[0m [36mfunction[0m [33mContribute[0m({ page }: { page: [33mPage[0m<[33mPageData[0m> }) {
-  [90m8 |[0m   [36mconst[0m contributeLinks = [
-
-Import map: aliased to relative './src/lib/github' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/contribute.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/lib/events.ts:3:1
-Module not found: Can't resolve '@/lib/posthog'
-  [90m1 |[0m [36mimport[0m { z } [36mfrom[0m [32m"zod"[0m
-  [90m2 |[0m
-[31m[1m>[0m [90m3 |[0m [36mimport[0m { capturePostHogEvent } [36mfrom[0m [32m"@/lib/posthog"[0m
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m4 |[0m
-  [90m5 |[0m [36mconst[0m eventSchema = z.object({
-  [90m6 |[0m   name: z.[36menum[0m([
-
-Import map: aliased to relative './src/lib/posthog' inside of [project]/Desktop/coding/Ligature
-
-
-Import traces:
   Client Component Browser:
-    ./Desktop/coding/Ligature/src/lib/events.ts [Client Component Browser]
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Client Component Browser]
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Server Component]
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/coding/Ligature/src/lib/events.ts [Client Component SSR]
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Client Component SSR]
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx [Server Component]
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
+    ./Desktop/coding/Ligature/src/app/globals.css [Client Component Browser]
+    ./Desktop/coding/Ligature/src/app/layout.tsx [Server Component]
 
 
-./Desktop/coding/Ligature/src/lib/docs.ts:1:1
-Module not found: Can't resolve '@/lib/registry'
-[31m[1m>[0m [90m1 |[0m [36mimport[0m { getRegistryItem } [36mfrom[0m [32m"@/lib/registry"[0m
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m2 |[0m
-  [90m3 |[0m /**
-  [90m4 |[0m  * [33mReplaces[0m [33mComponentSource[0m tags [36min[0m content [36mwith[0m actual source code [36mfro.[0m..
-
-Import map: aliased to relative './src/lib/registry' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/lib/docs.ts
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:9:1
-Module not found: Can't resolve '@/registry/magicui/animated-shiny-text'
-  [90m 7 |[0m ...[36mrt[0m { [33mButton[0m } [36mfrom[0m [32m"@/components/ui/button"[0m
-  [90m 8 |[0m ...[36mrt[0m { [33mPingDot[0m } [36mfrom[0m [32m"@/components/ping-dot"[0m
-[31m[1m>[0m [90m 9 |[0m ...[36mrt[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny-text"[0m
-  [90m   |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m10 |[0m ...[36mrt[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
-  [90m11 |[0m ...[36mrt[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
-  [90m12 |[0m ...[36mrt[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
-
-Import map: aliased to relative './src/registry/magicui/animated-shiny-text' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:10:1
-Module not found: Can't resolve '@/registry/magicui/aurora-text'
-  [90m 8 |[0m [36mimport[0m { [33mPingDot[0m } [36mfrom[0m [32m"@/components/ping-dot"[0m
-  [90m 9 |[0m [36mimport[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny-t...[0m
-[31m[1m>[0m [90m10 |[0m [36mimport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m11 |[0m [36mimport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
-  [90m12 |[0m [36mimport[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
-  [90m13 |[0m
-
-Import map: aliased to relative './src/registry/magicui/aurora-text' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:11:1
-Module not found: Can't resolve '@/registry/magicui/line-shadow-text'
-  [90m 9 |[0m ...[36mmport[0m { [33mAnimatedShinyText[0m } [36mfrom[0m [32m"@/registry/magicui/animated-shiny...[0m
-  [90m10 |[0m ...[36mmport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
-[31m[1m>[0m [90m11 |[0m ...[36mmport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
-  [90m   |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m12 |[0m ...[36mmport[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
-  [90m13 |[0m ...
-  [90m14 |[0m ...[36mxport[0m [36mfunction[0m [33mProCTA[0m() {
-
-Import map: aliased to relative './src/registry/magicui/line-shadow-text' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:12:1
-Module not found: Can't resolve '@/registry/magicui/text-animate'
-  [90m10 |[0m [36mimport[0m { [33mAuroraText[0m } [36mfrom[0m [32m"@/registry/magicui/aurora-text"[0m
-  [90m11 |[0m [36mimport[0m { [33mLineShadowText[0m } [36mfrom[0m [32m"@/registry/magicui/line-shadow-text"[0m
-[31m[1m>[0m [90m12 |[0m [36mimport[0m { [33mTextAnimate[0m } [36mfrom[0m [32m"@/registry/magicui/text-animate"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m13 |[0m
-  [90m14 |[0m [36mexport[0m [36mfunction[0m [33mProCTA[0m() {
-  [90m15 |[0m   [36mreturn[0m (
-
-Import map: aliased to relative './src/registry/magicui/text-animate' inside of [project]/Desktop/coding/Ligature
-
-
-Import trace:
-  Server Component:
-    ./Desktop/coding/Ligature/src/components/sidebar-cta.tsx
-    ./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx:8:1
-Module not found: Can't resolve 'fumadocs-core/server'
-  [90m 6 |[0m [36mimport[0m [36mtype[0m { [33mBreadcrumbItem[0m } [36mfrom[0m [32m"fumadocs-core/breadcrumb"[0m
-  [90m 7 |[0m [36mimport[0m { getBreadcrumbItems } [36mfrom[0m [32m"fumadocs-core/breadcrumb"[0m
-[31m[1m>[0m [90m 8 |[0m [36mimport[0m { findNeighbour } [36mfrom[0m [32m"fumadocs-core/server"[0m
-  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m 9 |[0m [36mimport[0m [36mtype[0m { [33mBreadcrumbList[0m, [33mTechArticle[0m, [33mWithContext[0m } [36mfrom[0m [32m"schema-...[0m
-  [90m10 |[0m
-  [90m11 |[0m [36mimport[0m { getNeighboursFromConfig } [36mfrom[0m [32m"@/config/docs"[0m
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-    at <unknown> (./Desktop/coding/Ligature/src/lib/source.ts:1:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:8:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:7:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/docs-toc.tsx:8:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:13:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/docs-copy-page.tsx:5:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/ui/sidebar.tsx:9:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/contribute.tsx:5:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/lib/events.ts:3:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/lib/docs.ts:1:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:9:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:10:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:11:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/components/sidebar-cta.tsx:12:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (./Desktop/coding/Ligature/src/app/docs/[[...slug]]/page.tsx:8:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [/home/kislay/Desktop/coding/Ligature/.next/build/chunks/[root-of-the-server]__0_n6tgs._.js:146:36])
+    at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23) [/home/kislay/Desktop/coding/Ligature/.next/build/chunks/[root-of-the-server]__0in422v._.js:443:31])
  ELIFECYCLE  Command failed with exit code 1.
