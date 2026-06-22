@@ -29,9 +29,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async signIn({ account, profile }) {
-      if (account?.access_token && profile?.login) {
+      const githubProfile = profile as { login?: string } | undefined;
+      if (account?.access_token && githubProfile?.login) {
         try {
-          await saveUserToken(profile.login as string, account.access_token as string);
+          await saveUserToken(githubProfile.login, account.access_token as string);
         } catch (error) {
           console.error('Failed to save user token on sign-in:', error);
           // Still allow sign-in; the user can reconnect later.

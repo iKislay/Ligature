@@ -13,6 +13,7 @@ import { getUserToken } from '@/lib/user-token';
 import type { UserInfo, NormalColorSettings } from '@/lib/github-3d-contrib/type';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 interface Repo {
   language: string | null;
@@ -235,3 +236,4 @@ export async function GET(req: NextRequest) {
     });
   }
 }
+export const dynamic = 'force-dynamic';

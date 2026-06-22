@@ -8,6 +8,7 @@ export const runtime = 'nodejs';
 
 // Aggressive caching (60 minutes) to prevent rate-limiting as per constraints
 export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 async function fetchAllRepos(token: string, username: string): Promise<Array<{ stargazers_count: number; fork: boolean }>> {
   const repos: Array<{ stargazers_count: number; fork: boolean }> = [];
@@ -170,3 +171,4 @@ export async function GET(req: NextRequest) {
     return new Response('Failed to generate image', { status: 500 });
   }
 }
+
