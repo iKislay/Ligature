@@ -39,19 +39,16 @@ interface CommitItem {
 }
 
 const fetchGithubContributionsRest = async (store: BaseStore): Promise<Contribution[]> => {
+	const token = store.config.githubSettings?.accessToken ?? '';
 	const commits: CommitItem[] = [];
 	let isComplete = false;
 	let page = 1;
 
 	do {
 		try {
-			const headers: Record<string, string> = {};
-			if (store.config.githubSettings?.accessToken) {
-				headers['Authorization'] = 'Bearer ' + store.config.githubSettings.accessToken;
-			}
 			const response = await githubFetch(
-				`https://api.github.com/search/commits?q=author:${store.config.username}&sort=author-date&order=desc&page=${page}&per_page=100`,
-				{ headers }
+				token,
+				`https://api.github.com/search/commits?q=author:${store.config.username}&sort=author-date&order=desc&page=${page}&per_page=100`
 			);
 			const data = (await response.json()) as { items?: CommitItem[] };
 			isComplete = !data.items || data.items.length === 0;
@@ -115,15 +112,10 @@ const fetchGithubContributionsGraphQL = async (store: BaseStore): Promise<Contri
 		}
 	`;
 
-	const headers: Record<string, string> = {
-		'Content-Type': 'application/json'
-	};
-	if (store.config.githubSettings?.accessToken) {
-		headers['Authorization'] = `Bearer ${store.config.githubSettings.accessToken}`;
-	}
-	const response = await githubFetch('https://api.github.com/graphql', {
+	const token = store.config.githubSettings?.accessToken ?? '';
+	const response = await githubFetch('https://api.github.com/graphql', token, {
 		method: 'POST',
-		headers,
+		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ query, variables: { login: store.config.username } })
 	});
 
