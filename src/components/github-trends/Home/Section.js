@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { HiOutlineLightningBolt as LightningIcon } from 'react-icons/hi';
+import { Zap as LightningIcon } from 'lucide-react';
 
 const Section = (props) => {
   return (

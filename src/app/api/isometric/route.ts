@@ -3,9 +3,9 @@ import { createSvg } from '@/lib/github-3d-contrib/create-svg';
 import {
   NormalSettings,
   NorthSeasonSettings,
+  SouthSeasonSettings,
   NightViewSettings,
-  NightGreenSettings,
-  NightRainbowSettings,
+  HalloweenSettings,
   GitBlockSettings
 } from '@/lib/github-3d-contrib/color-template';
 import type { UserInfo } from '@/lib/github-3d-contrib/type';
@@ -61,14 +61,14 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const user = searchParams.get('user') || 'octocat';
-    const theme = searchParams.get('theme') || 'green';
+    const theme = searchParams.get('theme') || 'github';
     const animate = searchParams.get('animate') === 'true';
     
     let settings: any = NormalSettings;
-    if (theme === 'season') settings = NorthSeasonSettings;
-    else if (theme === 'night-view') settings = NightViewSettings;
-    else if (theme === 'night-green') settings = NightGreenSettings;
-    else if (theme === 'night-rainbow') settings = NightRainbowSettings;
+    if (theme === 'north') settings = NorthSeasonSettings;
+    else if (theme === 'south') settings = SouthSeasonSettings;
+    else if (theme === 'night') settings = NightViewSettings;
+    else if (theme === 'halloween') settings = HalloweenSettings;
     else if (theme === 'gitblock') settings = GitBlockSettings;
     
     const userInfo = getMockUserInfo(user);

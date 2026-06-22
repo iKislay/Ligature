@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  FaArrowLeft as LeftArrowIcon,
-  FaArrowRight as RightArrowIcon,
-} from 'react-icons/fa';
+  ArrowLeft as LeftArrowIcon,
+  ArrowRight as RightArrowIcon,
+} from 'lucide-react';
 
 import { classnames } from '../../utils';
 

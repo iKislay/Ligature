@@ -38,7 +38,7 @@ export function PreviewSection() {
   const imageUrl = isGame 
     ? `/api/games?user=${username || 'iKislay'}&game=${selectedGame}`
     : selectedTab === '3d-contrib'
-    ? `/api/github-3d-contrib?user=${username || 'iKislay'}`
+    ? `/api/isometric?user=${username || 'iKislay'}`
     : selectedTab === 'gh-skyline'
     ? `https://github.com/user-attachments/assets/ed0fe34e-6825-4eb2-91d7-a0834966dc3a`
     : `/api/github?user=${username || 'iKislay'}&theme=${selectedTheme}`;
