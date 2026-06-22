@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Github, Twitter } from 'lucide-react';
+import { Github } from 'lucide-react';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function SiteHeader() {
   return (
@@ -37,6 +38,9 @@ export function SiteHeader() {
             >
               GitHub
             </Link>
+          </li>
+          <li>
+            <ThemeToggle />
           </li>
         </ul>
       </nav>

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-
+import { ThemeProvider } from "@/components/theme-provider";
 
 export default function RootLayout({
   children,
@@ -29,16 +29,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-blue-900">
-        <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
             <SiteHeader />
             <main className="mx-auto w-full" id="content">
               {children}
             </main>
             <SiteFooter />
           </div>
+        </ThemeProvider>
       </body>
     </html>
   );
