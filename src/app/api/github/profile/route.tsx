@@ -2,8 +2,9 @@ import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getTheme } from '@/lib/themes';
 import { githubFetch } from '@/lib/github-client';
+import { getUserToken } from '@/lib/user-token';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const revalidate = 3600;
 
 interface Repo {
@@ -21,9 +22,24 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
+    const token = await getUserToken(user);
+    if (!token) {
+      return new ImageResponse(
+        (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif', padding: '40px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Connect your GitHub account</div>
+              <div style={{ fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligature.dev to enable widgets for @{user}</div>
+            </div>
+          </div>
+        ),
+        { width: 840, height: 600 }
+      );
+    }
+
     const [userRes, reposRes, contribRes] = await Promise.all([
-      githubFetch(`https://api.github.com/users/${user}`),
-      githubFetch(`https://api.github.com/users/${user}/repos?per_page=100`),
+      githubFetch(token, `https://api.github.com/users/${user}`),
+      githubFetch(token, `https://api.github.com/users/${user}/repos?per_page=100`),
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
     ]);
 
