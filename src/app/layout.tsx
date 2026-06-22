@@ -29,9 +29,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-white dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100 selection:bg-blue-200 dark:selection:bg-blue-900">
+      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-blue-900">
         <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
             <SiteHeader />
             <main className="mx-auto w-full" id="content">
