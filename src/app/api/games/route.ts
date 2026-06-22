@@ -7,6 +7,7 @@ import { getUserToken } from '@/lib/user-token';
 
 export const runtime = 'nodejs';
 export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 function errorSvg(message: string): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200">
@@ -69,4 +70,4 @@ export async function GET(req: NextRequest) {
     return new Response('Failed to generate image', { status: 500 });
   }
 }
-export const dynamic = 'force-dynamic';
+
