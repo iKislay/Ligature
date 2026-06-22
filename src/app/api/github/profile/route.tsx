@@ -117,16 +117,16 @@ export async function GET(req: NextRequest) {
           </div>
 
           {/* Graph */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', marginBottom: '24px' }}>
-            <div style={{ display: 'flex', gap: '3px', alignSelf: 'flex-start' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignSelf: 'flex-start' }}>
               {weeks.map((week, i) => (
                 <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
                   {week.map((day, j) => (
                     <div 
                       key={j} 
                       style={{ 
-                        width: '10px', 
-                        height: '10px', 
+                        width: '11px', 
+                        height: '11px', 
                         backgroundColor: getLevelColor(day),
                         borderRadius: '2px' 
                       }} 
