@@ -1,67 +1,35 @@
 ---
 title: GitHub Profile Overview
-description: Embed a beautiful GitHub profile overview in your README — contribution graph and top repositories.
+description: Add a real, interactive GitHub profile overview with your contribution graph and top repositories into your GitHub README.
 ---
 
 # GitHub Profile Overview
 
-Showcase your GitHub contributions and top repositories in a single card. Just copy, paste, and you're done.
+Showcase your GitHub contributions and top repositories in a single, beautiful widget that fetches live data directly from GitHub APIs.
 
 <WidgetPreview type="github-profile" />
 
-## Endpoint
+## Usage
 
-```
-GET /api/github/profile?user=<username>&theme=<theme>
+Simply copy the markdown snippet below and paste it into your `README.md` file. The widget will automatically update with your live GitHub data!
+
+```markdown
+[![GitHub Profile Overview](https://ligature.dev/api/github/profile?user=your-username&theme=geist_dark)](https://github.com/your-username)
 ```
 
 ## Parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `user` | `gautamkmahato` | GitHub username |
-| `theme` | `geist` | Color theme |
+You can customize the widget by adding the following parameters to the URL:
 
-## Available Themes
+| Parameter | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+| `user` | `string` | `gautamkmahato` | Your GitHub username. |
+| `theme` | `string` | `geist` | The color theme of the widget. Try `cyberpunk`, `retro`, `geist_dark`, or `minimal`. |
 
-| Theme | Style |
-|-------|-------|
-| `geist` | Clean, modern light |
-| `geist_dark` | Dark mode variant |
-| `cyberpunk` | Neon glow, dark terminal |
-| `minimal` | Sparse, neutral, high contrast |
-| `retro` | Solarized-inspired warm tones |
+---
 
-## Example
+### Example with Cyberpunk Theme
 
-Copy this into your README.md:
-
-```md
-[![GitHub Profile Overview](https://ligaturemd.netlify.app/api/github/profile?user=gautamkmahato&theme=geist)](https://github.com/gautamkmahato)
+```markdown
+[![GitHub Profile Overview](https://ligature.dev/api/github/profile?user=iKislay&theme=cyberpunk)](https://github.com/iKislay)
 ```
-
-### Dark theme
-
-```md
-[![GitHub Profile Overview](https://ligaturemd.netlify.app/api/github/profile?user=gautamkmahato&theme=geist_dark)](https://github.com/gautamkmahato)
-```
-
-### Cyberpunk
-
-```md
-[![GitHub Profile Overview](https://ligaturemd.netlify.app/api/github/profile?user=gautamkmahato&theme=cyberpunk)](https://github.com/gautamkmahato)
-```
-
-### Minimal
-
-```md
-[![GitHub Profile Overview](https://ligaturemd.netlify.app/api/github/profile?user=gautamkmahato&theme=minimal)](https://github.com/gautamkmahato)
-```
-
-### Retro
-
-```md
-[![GitHub Profile Overview](https://ligaturemd.netlify.app/api/github/profile?user=gautamkmahato&theme=retro)](https://github.com/gautamkmahato)
-```
-
-Just replace `gautamkmahato` with your own GitHub username and pick your favorite theme.

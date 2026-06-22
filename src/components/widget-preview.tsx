@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { WidgetPreviewType, useWidgetPreview } from '@/hooks/use-widget-preview';
-import { GithubProfileCard } from '@/components/github-profile-card';
 
 const THEME_OPTIONS = ['geist', 'geist_dark', 'cyberpunk', 'minimal', 'retro'] as const;
 const SUMMARY_THEME_OPTIONS = ['default', 'dark', 'dracula', 'github_dark', 'tokyonight', 'radical', 'gruvbox', 'solarized_dark', 'monokai'] as const;
@@ -158,10 +157,6 @@ export function WidgetPreview({
             fallbackImage={fallbackImage}
             title={widgetLabel}
           />
-        ) : type === 'github-profile' ? (
-          <div className="w-full max-w-4xl p-4">
-            <GithubProfileCard username={username || 'gautamkmahato'} theme={theme} />
-          </div>
         ) : (
           <PreviewImage src={relativeUrl} alt={`${widgetLabel} preview for ${username}`} />
         )}

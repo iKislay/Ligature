@@ -12,12 +12,33 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
-    const contributions = 101;
-    const totalRepos = 101;
+    const [userRes, reposRes, contribRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${user}`),
+      fetch(`https://api.github.com/users/${user}/repos?sort=stargazers_count&per_page=4`),
+      fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
+    ]);
+
+    const uData = userRes.ok ? await userRes.json() : null;
+    const rData = reposRes.ok ? await reposRes.json() : [];
+    const cData = contribRes.ok ? await contribRes.json() : null;
+
+    const totalRepos = uData?.public_repos || 0;
+    const contributions = cData?.total?.[new Date().getFullYear()] || cData?.total?.['lastYear'] || Object.values(cData?.total || {})[0] || 0;
     
-    const weeks = Array.from({ length: 52 }, () => 
-      Array.from({ length: 7 }, () => Math.random() > 0.8 ? Math.floor(Math.random() * 4) + 1 : 0)
-    );
+    // Process contributions into weeks array (52 weeks, 7 days)
+    // The API returns contributions array of { date, count, level }
+    const allDays = cData?.contributions || [];
+    // We want the last 364 days to form exactly 52 weeks of 7 days
+    const recentDays = allDays.slice(-364);
+    const weeks: number[][] = [];
+    for (let i = 0; i < 52; i++) {
+      const week = [];
+      for (let j = 0; j < 7; j++) {
+        const day = recentDays[i * 7 + j];
+        week.push(day ? day.level : 0);
+      }
+      weeks.push(week);
+    }
 
     const getLevelColor = (level: number) => {
       const intensityColors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
@@ -33,7 +54,21 @@ export async function GET(req: NextRequest) {
       if (level === 1) return colors[1];
       if (level === 2) return colors[2];
       if (level === 3) return colors[3];
-      return colors[4];
+      return colors[4] || colors[3];
+    };
+
+    const getLanguageColor = (lang: string) => {
+      switch (lang?.toLowerCase()) {
+        case 'javascript': return '#f1e05a';
+        case 'typescript': return '#3178c6';
+        case 'python': return '#3572A5';
+        case 'java': return '#b07219';
+        case 'html': return '#e34c26';
+        case 'css': return '#563d7c';
+        case 'go': return '#00ADD8';
+        case 'rust': return '#dea584';
+        default: return '#8b949e';
+      }
     };
 
     return new ImageResponse(
@@ -52,7 +87,7 @@ export async function GET(req: NextRequest) {
           }}
         >
           {/* Header */}
-          <div style={{ display: 'flex', marginBottom: '20px', fontSize: '18px' }}>
+          <div style={{ display: 'flex', marginBottom: '16px', fontSize: '16px' }}>
             <span style={{ fontWeight: 'bold', color: theme.colors.primary, marginRight: '6px' }}>{contributions}</span> 
             <span style={{ color: theme.colors.secondary }}>Contributions in the last year</span>
           </div>
@@ -79,47 +114,29 @@ export async function GET(req: NextRequest) {
           </div>
 
           {/* Repos Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-            <div style={{ display: 'flex', fontSize: '18px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', fontSize: '16px' }}>
               <span style={{ color: theme.colors.secondary, marginRight: '6px' }}>Total</span>
               <span style={{ fontWeight: 'bold', color: theme.colors.text, marginRight: '6px' }}>{totalRepos}</span>
               <span style={{ color: theme.colors.secondary }}>repositories</span>
-            </div>
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              padding: '8px 16px', 
-              backgroundColor: theme.colors.background,
-              borderRadius: '20px', 
-              border: `1px solid ${theme.colors.border}`,
-              fontSize: '16px',
-              fontWeight: '500',
-              color: theme.colors.text
-            }}>
-              Pinned Repositories <span style={{ marginLeft: '8px', fontSize: '12px' }}>▼</span>
             </div>
           </div>
 
           {/* Cards Grid */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-            {[
-              { name: 'generative-art-opensource', desc: 'Create generative art by using the canvas api and node js, feel free to contribute to this...', lang: 'JavaScript', color: '#f1e05a', stars: 1, isJS: true },
-              { name: 'SqlCraft', desc: 'A lightweight online Sqlite editor', lang: 'TypeScript', color: '#3178c6', stars: 0, isTS: true },
-              { name: 'Swagger-UI', desc: '', lang: 'JavaScript', color: '#f1e05a', stars: 0, isJS: true },
-              { name: 'tts', desc: 'A Python based Text to speech app', lang: 'Python', color: '#3572A5', stars: 0, isPy: true }
-            ].map((repo, i) => (
+            {rData.map((repo: any, i: number) => (
               <div key={i} style={{ 
                 display: 'flex', 
                 flexDirection: 'column', 
                 width: '370px',
-                height: '160px',
-                padding: '20px',
+                height: '140px',
+                padding: '16px',
                 backgroundColor: theme.colors.background,
                 border: `1px solid ${theme.colors.border}`,
-                borderRadius: '16px',
+                borderRadius: '12px',
                 boxSizing: 'border-box'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px', fontSize: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px', fontSize: '16px' }}>
                   <span style={{ color: theme.colors.secondary }}>{user}/</span>
                   <span style={{ fontWeight: 'bold', color: theme.colors.text }}>{repo.name}</span>
                 </div>
@@ -127,47 +144,28 @@ export async function GET(req: NextRequest) {
                 <div style={{ 
                   display: 'flex', 
                   flex: 1,
-                  fontSize: '15px', 
+                  fontSize: '13px',  
                   color: theme.colors.secondary, 
                   lineHeight: '1.4',
                   overflow: 'hidden'
                 }}>
-                  {repo.desc}
+                  {repo.description || 'No description provided.'}
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      {repo.isJS && (
-                         <div style={{ width: '20px', height: '20px', backgroundColor: '#f1e05a', color: 'black', fontSize: '10px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>JS</div>
-                      )}
-                      {repo.isTS && (
-                         <div style={{ width: '20px', height: '20px', backgroundColor: '#3178c6', color: 'white', fontSize: '10px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>TS</div>
-                      )}
-                      {repo.isPy && (
-                         <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>
-                            <span style={{ fontSize: '16px' }}>🐍</span>
-                         </div>
-                      )}
-                      <span style={{ fontSize: '14px', color: theme.colors.secondary }}>{repo.lang}</span>
-                    </div>
-                    {repo.stars > 0 && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <span style={{ color: theme.colors.secondary }}>☆</span>
-                        <span style={{ fontSize: '14px', color: theme.colors.secondary }}>{repo.stars}</span>
+                    {repo.language && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <div style={{ width: '10px', height: '10px', backgroundColor: getLanguageColor(repo.language), borderRadius: '50%' }} />
+                        <span style={{ fontSize: '13px', color: theme.colors.secondary }}>{repo.language}</span>
                       </div>
                     )}
-                  </div>
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                    width: '32px', 
-                    height: '32px', 
-                    borderRadius: '50%', 
-                    backgroundColor: theme.colors.border
-                  }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme.colors.secondary} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    {repo.stargazers_count > 0 && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <span style={{ color: theme.colors.secondary, fontSize: '13px' }}>★</span>
+                        <span style={{ fontSize: '13px', color: theme.colors.secondary }}>{repo.stargazers_count}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
