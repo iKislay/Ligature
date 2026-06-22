@@ -7,22 +7,36 @@ import { themes } from '@/lib/themes';
 
 const previewOptions = [
   { value: 'github', label: 'GitHub Stats' },
+  { value: 'games', label: 'Arcade Games' },
   { value: 'istime', label: 'IsTime' },
   { value: 'discord', label: 'Discord' },
   { value: 'forg', label: 'Forg' },
 ] as const;
 
+const gameOptions = [
+  { value: 'pacman', label: 'Pac-Man' },
+  { value: 'bomberman', label: 'Bomberman' },
+  { value: 'breakout', label: 'Breakout' },
+  { value: 'galaga', label: 'Galaga' },
+  { value: 'puzzle-bobble', label: 'Puzzle Bobble' },
+  { value: 'minesweeper', label: 'Minesweeper' },
+] as const;
+
 const themeKeys = Object.keys(themes);
 
 export function PreviewSection() {
-  const [selectedTab, setSelectedTab] = useState<'github' | 'istime' | 'discord' | 'forg'>('github');
+  const [selectedTab, setSelectedTab] = useState<'github' | 'games' | 'istime' | 'discord' | 'forg'>('github');
   const [username, setUsername] = useState('torvalds');
   const [selectedTheme, setSelectedTheme] = useState('geist');
+  const [selectedGame, setSelectedGame] = useState('pacman');
   const [copied, setCopied] = useState(false);
 
-  const imageUrl = `/api/github?user=${username || 'torvalds'}&theme=${selectedTheme}`;
+  const isGame = selectedTab === 'games';
+  const imageUrl = isGame 
+    ? `/api/games?user=${username || 'torvalds'}&game=${selectedGame}`
+    : `/api/github?user=${username || 'torvalds'}&theme=${selectedTheme}`;
   const fullImageUrl = `https://ligature.dev${imageUrl}`;
-  const markdownSnippet = `[![${username}'s GitHub Stats](${fullImageUrl})](https://github.com/${username})`;
+  const markdownSnippet = `[![${username}'s ${isGame ? 'Game' : 'GitHub'} Stats](${fullImageUrl})](https://github.com/${username})`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(markdownSnippet);
@@ -61,17 +75,31 @@ export function PreviewSection() {
               placeholder="Username"
               className="h-9 px-3 w-32 md:w-40 rounded-md border border-neutral-200 dark:border-neutral-800 bg-transparent text-sm focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:focus:ring-neutral-300"
             />
-            <select
-              value={selectedTheme}
-              onChange={(e) => setSelectedTheme(e.target.value)}
-              className="h-9 px-3 rounded-md border border-neutral-200 dark:border-neutral-800 bg-transparent text-sm focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:focus:ring-neutral-300 capitalize appearance-none"
-            >
-              {themeKeys.map((t) => (
-                <option key={t} value={t} className="bg-white dark:bg-neutral-900">
-                  {t}
-                </option>
-              ))}
-            </select>
+            {isGame ? (
+              <select
+                value={selectedGame}
+                onChange={(e) => setSelectedGame(e.target.value)}
+                className="h-9 px-3 rounded-md border border-neutral-200 dark:border-neutral-800 bg-transparent text-sm focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:focus:ring-neutral-300 capitalize appearance-none"
+              >
+                {gameOptions.map((g) => (
+                  <option key={g.value} value={g.value} className="bg-white dark:bg-neutral-900">
+                    {g.label}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <select
+                value={selectedTheme}
+                onChange={(e) => setSelectedTheme(e.target.value)}
+                className="h-9 px-3 rounded-md border border-neutral-200 dark:border-neutral-800 bg-transparent text-sm focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:focus:ring-neutral-300 capitalize appearance-none"
+              >
+                {themeKeys.map((t) => (
+                  <option key={t} value={t} className="bg-white dark:bg-neutral-900">
+                    {t}
+                  </option>
+                ))}
+              </select>
+            )}
             <button
               onClick={handleCopy}
               className="h-9 w-9 inline-flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 bg-transparent text-sm font-medium hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 transition-colors"
@@ -88,10 +116,10 @@ export function PreviewSection() {
       </div>
 
       <div className="w-full rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black p-4 md:p-12 flex items-center justify-center min-h-[400px]">
-        {selectedTab === 'github' ? (
+        {selectedTab === 'github' || selectedTab === 'games' ? (
           <img 
             src={imageUrl} 
-            alt="GitHub Widget Preview"
+            alt={`${selectedTab === 'games' ? 'Games' : 'GitHub'} Widget Preview`}
             className="w-full max-w-[800px] shadow-lg rounded-xl border border-neutral-200 dark:border-neutral-800"
           />
         ) : (
