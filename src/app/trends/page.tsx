@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Home } from '@/components/github-trends/Home'; // Assuming Home is the main component exported
+
 
 export default function TrendsPage() {
   return (

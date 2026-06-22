@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Github } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 export function SiteHeader() {
