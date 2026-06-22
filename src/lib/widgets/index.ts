@@ -9,4 +9,4 @@ export { generateScenarioContributions, isScenarioName, resolveScenarioName } fr
 export type { ArcadeConfig, GameType } from './shared/arcade-renderer';
 export { PLATFORM_REGISTRY, PLATFORMS, SCENARIO_REGISTRY, SCENARIOS } from './shared/types';
 export type { Platform, Scenario } from './shared/types';
-export * as IsometricContrib from './isometric-contrib/index';
+

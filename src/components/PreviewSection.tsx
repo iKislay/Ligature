@@ -8,11 +8,13 @@ import { themes } from '@/lib/themes';
 const previewOptions = [
   { value: 'github', label: 'GitHub Stats' },
   { value: '3d-contrib', label: '3D Contributions' },
+  { value: 'gh-skyline', label: 'GitHub Skyline' },
   { value: 'games', label: 'Arcade Games' },
   { value: 'istime', label: 'IsTime' },
   { value: 'discord', label: 'Discord' },
   { value: 'forg', label: 'Forg' },
 ] as const;
+
 
 const gameOptions = [
   { value: 'pacman', label: 'Pac-Man' },
@@ -26,20 +28,24 @@ const gameOptions = [
 const themeKeys = Object.keys(themes);
 
 export function PreviewSection() {
-  const [selectedTab, setSelectedTab] = useState<'github' | 'actions' | 'games' | 'istime' | 'discord' | 'forg' | '3d-contrib'>('github');
-  const [username, setUsername] = useState('torvalds');
+  const [selectedTab, setSelectedTab] = useState<'github' | 'actions' | 'games' | 'istime' | 'discord' | 'forg' | '3d-contrib' | 'gh-skyline'>('github');
+  const [username, setUsername] = useState('iKislay');
   const [selectedTheme, setSelectedTheme] = useState('geist');
   const [selectedGame, setSelectedGame] = useState('pacman');
   const [copied, setCopied] = useState(false);
 
   const isGame = selectedTab === 'games';
   const imageUrl = isGame 
-    ? `/api/games?user=${username || 'torvalds'}&game=${selectedGame}`
+    ? `/api/games?user=${username || 'iKislay'}&game=${selectedGame}`
     : selectedTab === '3d-contrib'
-    ? `/api/github-3d-contrib?user=${username || 'torvalds'}`
-    : `/api/github?user=${username || 'torvalds'}&theme=${selectedTheme}`;
-  const fullImageUrl = `https://ligature.dev${imageUrl}`;
-  const markdownSnippet = `[![${username}'s ${isGame ? 'Game' : 'GitHub'} Stats](${fullImageUrl})](https://github.com/${username})`;
+    ? `/api/github-3d-contrib?user=${username || 'iKislay'}`
+    : selectedTab === 'gh-skyline'
+    ? `https://github.com/user-attachments/assets/ed0fe34e-6825-4eb2-91d7-a0834966dc3a`
+    : `/api/github?user=${username || 'iKislay'}&theme=${selectedTheme}`;
+  const fullImageUrl = selectedTab === 'gh-skyline' ? imageUrl : `https://ligature.dev${imageUrl}`;
+  const markdownSnippet = selectedTab === 'gh-skyline'
+    ? `Check out my [GitHub Skyline 3D Contribution Graph](skyline.stl)!`
+    : `[![${username}'s ${isGame ? 'Game' : 'GitHub'} Stats](${fullImageUrl})](https://github.com/${username})`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(markdownSnippet);
@@ -119,10 +125,10 @@ export function PreviewSection() {
       </div>
 
       <div className="w-full rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black p-4 md:p-12 flex items-center justify-center min-h-[400px]">
-        {selectedTab === 'github' || selectedTab === 'games' || selectedTab === '3d-contrib' ? (
+        {selectedTab === 'github' || selectedTab === 'games' || selectedTab === '3d-contrib' || selectedTab === 'gh-skyline' ? (
           <img 
             src={imageUrl} 
-            alt={`${selectedTab === 'games' ? 'Games' : selectedTab === '3d-contrib' ? '3D Contributions' : 'GitHub'} Widget Preview`}
+            alt={`${selectedTab === 'games' ? 'Games' : selectedTab === '3d-contrib' ? '3D Contributions' : selectedTab === 'gh-skyline' ? 'GitHub Skyline' : 'GitHub'} Widget Preview`}
             className="w-full max-w-[800px] shadow-lg rounded-xl border border-neutral-200 dark:border-neutral-800"
           />
         ) : (
