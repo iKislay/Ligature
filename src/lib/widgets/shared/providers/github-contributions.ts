@@ -31,8 +31,15 @@ export const fetchGithubContributions = async (store: BaseStore): Promise<Contri
 	}
 };
 
+interface CommitItem {
+	commit: {
+		author?: { date?: string };
+		committer?: { date?: string };
+	};
+}
+
 const fetchGithubContributionsRest = async (store: BaseStore): Promise<Contribution[]> => {
-	const commits: any[] = [];
+	const commits: CommitItem[] = [];
 	let isComplete = false;
 	let page = 1;
 
@@ -46,7 +53,7 @@ const fetchGithubContributionsRest = async (store: BaseStore): Promise<Contribut
 				`https://api.github.com/search/commits?q=author:${store.config.username}&sort=author-date&order=desc&page=${page}&per_page=100`,
 				{ headers }
 			);
-			const data: { items?: any[] } = await response.json();
+			const data = (await response.json()) as { items?: CommitItem[] };
 			isComplete = !data.items || data.items.length === 0;
 			commits.push(...(data.items ?? []));
 			page++;
@@ -57,18 +64,20 @@ const fetchGithubContributionsRest = async (store: BaseStore): Promise<Contribut
 
 	const contributions = Array.from(
 		commits
-			.reduce((map: any, item: any) => {
+			.reduce((map, item) => {
 				const authorDateStr = item.commit.author?.date?.split('T')[0];
 				const committerDateStr = item.commit.committer?.date?.split('T')[0];
 				const keyDate = committerDateStr || authorDateStr;
-				const count = (map.get(keyDate) || { count: 0 }).count + 1;
+				if (!keyDate) return map;
+				const current = map.get(keyDate);
+				const count = (current?.count ?? 0) + 1;
 				return map.set(keyDate, {
 					date: new Date(keyDate),
 					count,
 					color: '',
 					level: 'NONE' as const
 				});
-			}, new Map())
+			}, new Map<string, { date: Date; count: number; color: string; level: 'NONE' }>())
 			.values()
 	) as Contribution[];
 

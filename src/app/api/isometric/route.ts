@@ -13,6 +13,18 @@ import type { UserInfo, NormalColorSettings } from '@/lib/github-3d-contrib/type
 
 export const runtime = 'nodejs';
 
+interface Repo {
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+}
+
+interface ContribDay {
+  date: string;
+  count?: number;
+  level?: number;
+}
+
 const STANDARD_THEME_MAP: Record<string, Partial<NormalColorSettings>> = {
   geist: {
     type: 'normal',
@@ -89,11 +101,11 @@ async function fetchUserInfo(username: string): Promise<UserInfo> {
     fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`),
   ]);
 
-  const repos = reposRes.ok ? (await reposRes.json()) as Array<any> : [];
+  const repos = reposRes.ok ? (await reposRes.json()) as Repo[] : [];
   const contribData = contribRes.ok ? await contribRes.json() : null;
 
   const contributionCalendar =
-    contribData?.contributions?.map((day: any) => ({
+    (contribData?.contributions as ContribDay[] | undefined)?.map((day) => ({
       date: new Date(day.date),
       contributionCount: day.count || 0,
       contributionLevel: day.level || 0,

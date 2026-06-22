@@ -62,9 +62,9 @@ export function GithubProfileCard({ username, theme = 'geist' }: { username: str
 
         if (userRes.ok && reposRes.ok) {
           const uData = await userRes.json();
-          const allRepos = await reposRes.json();
+          const allRepos = (await reposRes.json()) as Repo[];
           const rData = allRepos
-            .sort((a: any, b: any) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+            .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
             .slice(0, 4);
           setUserData(uData);
           setRepos(rData);
