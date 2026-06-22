@@ -6,9 +6,11 @@ import { signIn } from 'next-auth/react';
 import { WidgetPreviewType, useWidgetPreview } from '@/hooks/use-widget-preview';
 
 const THEME_OPTIONS = ['geist', 'geist_dark', 'cyberpunk', 'minimal', 'retro'] as const;
+const SUMMARY_THEME_OPTIONS = ['default', 'dark', 'dracula', 'github_dark', 'tokyonight', 'radical', 'gruvbox', 'solarized_dark', 'monokai'] as const;
 
 const WIDGET_LABELS: Record<WidgetPreviewType, string> = {
   'github-stats': 'GitHub Stats',
+  'github-profile': 'GitHub Profile Overview',
   isometric: '3D Contribution Graph',
   pacman: 'Pac-Man',
   breakout: 'Breakout',
@@ -19,6 +21,11 @@ const WIDGET_LABELS: Record<WidgetPreviewType, string> = {
   skyline: 'GitHub Skyline',
   trends: 'GitHub Trends',
   actions: 'GitHub Actions',
+  'summary-stats': 'GitHub Summary Stats',
+  'summary-profile': 'GitHub Profile Summary',
+  'summary-repos-lang': 'Repo Languages',
+  'summary-commit-lang': 'Commit Languages',
+  'summary-productive': 'Productive Time',
 };
 
 interface AuthGateProps {
@@ -132,7 +139,8 @@ export function WidgetPreview({
   const fullImageUrl = getFullPreviewUrl(type);
   const markdownSnippet = getMarkdownSnippet(type);
   const needsAuthGate = requiresAuth && !checkingAuth && !isAuthenticated;
-  const showThemeSelector = type === 'github-stats' || type === 'isometric';
+  const isSummaryCard = type.startsWith('summary-');
+  const showThemeSelector = type === 'github-stats' || type === 'isometric' || isSummaryCard;
   const widgetLabel = WIDGET_LABELS[type] ?? type;
 
   return (
@@ -169,7 +177,7 @@ export function WidgetPreview({
             onChange={(e) => setTheme(e.target.value)}
             className="h-9 rounded-md border border-neutral-200 bg-transparent px-3 text-sm capitalize focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-neutral-800 dark:focus:ring-neutral-300"
           >
-            {THEME_OPTIONS.map((t) => (
+            {(isSummaryCard ? SUMMARY_THEME_OPTIONS : THEME_OPTIONS).map((t) => (
               <option key={t} value={t} className="bg-white dark:bg-neutral-900">
                 {t.replace('_', ' ')}
               </option>

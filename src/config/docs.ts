@@ -97,8 +97,18 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "GitHub Profile Overview",
+          href: "/docs/github-profile",
+          items: [],
+        },
+        {
           title: "Isometric Graph",
           href: "/docs/isometric",
+          items: [],
+        },
+        {
+          title: "GitHub Summary Cards",
+          href: "/docs/github-summary-cards",
           items: [],
         },
       ],
