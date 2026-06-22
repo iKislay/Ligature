@@ -23,16 +23,12 @@ export async function GET(req: NextRequest) {
 
     const [userRes, reposRes, contribRes] = await Promise.all([
       githubFetch(`https://api.github.com/users/${user}`),
-      githubFetch(`https://api.github.com/users/${user}/repos?per_page=100`),
+      githubFetch(`https://api.github.com/users/${user}/repos?sort=stargazers_count&per_page=4`),
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
     ]);
 
     const uData = userRes.ok ? await userRes.json() : null;
-    const allRepos = reposRes.ok ? (await reposRes.json()) as Repo[] : [];
-    // GitHub's "sort=stargazers_count" is not valid; sort client-side.
-    const rData = allRepos
-      .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
-      .slice(0, 4);
+    const rData = reposRes.ok ? await reposRes.json() : [];
     const cData = contribRes.ok ? await contribRes.json() : null;
 
     if (!uData) {
