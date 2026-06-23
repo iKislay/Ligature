@@ -368,7 +368,11 @@ export async function GET(req: NextRequest) {
   <text x="420" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="${theme.colors.secondary}">Server configuration is missing. Please contact the administrator.</text>
 </svg>`;
       return new Response(errorSvg, {
-        headers: { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'public, max-age=3600' },
+        headers: {
+          'Content-Type': 'image/svg+xml',
+          'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+          'Netlify-Vary': 'query=user|theme|mode',
+        },
       });
     }
 
@@ -394,7 +398,11 @@ export async function GET(req: NextRequest) {
   <text x="420" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="${theme.colors.text}">GitHub API Rate Limit Exceeded or User Not Found</text>
 </svg>`;
       return new Response(errorSvg, {
-        headers: { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'public, max-age=3600' },
+        headers: {
+          'Content-Type': 'image/svg+xml',
+          'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+          'Netlify-Vary': 'query=user|theme|mode',
+        },
       });
     }
 
@@ -421,7 +429,8 @@ export async function GET(req: NextRequest) {
     return new Response(svg, {
       headers: {
         'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'public, max-age=3600',
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+        'Netlify-Vary': 'query=user|theme|mode',
       },
     });
   } catch (error) {
