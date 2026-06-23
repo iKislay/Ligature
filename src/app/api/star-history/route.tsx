@@ -1,13 +1,14 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getTheme } from '@/lib/themes';
-import { githubFetch } from '@/lib/github-client';
+import { githubFetch, resolveToken, authRequiredResponse } from '@/lib/github-client';
+import { getUserToken } from '@/lib/user-token';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const revalidate = 3600;
 
-async function getStarHistoryData(repo: string) {
-  const repoRes = await githubFetch(`https://api.github.com/repos/${repo}`);
+async function getStarHistoryData(repo: string, token: string) {
+  const repoRes = await githubFetch(`https://api.github.com/repos/${repo}`, token);
   if (!repoRes.ok) return null;
   const repoData = await repoRes.json();
   const totalStars = repoData.stargazers_count;
@@ -32,7 +33,7 @@ async function getStarHistoryData(repo: string) {
     }
 
     const fetchPage = async (page: number) => {
-      const res = await githubFetch(`https://api.github.com/repos/${repo}/stargazers?per_page=100&page=${page}`, {
+      const res = await githubFetch(`https://api.github.com/repos/${repo}/stargazers?per_page=100&page=${page}`, token, {
         headers: { Accept: 'application/vnd.github.v3.star+json' }
       });
       if (!res.ok) return [];
@@ -80,7 +81,15 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
-    const history = await getStarHistoryData(repo);
+    // Use the repo owner to check for a token
+    const owner = repo.split('/')[0];
+    const userToken = await getUserToken(owner);
+    const token = resolveToken(userToken);
+    if (!token) {
+      return authRequiredResponse('image');
+    }
+
+    const history = await getStarHistoryData(repo, token);
 
     if (!history) {
       return new ImageResponse(
