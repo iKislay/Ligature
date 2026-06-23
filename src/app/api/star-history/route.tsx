@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
-import { getTheme } from '@/lib/themes';
+import { getTheme, ThemeMode } from '@/lib/themes';
 import { githubFetch, resolveToken, authRequiredResponse } from '@/lib/github-client';
 import { getUserToken } from '@/lib/user-token';
 
@@ -79,7 +79,9 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const repo = searchParams.get('repo') || 'iKislay/Ligature';
     const themeName = searchParams.get('theme') || 'geist';
-    const theme = getTheme(themeName);
+    const modeParam = searchParams.get('mode');
+    const mode: ThemeMode = modeParam === 'dark' ? 'dark' : 'light';
+    const theme = getTheme(themeName, mode);
 
     // Use the repo owner to check for a token
     const owner = repo.split('/')[0];
@@ -135,7 +137,7 @@ export async function GET(req: NextRequest) {
       return { val, y: getY(val) };
     });
 
-    const isDark = themeName.includes('dark') || themeName === 'cyberpunk' || themeName === 'monokai';
+    const isDark = mode === 'dark';
     const gridColor = isDark ? '#333333' : '#e5e5e5';
     const labelColor = theme.colors.secondary;
 

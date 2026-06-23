@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
-import { getTheme } from '@/lib/themes';
+import { getTheme, ThemeMode } from '@/lib/themes';
 import { githubFetch, resolveToken, authRequiredResponse } from '@/lib/github-client';
 import { getUserToken } from '@/lib/user-token';
 
@@ -64,7 +64,9 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const user = searchParams.get('user') || 'octocat';
     const themeName = searchParams.get('theme') || 'geist';
-    const theme = getTheme(themeName);
+    const modeParam = searchParams.get('mode');
+    const mode: ThemeMode = modeParam === 'dark' ? 'dark' : 'light';
+    const theme = getTheme(themeName, mode);
 
     const userToken = await getUserToken(user);
     const token = resolveToken(userToken);

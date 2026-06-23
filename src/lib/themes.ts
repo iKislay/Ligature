@@ -28,6 +28,7 @@ export const themes: Record<string, Theme> = {
   geist: {
     name: 'geist',
     light: {
+      background: '#ffffff',
       text: '#171717',
       primary: '#006bff',
       secondary: '#6b7280',
@@ -35,6 +36,7 @@ export const themes: Record<string, Theme> = {
       contributionEmpty: '#ebedf0',
     },
     dark: {
+      background: '#0a0a0a',
       text: '#ededed',
       primary: '#3b82f6',
       secondary: '#9ca3af',
@@ -50,6 +52,7 @@ export const themes: Record<string, Theme> = {
   cyberpunk: {
     name: 'cyberpunk',
     light: {
+      background: '#f5f0ff',
       text: '#1a0033',
       primary: '#ff003c',
       secondary: '#6b21a8',
@@ -57,6 +60,7 @@ export const themes: Record<string, Theme> = {
       contributionEmpty: '#f3e8ff',
     },
     dark: {
+      background: '#0d0221',
       text: '#00ff41',
       primary: '#ff003c',
       secondary: '#00e5ff',
@@ -75,6 +79,7 @@ export const themes: Record<string, Theme> = {
   minimal: {
     name: 'minimal',
     light: {
+      background: '#f4f4f5',
       text: '#27272a',
       primary: '#18181b',
       secondary: '#71717a',
@@ -82,6 +87,7 @@ export const themes: Record<string, Theme> = {
       contributionEmpty: '#e4e4e7',
     },
     dark: {
+      background: '#09090b',
       text: '#fafafa',
       primary: '#fafafa',
       secondary: '#a1a1aa',
@@ -97,6 +103,7 @@ export const themes: Record<string, Theme> = {
   retro: {
     name: 'retro',
     light: {
+      background: '#fdf6e3',
       text: '#657b83',
       primary: '#cb4b16',
       secondary: '#2aa198',
@@ -104,6 +111,7 @@ export const themes: Record<string, Theme> = {
       contributionEmpty: '#eee8d5',
     },
     dark: {
+      background: '#002b36',
       text: '#93a1a1',
       primary: '#cb4b16',
       secondary: '#2aa198',

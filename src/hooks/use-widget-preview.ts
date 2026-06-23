@@ -41,9 +41,9 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
 
       switch (type) {
         case 'github-stats':
-          return `/api/github?user=${user}&theme=${theme}`;
+          return `/api/github?user=${user}&theme=${theme}&mode=${modeValue}`;
         case 'star-history':
-          return `/api/star-history?repo=${repo}&theme=${theme}`;
+          return `/api/star-history?repo=${repo}&theme=${theme}&mode=${modeValue}`;
         case 'github-profile':
           return `/api/github/profile?user=${user}&theme=${theme}&mode=${modeValue}`;
         case 'isometric':
@@ -57,7 +57,7 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
           return `/api/games?user=${user}&game=${type}&theme=${theme}`;
 
         default:
-          return `/api/github?user=${user}&theme=${theme}`;
+          return `/api/github?user=${user}&theme=${theme}&mode=${modeValue}`;
       }
     },
     [username, theme, mode]
