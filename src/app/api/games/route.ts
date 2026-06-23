@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server';
 import { ArcadeRenderer, ARCADE_GAMES } from '@/lib/widgets';
 import type { GameType } from '@/lib/widgets';
 import type { ThemeKeys } from '@/lib/widgets/shared/types';
+import { GAME_THEMES } from '@/lib/widgets/shared/constants';
 import { PlayerStyle } from '@/lib/widgets';
 import { resolveToken } from '@/lib/github-client';
 import { getUserToken } from '@/lib/user-token';
@@ -42,8 +43,10 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const resolvedTheme = mode === 'dark' && themeName === 'geist'
-      ? 'geist_dark'
+    const isDark = mode === 'dark';
+    const darkKey = `${themeName}_dark` as ThemeKeys;
+    const resolvedTheme = isDark && GAME_THEMES[darkKey]
+      ? darkKey
       : themeName as ThemeKeys;
 
     const svg = await new Promise<string>((resolve, reject) => {

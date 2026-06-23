@@ -67,16 +67,34 @@ export const GAME_THEMES: { [key in ThemeKeys]: GameTheme } = {
 		wallColor: '#ff003c',
 		intensityColors: CYBERPUNK
 	},
+	cyberpunk_dark: {
+		textColor: '#00ff41',
+		gridBackground: '#0d0221',
+		wallColor: '#ff003c',
+		intensityColors: CYBERPUNK
+	},
 	minimal: {
 		textColor: '#27272a',
 		gridBackground: '#f4f4f5',
 		wallColor: '#18181b',
 		intensityColors: MINIMAL
 	},
+	minimal_dark: {
+		textColor: '#fafafa',
+		gridBackground: '#09090b',
+		wallColor: '#fafafa',
+		intensityColors: ['#27272a', '#3f3f46', '#52525b', '#71717a', '#a1a1aa']
+	},
 	retro: {
 		textColor: '#657b83',
 		gridBackground: '#fdf6e3',
 		wallColor: '#cb4b16',
 		intensityColors: RETRO
+	},
+	retro_dark: {
+		textColor: '#93a1a1',
+		gridBackground: '#002b36',
+		wallColor: '#cb4b16',
+		intensityColors: ['#073642', '#586e75', '#b58900', '#cb4b16', '#dc322f']
 	}
 };

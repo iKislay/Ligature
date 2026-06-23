@@ -68,7 +68,7 @@ export function PreviewSection() {
 
   const isGame = selectedTab === 'games';
   const widgetType = tabToWidgetType(selectedTab, selectedGame);
-  const resolvedMode = mode === 'auto' ? (resolvedTheme as 'light' | 'dark' ?? 'dark') : mode;
+  const resolvedMode = mode === 'auto' ? (resolvedTheme === 'dark' ? 'dark' : 'light') : mode;
   const imageUrl = widgetType ? getPreviewUrl(widgetType, resolvedMode) : '';
   const markdownSnippet = widgetType ? getMarkdownSnippet(widgetType) : '';
 

@@ -19,7 +19,7 @@ export interface GridCell {
 	level: ContributionLevel;
 }
 
-export type ThemeKeys = 'github' | 'github-dark' | 'gitlab' | 'gitlab-dark' | 'geist' | 'geist_dark' | 'cyberpunk' | 'minimal' | 'retro';
+export type ThemeKeys = 'github' | 'github-dark' | 'gitlab' | 'gitlab-dark' | 'geist' | 'geist_dark' | 'cyberpunk' | 'cyberpunk_dark' | 'minimal' | 'minimal_dark' | 'retro' | 'retro_dark';
 
 export interface GameTheme {
 	textColor: string;

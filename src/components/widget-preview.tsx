@@ -72,7 +72,7 @@ export function WidgetPreview({
     defaultUsername: type === 'star-history' ? 'iKislay/Ligature' : 'iKislay'
   });
 
-  const resolvedMode = mode === 'auto' ? (resolvedTheme as 'light' | 'dark' ?? 'dark') : mode;
+  const resolvedMode = mode === 'auto' ? (resolvedTheme === 'dark' ? 'dark' : 'light') : mode;
   const relativeUrl = getPreviewUrl(type, resolvedMode);
   const markdownSnippet = getMarkdownSnippet(type);
   const showThemeSelector = type !== 'trends' && type !== 'actions';
