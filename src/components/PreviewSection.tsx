@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Copy, Check } from 'lucide-react';
 import { themes } from '@/lib/themes';
 import { useWidgetPreview, WidgetPreviewType } from '@/hooks/use-widget-preview';
+import { InlineSvg } from '@/components/inline-svg';
 
 type PreviewTab = 'github' | '3d-contrib' | 'games' | 'istime' | 'discord' | 'forg';
 
@@ -53,6 +54,8 @@ export function PreviewSection() {
     setUsername,
     theme,
     setTheme,
+    mode,
+    setMode,
     selectedGame,
     setSelectedGame,
     copied,
@@ -111,17 +114,28 @@ export function PreviewSection() {
                 ))}
               </select>
             ) : (
-              <select
-                value={theme}
-                onChange={(e) => { setTheme(e.target.value); setImgError(false); }}
-                className="h-9 appearance-none rounded-md border border-neutral-200 bg-transparent px-3 text-sm capitalize focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-neutral-800 dark:focus:ring-neutral-300"
-              >
-                {themeKeys.map((t) => (
-                  <option key={t} value={t} className="bg-white dark:bg-neutral-900">
-                    {t}
-                  </option>
-                ))}
-              </select>
+              <>
+                <select
+                  value={theme}
+                  onChange={(e) => { setTheme(e.target.value); setImgError(false); }}
+                  className="h-9 appearance-none rounded-md border border-neutral-200 bg-transparent px-3 text-sm capitalize focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-neutral-800 dark:focus:ring-neutral-300"
+                >
+                  {themeKeys.map((t) => (
+                    <option key={t} value={t} className="bg-white dark:bg-neutral-900">
+                      {t}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={mode}
+                  onChange={(e) => { setMode(e.target.value as 'light' | 'dark' | 'auto'); setImgError(false); }}
+                  className="h-9 appearance-none rounded-md border border-neutral-200 bg-transparent px-3 text-sm capitalize focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-neutral-800 dark:focus:ring-neutral-300"
+                >
+                  <option value="auto" className="bg-white dark:bg-neutral-900">auto</option>
+                  <option value="light" className="bg-white dark:bg-neutral-900">light</option>
+                  <option value="dark" className="bg-white dark:bg-neutral-900">dark</option>
+                </select>
+              </>
             )}
             <button
               onClick={onCopy}
@@ -151,12 +165,18 @@ export function PreviewSection() {
               </p>
             </div>
           ) : (
-            <img
-              key={`${username}-${theme}-${selectedTab}-${selectedGame}`}
+            <InlineSvg
+              key={`${username}-${theme}-${mode}-${selectedTab}-${selectedGame}`}
               src={imageUrl}
-              alt={`${selectedTab === 'games' ? 'Games' : selectedTab === '3d-contrib' ? '3D Contributions' : 'GitHub'} Widget Preview`}
-              className="w-full max-w-[800px] rounded-xl border border-neutral-200 shadow-lg dark:border-neutral-800"
-              onError={() => setImgError(true)}
+              className="w-full max-w-[800px]"
+              fallback={
+                <div className="flex flex-col items-center space-y-3 text-center">
+                  <h3 className="text-xl font-semibold tracking-tight">Preview unavailable</h3>
+                  <p className="max-w-sm text-sm text-neutral-500 dark:text-neutral-400">
+                    Could not load the preview. Check the username and try again.
+                  </p>
+                </div>
+              }
             />
           )
         ) : (

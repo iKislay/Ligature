@@ -16,46 +16,46 @@ Ligature is a dynamic SVG generation engine built on Next.js. It allows you to c
 
 Ligature is designed to be embedded directly into your `README.md` to showcase your stats, repositories, and even interactive games! Here is what they look like in action.
 
-*(Note: Replace `https://your-deployment-url.com` with your actual hosted Ligature URL to display your own widgets)*
+*(Note: Replace `https://ligatures.netlify.app` with your actual hosted Ligature URL if you deploy your own instance)*
 
 ### 📊 GitHub Stats
 Get a beautiful overview of a user's GitHub activity.
 
 ```markdown
-![GitHub Stats](https://your-deployment-url.com/api/github?user=iKislay&theme=geist)
+![GitHub Stats](https://ligatures.netlify.app/api/github?user=iKislay&theme=geist)
 ```
 <div align="center">
-  <img src="https://ligature.vercel.app/api/github?user=iKislay&theme=geist" alt="GitHub Stats Example" width="800" />
+  <img src="https://ligatures.netlify.app/api/github?user=iKislay&theme=geist" alt="GitHub Stats Example" width="800" />
 </div>
 
 ### 📈 Star History
 Visualize the growth trajectory of any repository.
 
 ```markdown
-![Star History](https://your-deployment-url.com/api/star-history?repo=iKislay/Ligature&theme=cyberpunk)
+![Star History](https://ligatures.netlify.app/api/star-history?repo=iKislay/Ligature&theme=cyberpunk)
 ```
 <div align="center">
-  <img src="https://ligature.vercel.app/api/star-history?repo=iKislay/Ligature&theme=cyberpunk" alt="Star History Example" width="840" />
+  <img src="https://ligatures.netlify.app/api/star-history?repo=iKislay/Ligature&theme=cyberpunk" alt="Star History Example" width="840" />
 </div>
 
 ### 🧊 3D Contribution Graph
 A stunning 3D isometric projection of your GitHub contribution grid.
 
 ```markdown
-![3D Contribution Graph](https://your-deployment-url.com/api/isometric?user=iKislay&theme=geist_dark&animate=true)
+![3D Contribution Graph](https://ligatures.netlify.app/api/isometric?user=iKislay&theme=geist_dark&animate=true)
 ```
 <div align="center">
-  <img src="https://ligature.vercel.app/api/isometric?user=iKislay&theme=geist_dark&animate=true" alt="3D Contribution Graph Example" width="800" />
+  <img src="https://ligatures.netlify.app/api/isometric?user=iKislay&theme=geist_dark&animate=true" alt="3D Contribution Graph Example" width="800" />
 </div>
 
 ### 🕹️ Arcade Games (Pac-Man)
 Embed playable widgets like Pac-Man into your profile.
 
 ```markdown
-![Pac-Man](https://your-deployment-url.com/api/games?user=iKislay&game=pacman&theme=minimal)
+![Pac-Man](https://ligatures.netlify.app/api/games?user=iKislay&game=pacman&theme=minimal)
 ```
 <div align="center">
-  <img src="https://ligature.vercel.app/api/games?user=iKislay&game=pacman&theme=minimal" alt="Arcade Games Example" width="800" />
+  <img src="https://ligatures.netlify.app/api/games?user=iKislay&game=pacman&theme=minimal" alt="Arcade Games Example" width="800" />
 </div>
 
 ---
