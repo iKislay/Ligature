@@ -113,8 +113,8 @@ function generateSvg(
   const cardWidth = 370;
   const cardHeight = 120;
   const cardGap = 16;
-  const svgWidth = 840;
-  const padding = 40;
+  const svgWidth = 800;
+  const padding = 22;
 
   const repoCardsHtml = rData.map((repo, i) => {
     const col = i % 2;
@@ -195,7 +195,7 @@ function generateSvg(
   const svgHeight = 230 + Math.ceil(rData.length / 2) * (cardHeight + cardGap) + padding;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 100%; height: auto;">
   <style>
     text { -webkit-font-smoothing: antialiased; }
   </style>
@@ -343,7 +343,7 @@ function generatePngFallback(
       </div>
     ),
     {
-      width: 840,
+      width: 800,
       height: 600,
     }
   );

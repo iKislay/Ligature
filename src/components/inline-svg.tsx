@@ -51,6 +51,7 @@ export function InlineSvg({ src, className, fallback }: InlineSvgProps) {
   return (
     <div
       className={className}
+      style={{ lineHeight: 0 }}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     />
   );

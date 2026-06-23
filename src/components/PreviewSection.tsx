@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Copy, Check } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { themes } from '@/lib/themes';
 import { useWidgetPreview, WidgetPreviewType } from '@/hooks/use-widget-preview';
 import { InlineSvg } from '@/components/inline-svg';
@@ -48,6 +49,7 @@ function tabToWidgetType(
 export function PreviewSection() {
   const [selectedTab, setSelectedTab] = useState<PreviewTab>('github');
   const [imgError, setImgError] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const {
     username,
@@ -66,7 +68,8 @@ export function PreviewSection() {
 
   const isGame = selectedTab === 'games';
   const widgetType = tabToWidgetType(selectedTab, selectedGame);
-  const imageUrl = widgetType ? getPreviewUrl(widgetType) : '';
+  const resolvedMode = mode === 'auto' ? (resolvedTheme as 'light' | 'dark' ?? 'dark') : mode;
+  const imageUrl = widgetType ? getPreviewUrl(widgetType, resolvedMode) : '';
   const markdownSnippet = widgetType ? getMarkdownSnippet(widgetType) : '';
 
   const onCopy = () => handleCopy(markdownSnippet);
@@ -166,9 +169,9 @@ export function PreviewSection() {
             </div>
           ) : (
             <InlineSvg
-              key={`${username}-${theme}-${mode}-${selectedTab}-${selectedGame}`}
+              key={`${username}-${theme}-${resolvedMode}-${selectedTab}-${selectedGame}`}
               src={imageUrl}
-              className="w-full max-w-[800px]"
+              className="w-full max-w-[800px] [&>svg]:w-full [&>svg]:h-auto"
               fallback={
                 <div className="flex flex-col items-center space-y-3 text-center">
                   <h3 className="text-xl font-semibold tracking-tight">Preview unavailable</h3>

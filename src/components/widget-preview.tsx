@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { WidgetPreviewType, useWidgetPreview } from '@/hooks/use-widget-preview';
+import { InlineSvg } from '@/components/inline-svg';
 
 const THEME_OPTIONS = ['geist', 'cyberpunk', 'minimal', 'retro'] as const;
 const MODE_OPTIONS = ['auto', 'light', 'dark'] as const;
@@ -28,7 +30,7 @@ function PreviewImage({ src, alt }: { src: string; alt: string }) {
   if (error) {
     return (
       <div className="flex min-h-[200px] w-full items-center justify-center rounded-lg bg-neutral-50 dark:bg-neutral-900">
-        <p className="text-sm text-neutral-500 dark:text-neutral-500">
+        <p className="text-sm text-neutral-500">
           Failed to load preview. Check the username and try again.
         </p>
       </div>
@@ -54,6 +56,7 @@ interface WidgetPreviewProps {
 export function WidgetPreview({
   type,
 }: WidgetPreviewProps) {
+  const { resolvedTheme } = useTheme();
   const {
     username,
     setUsername,
@@ -67,16 +70,31 @@ export function WidgetPreview({
     handleCopy,
   } = useWidgetPreview();
 
-  const relativeUrl = getPreviewUrl(type);
+  const resolvedMode = mode === 'auto' ? (resolvedTheme as 'light' | 'dark' ?? 'dark') : mode;
+  const relativeUrl = getPreviewUrl(type, resolvedMode);
   const markdownSnippet = getMarkdownSnippet(type);
   const showThemeSelector = type !== 'trends' && type !== 'actions';
   const showModeSelector = type === 'github-profile';
   const widgetLabel = WIDGET_LABELS[type] ?? type;
+  const useInlineSvg = type === 'github-profile';
 
   return (
     <div className="my-8 w-full overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
       <div className="flex min-h-[280px] items-center justify-center bg-white p-4 md:p-8 dark:bg-black">
-        <PreviewImage src={relativeUrl} alt={`${widgetLabel} preview for ${username}`} />
+        {useInlineSvg ? (
+          <InlineSvg
+            key={relativeUrl}
+            src={relativeUrl}
+            className="w-full max-w-[800px] [&>svg]:w-full [&>svg]:h-auto"
+            fallback={
+              <div className="flex min-h-[200px] w-full items-center justify-center rounded-lg bg-neutral-50 dark:bg-neutral-900">
+                <p className="text-sm text-neutral-500">Loading preview...</p>
+              </div>
+            }
+          />
+        ) : (
+          <PreviewImage src={relativeUrl} alt={`${widgetLabel} preview for ${username}`} />
+        )}
       </div>
 
       <div className="flex flex-wrap items-center gap-3 border-t border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900/50">
@@ -103,7 +121,7 @@ export function WidgetPreview({
         {showModeSelector && (
           <select
             value={mode}
-            onChange={(e) => setMode(e.target.value as 'light' | 'dark')}
+            onChange={(e) => setMode(e.target.value as 'light' | 'dark' | 'auto')}
             className="h-9 rounded-md border border-neutral-200 bg-transparent px-3 text-sm capitalize focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-neutral-800 dark:focus:ring-neutral-300"
           >
             {MODE_OPTIONS.map((m) => (
