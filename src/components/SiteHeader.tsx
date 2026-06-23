@@ -10,7 +10,7 @@ export function SiteHeader() {
           className="flex items-center gap-2 font-medium"
           href="/"
         >
-          <div className="w-5 h-5 bg-black dark:bg-white rounded-sm" />
+          <img src="/logo.jpg" alt="Ligature logo" className="w-6 h-6 rounded-sm object-cover" />
           <span className="font-medium tracking-tight text-neutral-900 dark:text-white">Ligature</span>
         </Link>
         <ul className="flex flex-wrap items-center gap-4">

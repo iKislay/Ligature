@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ligature - Stateless SVG Widgets for GitHub",
   description: "One directory. Infinite themes. Stateless, edge-rendered SVGs for your README.",
+  icons: {
+    icon: "/logo.ico",
+  },
+  openGraph: {
+    images: ["/logo.jpg"],
+  },
 };
 
 import { SiteHeader } from "@/components/SiteHeader";

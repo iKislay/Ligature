@@ -57,7 +57,6 @@ export function PreviewSection() {
     setSelectedGame,
     copied,
     getPreviewUrl,
-    getFullPreviewUrl,
     getMarkdownSnippet,
     handleCopy,
   } = useWidgetPreview();
@@ -65,7 +64,6 @@ export function PreviewSection() {
   const isGame = selectedTab === 'games';
   const widgetType = tabToWidgetType(selectedTab, selectedGame);
   const imageUrl = widgetType ? getPreviewUrl(widgetType) : '';
-  const fullImageUrl = widgetType ? getFullPreviewUrl(widgetType) : '';
   const markdownSnippet = widgetType ? getMarkdownSnippet(widgetType) : '';
 
   const onCopy = () => handleCopy(markdownSnippet);

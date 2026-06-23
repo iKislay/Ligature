@@ -52,8 +52,6 @@ interface WidgetPreviewProps {
 
 export function WidgetPreview({
   type,
-  requiresAuth = false,
-  fallbackImage,
 }: WidgetPreviewProps) {
   const {
     username,
@@ -62,13 +60,11 @@ export function WidgetPreview({
     setTheme,
     copied,
     getPreviewUrl,
-    getFullPreviewUrl,
     getMarkdownSnippet,
     handleCopy,
   } = useWidgetPreview();
 
   const relativeUrl = getPreviewUrl(type);
-  const fullImageUrl = getFullPreviewUrl(type);
   const markdownSnippet = getMarkdownSnippet(type);
   const showThemeSelector = type !== 'trends' && type !== 'actions';
   const widgetLabel = WIDGET_LABELS[type] ?? type;

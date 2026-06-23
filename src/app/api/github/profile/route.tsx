@@ -39,8 +39,8 @@ export async function GET(req: NextRequest) {
     }
 
     const [userRes, reposRes, contribRes] = await Promise.all([
-      githubFetch(token, `https://api.github.com/users/${user}`),
-      githubFetch(token, `https://api.github.com/users/${user}/repos?per_page=100`),
+      githubFetch(`https://api.github.com/users/${user}`, token),
+      githubFetch(`https://api.github.com/users/${user}/repos?per_page=100`, token),
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`)
     ]);
 

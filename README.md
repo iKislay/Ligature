@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="./public/logo.jpg" alt="Ligature Logo" width="120" />
+  <h1>Ligature</h1>
+  <p><b>Stateless, edge-rendered SVG widgets for your GitHub and GitLab READMEs.</b></p>
+</div>
+
+<br />
+
+One directory. Infinite themes. 
+
+Ligature is a dynamic SVG generation engine built on Next.js. It allows you to customize and embed dynamic widgets directly into markdown files without requiring any persistent databases or heavy infrastructure.
+
+## Features
+
+- **GitHub Stats**: Dynamically fetch and display a user's commits, PRs, issues, and stars.
+- **Profile Overview**: A responsive layout showing contribution history, total repositories, and top projects.
+- **Star History**: A beautiful, auto-scaling line chart visualizing the growth trajectory of any repository.
+- **3D Isometric Graph**: A stunning isometric projection of a user's GitHub contribution grid.
+- **Arcade Games**: Embed playable widgets like Pac-Man, Bomberman, Minesweeper, and more right into your profile.
 
 ## Getting Started
+
+Ligature is built with [Next.js](https://nextjs.org/) and Edge runtime APIs.
+
+### Local Development
 
 First, run the development server:
 
 ```bash
 npm run dev
 # or
-yarn dev
-# or
 pnpm dev
 # or
-bun dev
+yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the live preview customizer.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+For the widgets to bypass GitHub's unauthenticated API rate limits (60 req/hr), you need to provide a `GITHUB_TOKEN` or `GITHUB_ID` / `GITHUB_SECRET` in your `.env.local` file:
 
-## Learn More
+```env
+GITHUB_TOKEN=your_personal_access_token
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The easiest way to deploy Ligature is on the [Vercel Platform](https://vercel.com/new) or [Netlify](https://netlify.com). Ensure you set your environment variables in the dashboard of your hosting provider.
