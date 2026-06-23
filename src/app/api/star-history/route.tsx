@@ -65,6 +65,9 @@ async function getStarHistoryData(repo: string) {
     if (lastCount < totalStars) {
        starData.push({ date: new Date(), count: totalStars });
     }
+  } else {
+    // If 0 stars, just draw a line from creation to today
+    starData.push({ date: new Date(), count: 0 });
   }
 
   return { data: starData, repoData };
@@ -101,7 +104,10 @@ export async function GET(req: NextRequest) {
     const chartHeight = height - paddingBottom;
 
     const minDate = data[0].date.getTime();
-    const maxDate = new Date().getTime(); // up to today
+    let maxDate = new Date().getTime(); // up to today
+    if (maxDate - minDate < 86400000) {
+      maxDate = minDate + 86400000; // Force at least 1 day spread to avoid divide by zero
+    }
     const maxCount = Math.max(repoData.stargazers_count, 10); // Minimum 10 scale
 
     const getX = (date: Date) => paddingLeft + ((date.getTime() - minDate) / (maxDate - minDate)) * chartWidth;
