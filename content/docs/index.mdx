@@ -1,11 +1,11 @@
 ---
 title: Introduction
-description: Learn about Ligature, the stateless edge-rendered SVG widget system for GitHub and GitLab profiles.
+description: Learn about Ligature, the SVG widget system for GitHub and GitLab profiles.
 ---
 
 # Welcome to Ligature
 
-Ligature lets you generate beautiful, customizable SVG widgets for your GitHub and GitLab profile READMEs. Every widget is rendered at the edge — no servers, no state, no maintenance.
+Ligature lets you generate beautiful, customizable SVG widgets for your GitHub and GitLab profile READMEs. No login required — just enter your username and go.
 
 ## How It Works
 
@@ -14,12 +14,12 @@ Ligature lets you generate beautiful, customizable SVG widgets for your GitHub a
 3. Copy the Markdown snippet
 4. Paste it into your README
 
-That's it. The SVG is rendered on every request by **Next.js Edge Runtime**, so your stats are always up to date.
+That's it. Your stats are fetched fresh on every request and rendered as a PNG or SVG image.
 
 ## Features
 
-- **Stateless** — no database, no state management
-- **Edge-rendered** — fast responses from CDN edges worldwide
+- **Zero config** — no database, no login required
+- **Always up to date** — widgets fetch fresh data on every load
 - **Arcade Games** — playable retro games overlaid on your contribution graph
 - **Multiple Themes** — dark, light, seasonal, and custom palettes
 - **GitHub + GitLab** — support for both platforms
@@ -34,5 +34,5 @@ Copy this into your `README.md`:
 ```
 
 <Callout>
-  All widgets follow the same pattern: a `<img>` or Markdown link pointing to a Ligature API endpoint.
+  All widgets follow the same pattern: an `<img>` or Markdown link pointing to a Ligature API endpoint. No authentication needed.
 </Callout>

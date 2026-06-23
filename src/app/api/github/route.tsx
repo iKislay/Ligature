@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getTheme } from '@/lib/themes';
-import { githubFetch } from '@/lib/github-client';
+import { githubFetch, resolveToken, authRequiredResponse } from '@/lib/github-client';
 import { getUserToken } from '@/lib/user-token';
 
 export const runtime = 'nodejs';
@@ -15,8 +15,8 @@ async function fetchAllRepos(token: string, username: string): Promise<Array<{ s
   let page = 1;
   while (page <= 10) {
     const res = await githubFetch(
+      `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=pushed`,
       token,
-      `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=pushed`
     );
     if (!res.ok) break;
     const data = (await res.json()) as Array<{ stargazers_count: number; fork: boolean }>;
@@ -36,8 +36,8 @@ async function fetchTotalStars(token: string, username: string): Promise<number>
 
 async function fetchSearchCount(token: string, username: string, type: 'pr' | 'issue'): Promise<number> {
   const res = await githubFetch(
+    `https://api.github.com/search/issues?q=author:${username}+type:${type}&per_page=1`,
     token,
-    `https://api.github.com/search/issues?q=author:${username}+type:${type}&per_page=1`
   );
   if (!res.ok) return 0;
   const data = (await res.json()) as { total_count?: number };
@@ -66,19 +66,10 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
-    const token = await getUserToken(user);
+    const userToken = await getUserToken(user);
+    const token = resolveToken(userToken);
     if (!token) {
-      return new ImageResponse(
-        (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif', padding: '40px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-              <div style={{ display: 'flex', fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Connect your GitHub account</div>
-              <div style={{ display: 'flex', fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligature.dev to enable widgets for @{user}</div>
-            </div>
-          </div>
-        ),
-        { width: 800, height: 400 }
-      );
+      return authRequiredResponse('image');
     }
 
     const [commits, prs, issues, stars] = await Promise.all([
@@ -171,4 +162,3 @@ export async function GET(req: NextRequest) {
     return new Response('Failed to generate image', { status: 500 });
   }
 }
-

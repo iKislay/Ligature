@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif', padding: '40px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
               <div style={{ display: 'flex', fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Connect your GitHub account</div>
-              <div style={{ display: 'flex', fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligature.dev to enable widgets for @{user}</div>
+              <div style={{ display: 'flex', fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligatures.netlify.app to enable widgets for @{user}</div>
             </div>
           </div>
         ),
@@ -69,7 +69,7 @@ export async function GET(req: NextRequest) {
       );
     }
     const contributions = cData?.total?.[new Date().getFullYear()] || cData?.total?.['lastYear'] || Object.values(cData?.total || {})[0] || 0;
-    
+
     // Process contributions into weeks array (52 weeks, 7 days)
     // The API returns contributions array of { date, count, level }
     const allDays = cData?.contributions || [];
@@ -133,7 +133,7 @@ export async function GET(req: NextRequest) {
         >
           {/* Header */}
           <div style={{ display: 'flex', marginBottom: '16px', fontSize: '16px' }}>
-            <span style={{ fontWeight: 'bold', color: theme.colors.primary, marginRight: '6px' }}>{contributions}</span> 
+            <span style={{ fontWeight: 'bold', color: theme.colors.primary, marginRight: '6px' }}>{contributions}</span>
             <span style={{ color: theme.colors.secondary }}>Contributions in the last year</span>
           </div>
 
@@ -143,14 +143,14 @@ export async function GET(req: NextRequest) {
               {weeks.map((week, i) => (
                 <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
                   {week.map((day, j) => (
-                    <div 
-                      key={j} 
-                      style={{ 
-                        width: '11px', 
-                        height: '11px', 
+                    <div
+                      key={j}
+                      style={{
+                        width: '11px',
+                        height: '11px',
                         backgroundColor: getLevelColor(day),
-                        borderRadius: '2px' 
-                      }} 
+                        borderRadius: '2px'
+                      }}
                     />
                   ))}
                 </div>
@@ -170,9 +170,9 @@ export async function GET(req: NextRequest) {
           {/* Cards Grid */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
             {rData.map((repo, i) => (
-              <div key={i} style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
+              <div key={i} style={{
+                display: 'flex',
+                flexDirection: 'column',
                 width: '370px',
                 height: '140px',
                 padding: '16px',
@@ -185,12 +185,12 @@ export async function GET(req: NextRequest) {
                   <span style={{ color: theme.colors.secondary }}>{displayUser}/</span>
                   <span style={{ fontWeight: 'bold', color: theme.colors.text }}>{repo.name}</span>
                 </div>
-                
-                <div style={{ 
-                  display: 'flex', 
+
+                <div style={{
+                  display: 'flex',
                   flex: 1,
-                  fontSize: '13px',  
-                  color: theme.colors.secondary, 
+                  fontSize: '13px',
+                  color: theme.colors.secondary,
                   lineHeight: '1.4',
                   overflow: 'hidden'
                 }}>

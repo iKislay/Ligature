@@ -1,24 +1,30 @@
 /**
  * Authenticated GitHub REST fetch helper.
  *
- * Every request must carry a valid user access token. There is no anonymous
- * fallback and no shared server token. This keeps each user's GitHub quota
- * separate and avoids leaking a single deployer token.
+ * Tries the user's personal token first, then falls back to the server-wide
+ * GITHUB_TOKEN env var so that public-data widgets work without requiring
+ * every visitor to authenticate.
  */
+
+function getServerToken(): string {
+  return process.env.GITHUB_TOKEN ?? '';
+}
+
 export async function githubFetch(
   url: string,
   token: string,
   init?: RequestInit,
 ): Promise<Response> {
-  if (!token) {
-    throw new Error('A GitHub access token is required for all API calls.');
-  }
+  const effectiveToken = token || getServerToken();
 
   const headers: Record<string, string> = {
     'User-Agent': 'Ligature/1.0',
-    Authorization: `Bearer ${token}`,
     ...(init?.headers as Record<string, string>),
   };
+
+  if (effectiveToken) {
+    headers['Authorization'] = `Bearer ${effectiveToken}`;
+  }
 
   return fetch(url, {
     ...init,
@@ -27,21 +33,28 @@ export async function githubFetch(
 }
 
 /**
- * Error response used by widget routes when the requested user has not
- * connected their GitHub account yet.
+ * Returns a usable token: the user's own token if present, otherwise
+ * the server token. Returns null only when neither exists (shouldn't
+ * happen in production if GITHUB_TOKEN is set).
+ */
+export function resolveToken(userToken: string | null): string | null {
+  return userToken || getServerToken() || null;
+}
+
+/**
+ * Friendly SVG shown when even the server token is missing.
  */
 export function authRequiredResponse(type: 'svg' | 'image' = 'svg') {
   if (type === 'svg') {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200">
       <rect width="800" height="200" fill="#ffffff"/>
-      <text x="400" y="85" text-anchor="middle" fill="#171717" font-size="20" font-family="sans-serif">Connect your GitHub account to generate this widget</text>
-      <text x="400" y="120" text-anchor="middle" fill="#6b7280" font-size="14" font-family="sans-serif">Sign in at https://ligature.dev to enable embeds for your username.</text>
+      <text x="400" y="85" text-anchor="middle" fill="#171717" font-size="20" font-family="sans-serif">Widget temporarily unavailable</text>
+      <text x="400" y="120" text-anchor="middle" fill="#6b7280" font-size="14" font-family="sans-serif">Server configuration is missing. Please contact the administrator.</text>
     </svg>`;
     return new Response(svg, {
-      status: 401,
+      status: 503,
       headers: { 'Content-Type': 'image/svg+xml' },
     });
   }
-  // image/png not easily generated here; callers should render their own.
-  return new Response('Authentication required', { status: 401 });
+  return new Response('Service temporarily unavailable', { status: 503 });
 }

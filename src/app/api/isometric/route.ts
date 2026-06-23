@@ -8,7 +8,7 @@ import {
   HalloweenSettings,
   GitBlockSettings
 } from '@/lib/github-3d-contrib/color-template';
-import { githubFetch } from '@/lib/github-client';
+import { githubFetch, resolveToken } from '@/lib/github-client';
 import { getUserToken } from '@/lib/user-token';
 import type { UserInfo, NormalColorSettings } from '@/lib/github-3d-contrib/type';
 
@@ -100,7 +100,7 @@ function getSettings(themeName: string) {
 
 async function fetchUserInfo(token: string, username: string): Promise<UserInfo> {
   const [reposRes, contribRes] = await Promise.all([
-    githubFetch(token, `https://api.github.com/users/${username}/repos?per_page=100`),
+    githubFetch(`https://api.github.com/users/${username}/repos?per_page=100`, token),
     fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`),
   ]);
 
@@ -200,12 +200,13 @@ export async function GET(req: NextRequest) {
     const theme = searchParams.get('theme') || 'geist';
     const animate = searchParams.get('animate') === 'true';
 
-    const token = await getUserToken(user);
+    const userToken = await getUserToken(user);
+    const token = resolveToken(userToken);
     if (!token) {
       return new Response(
-        errorSvg(`User @${user} has not connected their GitHub account.`, theme),
+        errorSvg('Server configuration is missing. Please contact the administrator.', theme),
         {
-          status: 401,
+          status: 503,
           headers: {
             'Content-Type': 'image/svg+xml',
             'Cache-Control': 'no-cache',
@@ -236,4 +237,3 @@ export async function GET(req: NextRequest) {
     });
   }
 }
-
