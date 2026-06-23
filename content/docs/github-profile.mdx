@@ -11,25 +11,124 @@ Showcase your GitHub contributions and top repositories in a single, beautiful w
 
 ## Usage
 
-Simply copy the markdown snippet below and paste it into your `README.md` file. The widget will automatically update with your live GitHub data!
+Copy the markdown snippet below and paste it into your `README.md` file:
 
 ```markdown
-[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=your-username&theme=geist_dark)](https://github.com/your-username)
+[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=your-username&theme=geist&mode=dark)](https://github.com/your-username)
 ```
 
 ## Parameters
 
-You can customize the widget by adding the following parameters to the URL:
-
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
-| `user` | `string` | `gautamkmahato` | Your GitHub username. |
-| `theme` | `string` | `geist` | The color theme of the widget. Try `cyberpunk`, `retro`, `geist_dark`, or `minimal`. |
+| `user` | `string` | `iKislay` | Your GitHub username. |
+| `theme` | `string` | `geist` | The color theme: `geist`, `cyberpunk`, `minimal`, `retro`. |
+| `mode` | `string` | `auto` | Color mode: `light`, `dark`, or `auto`. |
+| `format` | `string` | `svg` | Output format: `svg` (interactive) or `png` (static). |
+
+## Themes
+
+Every theme includes both light and dark color palettes:
+
+| Theme | Style | Best for |
+|-------|-------|----------|
+| `geist` | Clean, modern | Any website |
+| `cyberpunk` | Neon, hacker | Dark/neon sites |
+| `minimal` | Grayscale | Clean designs |
+| `retro` | Warm, solarized | Vintage aesthetics |
+
+## Mode
+
+The `mode` parameter controls light vs dark colors:
+
+| Mode | Behavior |
+|------|----------|
+| `auto` | Defaults to `dark` for API; React component detects system preference |
+| `light` | Light color palette |
+| `dark` | Dark color palette |
+
+### React / Next.js (auto-detects system preference)
+
+```jsx
+<GithubProfileCard username="your-username" theme="geist" mode="auto" />
+```
+
+Or with `<img>` tag:
+
+```jsx
+const [mode, setMode] = useState('auto');
+
+<img
+  src={`https://ligatures.netlify.app/api/github/profile?user=your-username&theme=geist&mode=${mode}`}
+  alt="GitHub Profile Overview"
+/>
+```
+
+### HTML with CSS media query
+
+```html
+<img
+  src="https://ligatures.netlify.app/api/github/profile?user=your-username&theme=geist&mode=light"
+  alt="GitHub Profile Overview"
+  class="theme-light"
+/>
+<img
+  src="https://ligatures.netlify.app/api/github/profile?user=your-username&theme=geist&mode=dark"
+  alt="GitHub Profile Overview"
+  class="theme-dark"
+/>
+```
+
+```css
+.theme-light { display: block; }
+.theme-dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .theme-light { display: none; }
+  .theme-dark { display: block; }
+}
+```
+
+### GitHub README
+
+Pick one mode (README doesn't support JavaScript):
+
+```markdown
+[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=your-username&theme=geist&mode=dark)](https://github.com/your-username)
+```
+
+## Interactive Features (SVG)
+
+The default `svg` format supports:
+
+- **Hover tooltips** on contribution squares: "5 contributions on Jan 15"
+- **Clickable repository cards** linking directly to each repo
+
+## PNG Fallback
+
+For platforms that don't render SVG well:
+
+```markdown
+[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=your-username&theme=geist&mode=dark&format=png)](https://github.com/your-username)
+```
+
+> PNG is static — no tooltips or clickable repos.
 
 ---
 
-### Example with Cyberpunk Theme
+### Examples
 
+**Cyberpunk dark:**
 ```markdown
-[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=iKislay&theme=cyberpunk)](https://github.com/iKislay)
+[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=iKislay&theme=cyberpunk&mode=dark)](https://github.com/iKislay)
+```
+
+**Minimal light:**
+```markdown
+[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=iKislay&theme=minimal&mode=light)](https://github.com/iKislay)
+```
+
+**Retro dark:**
+```markdown
+[![GitHub Profile Overview](https://ligatures.netlify.app/api/github/profile?user=iKislay&theme=retro&mode=dark)](https://github.com/iKislay)
 ```

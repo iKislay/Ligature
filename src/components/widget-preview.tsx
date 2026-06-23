@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { WidgetPreviewType, useWidgetPreview } from '@/hooks/use-widget-preview';
 
-const THEME_OPTIONS = ['geist', 'geist_dark', 'cyberpunk', 'minimal', 'retro'] as const;
+const THEME_OPTIONS = ['geist', 'cyberpunk', 'minimal', 'retro'] as const;
+const MODE_OPTIONS = ['auto', 'light', 'dark'] as const;
 
 const WIDGET_LABELS: Record<WidgetPreviewType, string> = {
   'github-stats': 'GitHub Stats',
@@ -39,7 +40,7 @@ function PreviewImage({ src, alt }: { src: string; alt: string }) {
       src={src}
       alt={alt}
       onError={() => setError(true)}
-      className="w-full max-w-[800px] rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-sm"
+      className="w-full max-w-[800px] rounded-lg shadow-sm"
     />
   );
 }
@@ -58,6 +59,8 @@ export function WidgetPreview({
     setUsername,
     theme,
     setTheme,
+    mode,
+    setMode,
     copied,
     getPreviewUrl,
     getMarkdownSnippet,
@@ -67,6 +70,7 @@ export function WidgetPreview({
   const relativeUrl = getPreviewUrl(type);
   const markdownSnippet = getMarkdownSnippet(type);
   const showThemeSelector = type !== 'trends' && type !== 'actions';
+  const showModeSelector = type === 'github-profile';
   const widgetLabel = WIDGET_LABELS[type] ?? type;
 
   return (
@@ -75,7 +79,7 @@ export function WidgetPreview({
         <PreviewImage src={relativeUrl} alt={`${widgetLabel} preview for ${username}`} />
       </div>
 
-      <div className="flex items-center gap-3 border-t border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900/50">
+      <div className="flex flex-wrap items-center gap-3 border-t border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900/50">
         <input
           type="text"
           value={username}
@@ -91,7 +95,20 @@ export function WidgetPreview({
           >
             {THEME_OPTIONS.map((t) => (
               <option key={t} value={t} className="bg-white dark:bg-neutral-900">
-                {t.replace('_', ' ')}
+                {t}
+              </option>
+            ))}
+          </select>
+        )}
+        {showModeSelector && (
+          <select
+            value={mode}
+            onChange={(e) => setMode(e.target.value as 'light' | 'dark')}
+            className="h-9 rounded-md border border-neutral-200 bg-transparent px-3 text-sm capitalize focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-neutral-800 dark:focus:ring-neutral-300"
+          >
+            {MODE_OPTIONS.map((m) => (
+              <option key={m} value={m} className="bg-white dark:bg-neutral-900">
+                {m}
               </option>
             ))}
           </select>

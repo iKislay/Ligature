@@ -1,12 +1,17 @@
+export type ThemeColors = {
+  background?: string;
+  text: string;
+  primary: string;
+  secondary: string;
+  border: string;
+  contributionEmpty: string;
+};
+
 export type Theme = {
   name: string;
-  colors: {
-    background: string;
-    text: string;
-    primary: string;
-    secondary: string;
-    border: string;
-  };
+  colors: ThemeColors;
+  light: ThemeColors;
+  dark: ThemeColors;
   typography: {
     fontFamily: string;
   };
@@ -17,44 +22,48 @@ export type Theme = {
   };
 };
 
+export type ThemeMode = 'light' | 'dark';
+
 export const themes: Record<string, Theme> = {
   geist: {
     name: 'geist',
-    colors: {
-      background: '#ffffff',
+    light: {
       text: '#171717',
       primary: '#006bff',
-      secondary: '#4d4d4d',
-      border: '#eaeaea',
+      secondary: '#6b7280',
+      border: '#e5e7eb',
+      contributionEmpty: '#ebedf0',
     },
-    typography: {
-      fontFamily: '"Geist Sans", sans-serif',
-    },
-    effects: {},
-  },
-  geist_dark: {
-    name: 'geist_dark',
-    colors: {
-      background: '#0a0a0a',
+    dark: {
       text: '#ededed',
-      primary: '#006bff',
-      secondary: '#a1a1aa',
-      border: '#333333',
+      primary: '#3b82f6',
+      secondary: '#9ca3af',
+      border: '#374151',
+      contributionEmpty: '#161b22',
     },
+    colors: {} as ThemeColors,
     typography: {
-      fontFamily: '"Geist Sans", sans-serif',
+      fontFamily: 'system-ui, -apple-system, sans-serif',
     },
     effects: {},
   },
   cyberpunk: {
     name: 'cyberpunk',
-    colors: {
-      background: '#0d0221',
+    light: {
+      text: '#1a0033',
+      primary: '#ff003c',
+      secondary: '#6b21a8',
+      border: '#e9d5ff',
+      contributionEmpty: '#f3e8ff',
+    },
+    dark: {
       text: '#00ff41',
       primary: '#ff003c',
       secondary: '#00e5ff',
       border: '#ff003c',
+      contributionEmpty: '#1a0033',
     },
+    colors: {} as ThemeColors,
     typography: {
       fontFamily: 'monospace',
     },
@@ -65,27 +74,43 @@ export const themes: Record<string, Theme> = {
   },
   minimal: {
     name: 'minimal',
-    colors: {
-      background: '#f4f4f5',
+    light: {
       text: '#27272a',
       primary: '#18181b',
       secondary: '#71717a',
       border: '#e4e4e7',
+      contributionEmpty: '#e4e4e7',
     },
+    dark: {
+      text: '#fafafa',
+      primary: '#fafafa',
+      secondary: '#a1a1aa',
+      border: '#27272a',
+      contributionEmpty: '#27272a',
+    },
+    colors: {} as ThemeColors,
     typography: {
-      fontFamily: 'Inter, sans-serif',
+      fontFamily: 'Inter, system-ui, sans-serif',
     },
     effects: {},
   },
   retro: {
     name: 'retro',
-    colors: {
-      background: '#fdf6e3',
+    light: {
       text: '#657b83',
       primary: '#cb4b16',
       secondary: '#2aa198',
       border: '#eee8d5',
+      contributionEmpty: '#eee8d5',
     },
+    dark: {
+      text: '#93a1a1',
+      primary: '#cb4b16',
+      secondary: '#2aa198',
+      border: '#586e75',
+      contributionEmpty: '#073642',
+    },
+    colors: {} as ThemeColors,
     typography: {
       fontFamily: '"Courier New", monospace',
     },
@@ -95,6 +120,16 @@ export const themes: Record<string, Theme> = {
   },
 };
 
-export const getTheme = (name: string): Theme => {
-  return themes[name] || themes.geist;
+export const getTheme = (name: string, mode?: ThemeMode): Theme => {
+  const base = themes[name] || themes.geist;
+  const resolvedMode = mode || 'light';
+  return {
+    ...base,
+    colors: resolvedMode === 'dark' ? { ...base.dark } : { ...base.light },
+  };
+};
+
+export const getThemeColors = (name: string, mode: ThemeMode = 'light'): ThemeColors => {
+  const theme = themes[name] || themes.geist;
+  return mode === 'dark' ? theme.dark : theme.light;
 };

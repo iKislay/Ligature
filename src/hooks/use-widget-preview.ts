@@ -17,22 +17,25 @@ export type WidgetPreviewType =
   | 'github-profile'
   | 'star-history';
 
+export type ThemeMode = 'light' | 'dark' | 'auto';
+
 export interface UseWidgetPreviewOptions {
   defaultUsername?: string;
   defaultTheme?: string;
+  defaultMode?: ThemeMode;
   defaultGame?: string;
 }
 
 export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
   const [username, setUsername] = useState(options?.defaultUsername ?? 'iKislay');
   const [theme, setTheme] = useState(options?.defaultTheme ?? 'geist');
+  const [mode, setMode] = useState<ThemeMode>(options?.defaultMode ?? 'dark');
   const [selectedGame, setSelectedGame] = useState(options?.defaultGame ?? 'pacman');
   const [copied, setCopied] = useState(false);
 
   const getPreviewUrl = useCallback(
     (type: WidgetPreviewType): string => {
       const user = username || 'iKislay';
-      // For repo-based widgets, allow "owner/repo" format or default to owner/Ligature
       const repo = user.includes('/') ? user : `${user}/Ligature`;
 
       switch (type) {
@@ -41,7 +44,7 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
         case 'star-history':
           return `/api/star-history?repo=${repo}&theme=${theme}`;
         case 'github-profile':
-          return `/api/github/profile?user=${user}&theme=${theme}`;
+          return `/api/github/profile?user=${user}&theme=${theme}&mode=${mode}`;
         case 'isometric':
           return `/api/isometric?user=${user}&theme=${theme}`;
         case 'pacman':
@@ -56,7 +59,7 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
           return `/api/github?user=${user}&theme=${theme}`;
       }
     },
-    [username, theme]
+    [username, theme, mode]
   );
 
   const getFullPreviewUrl = useCallback(
@@ -82,7 +85,6 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
         case 'star-history':
           label = 'Star History';
           break;
-
         case 'github-profile':
           label = 'GitHub Profile Overview';
           break;
@@ -118,6 +120,8 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
     setUsername,
     theme,
     setTheme,
+    mode,
+    setMode,
     selectedGame,
     setSelectedGame,
     copied,
