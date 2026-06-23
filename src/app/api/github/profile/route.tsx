@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getTheme } from '@/lib/themes';
-import { githubFetch } from '@/lib/github-client';
+import { githubFetch, resolveToken } from '@/lib/github-client';
 import { getUserToken } from '@/lib/user-token';
 
 export const runtime = 'nodejs';
@@ -23,14 +23,15 @@ export async function GET(req: NextRequest) {
     const themeName = searchParams.get('theme') || 'geist';
     const theme = getTheme(themeName);
 
-    const token = await getUserToken(user);
+    const userToken = await getUserToken(user);
+    const token = resolveToken(userToken);
     if (!token) {
       return new ImageResponse(
         (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', backgroundColor: theme.colors.background, color: theme.colors.text, fontFamily: 'sans-serif', padding: '40px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-              <div style={{ display: 'flex', fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Connect your GitHub account</div>
-              <div style={{ display: 'flex', fontSize: '16px', color: theme.colors.secondary }}>Sign in at ligatures.netlify.app to enable widgets for @{user}</div>
+              <div style={{ display: 'flex', fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>Widget temporarily unavailable</div>
+              <div style={{ display: 'flex', fontSize: '16px', color: theme.colors.secondary }}>Server configuration is missing. Please contact the administrator.</div>
             </div>
           </div>
         ),
