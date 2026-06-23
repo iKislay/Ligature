@@ -106,6 +106,11 @@ export const docsConfig: DocsConfig = {
           href: "/docs/isometric",
           items: [],
         },
+        {
+          title: "Star History",
+          href: "/docs/star-history",
+          items: [],
+        },
       ],
     },
     {

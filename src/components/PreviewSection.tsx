@@ -8,10 +8,11 @@ import { themes } from '@/lib/themes';
 import { useWidgetPreview, WidgetPreviewType } from '@/hooks/use-widget-preview';
 import { AuthGate } from '@/components/widget-preview';
 
-type PreviewTab = 'github' | '3d-contrib' | 'games' | 'istime' | 'discord' | 'forg';
+type PreviewTab = 'github' | 'star-history' | '3d-contrib' | 'games' | 'istime' | 'discord' | 'forg';
 
 const previewOptions = [
   { value: 'github' as PreviewTab, label: 'GitHub Stats' },
+  { value: 'star-history' as PreviewTab, label: 'Star History' },
   { value: '3d-contrib' as PreviewTab, label: '3D Contributions' },
   { value: 'games' as PreviewTab, label: 'Arcade Games' },
   { value: 'istime' as PreviewTab, label: 'IsTime' },
@@ -37,6 +38,8 @@ function tabToWidgetType(
   switch (tab) {
     case 'github':
       return 'github-stats';
+    case 'star-history':
+      return 'star-history';
     case '3d-contrib':
       return 'isometric';
     case 'games':
@@ -109,7 +112,7 @@ export function PreviewSection() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
+              placeholder={selectedTab === 'star-history' ? 'owner/repo' : 'Username'}
               className="h-9 w-32 rounded-md border border-neutral-200 bg-transparent px-3 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-950 dark:border-neutral-800 dark:focus:ring-neutral-300 md:w-40"
             />
             {isGame ? (

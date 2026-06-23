@@ -14,7 +14,8 @@ export type WidgetPreviewType =
   | 'minesweeper'
   | 'trends'
   | 'actions'
-  | 'github-profile';
+  | 'github-profile'
+  | 'star-history';
 
 export interface UseWidgetPreviewOptions {
   defaultUsername?: string;
@@ -31,10 +32,14 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
   const getPreviewUrl = useCallback(
     (type: WidgetPreviewType): string => {
       const user = username || 'iKislay';
+      // For repo-based widgets, allow "owner/repo" format or default to owner/Ligature
+      const repo = user.includes('/') ? user : `${user}/Ligature`;
 
       switch (type) {
         case 'github-stats':
           return `/api/github?user=${user}&theme=${theme}`;
+        case 'star-history':
+          return `/api/star-history?repo=${repo}&theme=${theme}`;
         case 'github-profile':
           return `/api/github/profile?user=${user}&theme=${theme}`;
         case 'isometric':
@@ -66,12 +71,16 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
   const getMarkdownSnippet = useCallback(
     (type: WidgetPreviewType): string => {
       const user = username || 'iKislay';
+      const repo = user.includes('/') ? user : `${user}/Ligature`;
       const fullUrl = getFullPreviewUrl(type);
 
       let label: string;
       switch (type) {
         case 'github-stats':
           label = 'GitHub Stats';
+          break;
+        case 'star-history':
+          label = 'Star History';
           break;
 
         case 'github-profile':
@@ -92,7 +101,8 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
           label = 'Widget';
       }
 
-      return `[![${user}'s ${label}](${fullUrl})](https://github.com/${user})`;
+      const targetUrl = type === 'star-history' ? `https://github.com/${repo}` : `https://github.com/${user}`;
+      return `[![${type === 'star-history' ? repo : user}'s ${label}](${fullUrl})](${targetUrl})`;
     },
     [username, getFullPreviewUrl]
   );

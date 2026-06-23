@@ -1,0 +1,31 @@
+---
+title: Star History
+description: Generate a dynamic SVG line chart displaying the star growth history of any GitHub repository.
+---
+
+# Star History
+
+The **Star History** widget creates a visually appealing line chart showing how a repository's stars have grown over time. It intelligently fetches and samples GitHub stargazers using Edge-compatible parallel processing to instantly plot the repository's trajectory.
+
+## Preview
+
+<WidgetPreview type="star-history" requiresAuth={false} />
+
+## How it works
+
+The widget samples stargazers across multiple pages of the GitHub API, getting precise timestamps for when the repository was starred. It plots these points into a smooth SVG line graph, complete with grid lines, data points, and gradient shading.
+
+## Usage
+
+Simply append the repository owner and name (`owner/repo`) as the `repo` parameter.
+
+```markdown
+[![Ligature's Star History](https://ligature.dev/api/star-history?repo=iKislay/Ligature&theme=geist)](https://github.com/iKislay/Ligature)
+```
+
+## Parameters
+
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `repo` | `string` | `iKislay/Ligature` | The GitHub repository in `owner/repo` format |
+| `theme` | `string` | `geist` | The color theme (e.g. `geist_dark`, `cyberpunk`, `retro`) |

@@ -17,8 +17,8 @@ const WIDGET_LABELS: Record<WidgetPreviewType, string> = {
   bomberman: 'Bomberman',
   'puzzle-bobble': 'Puzzle Bobble',
   minesweeper: 'Minesweeper',
-  trends: 'GitHub Trends',
   actions: 'GitHub Actions',
+  'star-history': 'Star History',
 };
 
 interface AuthGateProps {
@@ -156,7 +156,7 @@ export function WidgetPreview({
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="GitHub username"
+          placeholder={type === 'star-history' ? 'owner/repo' : 'GitHub username'}
           disabled={needsAuthGate}
           className="h-9 w-36 rounded-md border border-neutral-200 bg-transparent px-3 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-950 disabled:opacity-50 dark:border-neutral-800 dark:focus:ring-neutral-300 md:w-44"
         />

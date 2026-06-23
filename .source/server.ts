@@ -1,5 +1,6 @@
 // @ts-nocheck
-import * as __fd_glob_14 from "../content/docs/themes.mdx?collection=docs"
+import * as __fd_glob_15 from "../content/docs/themes.mdx?collection=docs"
+import * as __fd_glob_14 from "../content/docs/star-history.mdx?collection=docs"
 import * as __fd_glob_13 from "../content/docs/quick-start.mdx?collection=docs"
 import * as __fd_glob_12 from "../content/docs/puzzle-bobble.mdx?collection=docs"
 import * as __fd_glob_11 from "../content/docs/pacman.mdx?collection=docs"
@@ -22,4 +23,4 @@ const create = server<typeof Config, import("fumadocs-mdx/runtime/types").Intern
   }
 }>({"doc":{"passthroughs":["extractedReferences"]}});
 
-export const docs = await create.docs("docs", "content/docs", {}, {"api.mdx": __fd_glob_0, "bomberman.mdx": __fd_glob_1, "breakout.mdx": __fd_glob_2, "edge.mdx": __fd_glob_3, "galaga.mdx": __fd_glob_4, "github-profile.mdx": __fd_glob_5, "github-stats.mdx": __fd_glob_6, "github-trends.mdx": __fd_glob_7, "index.mdx": __fd_glob_8, "isometric.mdx": __fd_glob_9, "minesweeper.mdx": __fd_glob_10, "pacman.mdx": __fd_glob_11, "puzzle-bobble.mdx": __fd_glob_12, "quick-start.mdx": __fd_glob_13, "themes.mdx": __fd_glob_14, });
+export const docs = await create.docs("docs", "content/docs", {}, {"api.mdx": __fd_glob_0, "bomberman.mdx": __fd_glob_1, "breakout.mdx": __fd_glob_2, "edge.mdx": __fd_glob_3, "galaga.mdx": __fd_glob_4, "github-profile.mdx": __fd_glob_5, "github-stats.mdx": __fd_glob_6, "github-trends.mdx": __fd_glob_7, "index.mdx": __fd_glob_8, "isometric.mdx": __fd_glob_9, "minesweeper.mdx": __fd_glob_10, "pacman.mdx": __fd_glob_11, "puzzle-bobble.mdx": __fd_glob_12, "quick-start.mdx": __fd_glob_13, "star-history.mdx": __fd_glob_14, "themes.mdx": __fd_glob_15, });
