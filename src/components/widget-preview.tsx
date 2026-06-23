@@ -74,7 +74,7 @@ export function WidgetPreview({
   const relativeUrl = getPreviewUrl(type, resolvedMode);
   const markdownSnippet = getMarkdownSnippet(type);
   const showThemeSelector = type !== 'trends' && type !== 'actions';
-  const showModeSelector = type === 'github-profile';
+  const showModeSelector = type !== 'trends' && type !== 'actions';
   const widgetLabel = WIDGET_LABELS[type] ?? type;
   const useInlineSvg = type === 'github-profile';
 

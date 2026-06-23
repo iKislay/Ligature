@@ -49,6 +49,15 @@ const STANDARD_THEME_MAP: Record<string, Partial<NormalColorSettings>> = {
   },
   cyberpunk: {
     type: 'normal',
+    backgroundColor: '#f5f0ff',
+    foregroundColor: '#1a0033',
+    strongColor: '#ff003c',
+    weakColor: '#6b21a8',
+    radarColor: '#ff003c',
+    contribColors: ['#f3e8ff', '#c084fc', '#a855f7', '#9333ea', '#7e22ce'],
+  },
+  cyberpunk_dark: {
+    type: 'normal',
     backgroundColor: '#0d0221',
     foregroundColor: '#00ff41',
     strongColor: '#ff003c',
@@ -65,6 +74,15 @@ const STANDARD_THEME_MAP: Record<string, Partial<NormalColorSettings>> = {
     radarColor: '#18181b',
     contribColors: ['#e4e4e7', '#d4d4d8', '#a1a1aa', '#52525b', '#27272a'],
   },
+  minimal_dark: {
+    type: 'normal',
+    backgroundColor: '#09090b',
+    foregroundColor: '#fafafa',
+    strongColor: '#fafafa',
+    weakColor: '#a1a1aa',
+    radarColor: '#fafafa',
+    contribColors: ['#27272a', '#3f3f46', '#52525b', '#71717a', '#a1a1aa'],
+  },
   retro: {
     type: 'normal',
     backgroundColor: '#fdf6e3',
@@ -74,15 +92,29 @@ const STANDARD_THEME_MAP: Record<string, Partial<NormalColorSettings>> = {
     radarColor: '#cb4b16',
     contribColors: ['#eee8d5', '#e6dbb3', '#b58900', '#cb4b16', '#dc322f'],
   },
+  retro_dark: {
+    type: 'normal',
+    backgroundColor: '#002b36',
+    foregroundColor: '#93a1a1',
+    strongColor: '#cb4b16',
+    weakColor: '#2aa198',
+    radarColor: '#cb4b16',
+    contribColors: ['#073642', '#586e75', '#b58900', '#cb4b16', '#dc322f'],
+  },
 };
 
-function getSettings(themeName: string) {
-  const standard = STANDARD_THEME_MAP[themeName];
+function getSettings(themeName: string, mode: string = 'light') {
+  const isDark = mode === 'dark';
+  const resolvedTheme = isDark && STANDARD_THEME_MAP[`${themeName}_dark`]
+    ? `${themeName}_dark`
+    : themeName;
+
+  const standard = STANDARD_THEME_MAP[resolvedTheme];
   if (standard) {
     return { ...NormalSettings, ...standard } as NormalColorSettings;
   }
 
-  switch (themeName) {
+  switch (resolvedTheme) {
     case 'north':
       return NorthSeasonSettings;
     case 'south':
@@ -182,10 +214,12 @@ function getLanguageColor(lang: string): string {
   }
 }
 
-function errorSvg(message: string, themeName: string): string {
-  const isDark = themeName === 'geist_dark' || themeName === 'cyberpunk' || themeName === 'night';
+function errorSvg(message: string, themeName: string, mode: string = 'light'): string {
+  const isDark = mode === 'dark';
+  const isCyberpunkDark = themeName === 'cyberpunk' && isDark;
   const bg = isDark ? '#0a0a0a' : '#ffffff';
   const fg = isDark ? '#ededed' : '#171717';
+  const accent = isCyberpunkDark ? '#00ff41' : fg;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
     <rect width="800" height="400" fill="${bg}"/>
     <text x="400" y="180" text-anchor="middle" fill="${fg}" font-size="24" font-family="sans-serif">Unable to load 3D contribution graph</text>
@@ -198,13 +232,14 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const user = searchParams.get('user') || 'iKislay';
     const theme = searchParams.get('theme') || 'geist';
+    const mode = searchParams.get('mode') || 'light';
     const animate = searchParams.get('animate') === 'true';
 
     const userToken = await getUserToken(user);
     const token = resolveToken(userToken);
     if (!token) {
       return new Response(
-        errorSvg('Server configuration is missing. Please contact the administrator.', theme),
+        errorSvg('Server configuration is missing. Please contact the administrator.', theme, mode),
         {
           status: 503,
           headers: {
@@ -215,7 +250,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const settings = getSettings(theme);
+    const settings = getSettings(theme, mode);
     const userInfo = await fetchUserInfo(token, user);
     const svgContent = createSvg(userInfo, settings, animate);
 
@@ -228,7 +263,7 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error('Error generating 3D contrib:', error);
     const message = error instanceof Error ? error.message : 'GitHub API rate limit or network error';
-    return new Response(errorSvg(message, 'geist'), {
+    return new Response(errorSvg(message, 'geist', 'light'), {
       status: 503,
       headers: {
         'Content-Type': 'image/svg+xml',

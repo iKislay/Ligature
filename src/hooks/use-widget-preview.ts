@@ -47,14 +47,14 @@ export function useWidgetPreview(options?: UseWidgetPreviewOptions) {
         case 'github-profile':
           return `/api/github/profile?user=${user}&theme=${theme}&mode=${modeValue}`;
         case 'isometric':
-          return `/api/isometric?user=${user}&theme=${theme}`;
+          return `/api/isometric?user=${user}&theme=${theme}&mode=${modeValue}`;
         case 'pacman':
         case 'breakout':
         case 'galaga':
         case 'bomberman':
         case 'puzzle-bobble':
         case 'minesweeper':
-          return `/api/games?user=${user}&game=${type}&theme=${theme}`;
+          return `/api/games?user=${user}&game=${type}&theme=${theme}&mode=${modeValue}`;
 
         default:
           return `/api/github?user=${user}&theme=${theme}&mode=${modeValue}`;

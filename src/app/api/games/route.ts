@@ -24,6 +24,7 @@ export async function GET(req: NextRequest) {
     const user = searchParams.get('user') || 'octocat';
     const game = searchParams.get('game') || 'pacman';
     const themeName = searchParams.get('theme') || 'geist';
+    const mode = searchParams.get('mode') || 'light';
 
     if (!ARCADE_GAMES.includes(game as GameType)) {
       return new Response(`Invalid game: ${game}. Valid options: ${ARCADE_GAMES.join(', ')}`, { status: 400 });
@@ -41,13 +42,17 @@ export async function GET(req: NextRequest) {
       });
     }
 
+    const resolvedTheme = mode === 'dark' && themeName === 'geist'
+      ? 'geist_dark'
+      : themeName as ThemeKeys;
+
     const svg = await new Promise<string>((resolve, reject) => {
       let generatedSvg = '';
       const renderer = new ArcadeRenderer({
         game: game as GameType,
         platform: 'github',
         username: user,
-        gameTheme: themeName as ThemeKeys,
+        gameTheme: resolvedTheme,
         playerStyle: PlayerStyle.OPPORTUNISTIC,
         githubSettings: { accessToken: token },
         svgCallback: (svgContent: string) => {

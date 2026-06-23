@@ -168,19 +168,29 @@ export function PreviewSection() {
               </p>
             </div>
           ) : (
-            <InlineSvg
-              key={`${username}-${theme}-${resolvedMode}-${selectedTab}-${selectedGame}`}
-              src={imageUrl}
-              className="w-full max-w-[800px] [&>svg]:w-full [&>svg]:h-auto"
-              fallback={
-                <div className="flex flex-col items-center space-y-3 text-center">
-                  <h3 className="text-xl font-semibold tracking-tight">Preview unavailable</h3>
-                  <p className="max-w-sm text-sm text-neutral-500 dark:text-neutral-400">
-                    Could not load the preview. Check the username and try again.
-                  </p>
-                </div>
-              }
-            />
+            (widgetType === 'github-stats' || widgetType === 'star-history') ? (
+              <img
+                key={`${username}-${theme}-${resolvedMode}-${selectedTab}-${selectedGame}`}
+                src={imageUrl}
+                alt={`${widgetType} preview for ${username}`}
+                className="w-full max-w-[800px] rounded-lg shadow-sm"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <InlineSvg
+                key={`${username}-${theme}-${resolvedMode}-${selectedTab}-${selectedGame}`}
+                src={imageUrl}
+                className="w-full max-w-[800px] [&>svg]:w-full [&>svg]:h-auto"
+                fallback={
+                  <div className="flex flex-col items-center space-y-3 text-center">
+                    <h3 className="text-xl font-semibold tracking-tight">Preview unavailable</h3>
+                    <p className="max-w-sm text-sm text-neutral-500 dark:text-neutral-400">
+                      Could not load the preview. Check the username and try again.
+                    </p>
+                  </div>
+                }
+              />
+            )
           )
         ) : (
           <div className="flex flex-col items-center space-y-3 text-center">
