@@ -68,7 +68,9 @@ export function WidgetPreview({
     getPreviewUrl,
     getMarkdownSnippet,
     handleCopy,
-  } = useWidgetPreview();
+  } = useWidgetPreview({
+    defaultUsername: type === 'star-history' ? 'iKislay/Ligature' : 'iKislay'
+  });
 
   const resolvedMode = mode === 'auto' ? (resolvedTheme as 'light' | 'dark' ?? 'dark') : mode;
   const relativeUrl = getPreviewUrl(type, resolvedMode);

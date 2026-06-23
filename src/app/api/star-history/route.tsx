@@ -168,7 +168,9 @@ export async function GET(req: NextRequest) {
               <span style={{ fontSize: '14px', color: theme.colors.secondary }}>Star History</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ color: theme.colors.secondary, fontSize: '16px' }}>★</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill={theme.colors.secondary}>
+                <path fillRule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+              </svg>
               <span style={{ fontSize: '24px', fontWeight: 'bold', color: theme.colors.primary }}>{repoData.stargazers_count}</span>
             </div>
           </div>
@@ -187,9 +189,6 @@ export async function GET(req: NextRequest) {
               {yGridLines.map((line, i) => (
                 <g key={i}>
                   <line x1={paddingLeft} y1={line.y} x2={width} y2={line.y} stroke={gridColor} strokeWidth="1" strokeDasharray="4 4" />
-                  <text x={paddingLeft - 8} y={line.y + 4} fill={labelColor} fontSize="12" textAnchor="end" fontFamily="sans-serif">
-                    {line.val}
-                  </text>
                 </g>
               ))}
 
@@ -203,15 +202,55 @@ export async function GET(req: NextRequest) {
               {data.map((point, i) => (
                 <circle key={i} cx={getX(point.date)} cy={getY(point.count)} r="4" fill={theme.colors.background} stroke={strokeColor} strokeWidth="2" />
               ))}
-              
-              {/* Date Labels (Min/Max) */}
-              <text x={paddingLeft} y={height} fill={labelColor} fontSize="12" textAnchor="start" fontFamily="sans-serif">
-                {new Date(minDate).toLocaleDateString()}
-              </text>
-              <text x={width} y={height} fill={labelColor} fontSize="12" textAnchor="end" fontFamily="sans-serif">
-                Today
-              </text>
             </svg>
+            
+            {/* Y-Axis Labels as HTML */}
+            {yGridLines.map((line, i) => (
+              <div
+                key={`y-label-${i}`}
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: line.y - 7,
+                  width: paddingLeft - 8,
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  color: labelColor,
+                  fontSize: '12px',
+                  fontFamily: 'sans-serif'
+                }}
+              >
+                {line.val}
+              </div>
+            ))}
+
+            {/* Date Labels (Min/Max) as HTML */}
+            <div
+              style={{
+                position: 'absolute',
+                left: paddingLeft,
+                top: height,
+                display: 'flex',
+                color: labelColor,
+                fontSize: '12px',
+                fontFamily: 'sans-serif'
+              }}
+            >
+              {new Date(minDate).toLocaleDateString()}
+            </div>
+            <div
+              style={{
+                position: 'absolute',
+                right: width - chartWidth - paddingLeft,
+                top: height,
+                display: 'flex',
+                color: labelColor,
+                fontSize: '12px',
+                fontFamily: 'sans-serif'
+              }}
+            >
+              Today
+            </div>
           </div>
         </div>
       ),
